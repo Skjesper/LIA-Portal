@@ -6,7 +6,7 @@ import { createServerClient } from '@supabase/ssr'
 
     return createServerClient(
       process.env.local.NEXT_PUBLIC_SUPABASE_URL,
-      process.env.local.NEXT_SUPABASE_KEY,
+      process.env.local.NEXT_PUBLIC_SUPABASE_KEY,
       {
         cookies: {
           getAll() {
