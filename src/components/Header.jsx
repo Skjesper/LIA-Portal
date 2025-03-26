@@ -10,6 +10,9 @@ export default function Header() {
       <Link href="/event">
         <button>event</button>
       </Link>
+      <Link href="/instruments">
+        <button>instruments</button>
+      </Link>
    
 
       
