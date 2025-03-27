@@ -1,0 +1,54 @@
+.footer {
+  background-color: var(--bg-black);
+  display: flex;
+  width: 100%; /* Changed from 100vw to avoid horizontal scrolling issues */
+  height: 14.5rem;
+  padding: 1.5rem 1rem;
+  justify-content: space-between;
+  align-items: flex-start; /* Changed from center to align at the top */
+}
+
+.Nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-height: 100%; 
+  }
+
+  .NavLinks{
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .logoContainer {
+    display: inline-block; /* or flex */
+    margin-bottom: 2.25rem;
+    height: auto;
+    width: fit-content; /* Container will fit the content inside */
+  }
+  
+  .logoContainer img {
+    display: block; /* Removes any extra space around the image */
+    width: 70px;
+    height: 70px;
+    max-width: none; /* Allows image to be its natural size */
+  }
+
+  .login {
+    display: flex;
+    margin-top: auto;
+  }
+
+.rightContainer {
+  height: 100%;
+}
+
+  .logo {
+    display: flex;
+    height: 100%;
+    width: auto;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+  }
