@@ -1,4 +1,5 @@
 import { createServerClient } from "@supabase/ssr";
+import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs';
 import { NextResponse } from "next/server";
 
 export const createClient = (request) => {
