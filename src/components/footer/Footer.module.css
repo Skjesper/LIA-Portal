@@ -2,16 +2,27 @@
     background-color: var(--bg-black);
     display: flex;
     width: 100vw;
+    height: 13.5rem;
     padding: 1.5rem 1rem;
     justify-content: space-between;
     align-items: center;
     
 }
 
-.leftContainer {
+.Container {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    height: auto;
     gap: 1rem;
     align-self: stretch;
+  }
+
+  .logo {
+    display: flex;
+    height: 100%;
+    width: auto;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
   }
