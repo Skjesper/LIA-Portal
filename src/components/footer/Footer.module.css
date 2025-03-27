@@ -1,18 +1,22 @@
 .footer {
   background-color: var(--bg-black);
   display: flex;
-  width: 100%; /* Changed from 100vw to avoid horizontal scrolling issues */
-  height: 14.5rem;
+  width: 100%;
+  height: 34.5rem;
   padding: 1.5rem 1rem;
-  justify-content: space-between;
-  align-items: flex-start; /* Changed from center to align at the top */
+  padding-top: 0;
+  flex-direction: column;
+  justify-content: space-between; /* This helps put content at top and bottom */
+  align-items: flex-start;
+  margin-top: auto;
 }
 
 .Nav {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
     max-height: 100%; 
+    margin: auto;
   }
 
   .NavLinks{
@@ -25,14 +29,16 @@
     display: inline-block; /* or flex */
     margin-bottom: 2.25rem;
     height: auto;
+    align-items: center;
     width: fit-content; /* Container will fit the content inside */
   }
   
   .logoContainer img {
     display: block; /* Removes any extra space around the image */
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
     max-width: none; /* Allows image to be its natural size */
+    
   }
 
   .login {
@@ -40,15 +46,29 @@
     margin-top: auto;
   }
 
-.rightContainer {
-  height: 100%;
-}
+
+  .rightContainer {
+    display: flex;
+    align-self: flex-start; /* Aligns to the left edge */
+    margin-top: auto; /* Pushes the container to the bottom */
+    margin: auto;
+    align-items: center;
+    width: 100%;
+  }
+
+  .rightContainer img {
+    width: 100%;
+  }
 
   .logo {
-    display: flex;
-    height: 100%;
+    display: block; /* Changed from flex */
+    height: auto; /* Let height be determined by content */
     width: auto;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
+  }
+
+  .linkGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; 
+    margin-bottom: 2rem;/* Space between links within a group */
   }

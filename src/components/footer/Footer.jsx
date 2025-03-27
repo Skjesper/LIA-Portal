@@ -5,7 +5,6 @@ import Image from 'next/image';
 export default function Footer() {
   return (
     <footer className={styles.footer}>
-      <div className={styles.Nav}>
         <div className={styles.logoContainer}>
           <Image
             src="/logos/white-main.svg"
@@ -14,24 +13,36 @@ export default function Footer() {
             height={45}
           />
         </div>
+      <div className={styles.Nav}>
         
         <div className={styles.NavLinks}>
-          <Link href="/students" className={styles.link}>
-            Studerande
-          </Link>
-          <Link href="/companies" className={styles.link}>
-            Företag
-          </Link>
-          <Link href="/event" className={styles.link}>
-            Event
-          </Link>
+          <div className={styles.linkGroup}>
+            <Link href="/login" className={styles.link}>
+              Logga in
+            </Link>
+            <Link href="/students" className={styles.link}>
+              Studerande
+            </Link>
+          </div>
+  
+          <div className={styles.linkGroup}>
+            <Link href="/companies" className={styles.link}>
+              Företag
+            </Link>
+            <Link href="/event" className={styles.link}>
+              Event
+            </Link>
+          </div>
+  
+          <div className={styles.linkGroup}>
+            <Link href="/companies" className={styles.link}>
+              Företag
+            </Link>
+            <Link href="/event" className={styles.link}>
+              Event
+            </Link>
+          </div>
         </div>
-      </div>
-      
-      <div className={styles.login}>
-        <Link href="/login" className={styles.link}>
-          Logga in
-        </Link>
       </div>
       
       <div className={styles.rightContainer}>
