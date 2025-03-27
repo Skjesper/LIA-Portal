@@ -5,13 +5,17 @@ import Image from 'next/image';
 export default function Footer() {
   return (
     <footer className={styles.footer}>
-      <div className={styles.Container}>
-        <Image
-          src="/logos/white-main.svg"
-          alt="Huvudlogotyp"
-          width={90}
-          height={30}
-        />
+      <div className={styles.Nav}>
+      <div className={styles.logoContainer}>
+    <Image
+      src="/logos/white-main.svg"
+      alt="Huvudlogotyp"
+      width={130}
+      height={45}
+    />
+  </div>
+        
+      <div className={styles.NavLinks}>
         <Link href="/students" className={styles.link}>
           Studerande
         </Link>
@@ -21,7 +25,10 @@ export default function Footer() {
         <Link href="/event" className={styles.link}>
           Event
         </Link>
+        </div>
+      
       </div>
+      <div className={styles.rightContainer}>
       
       <Image 
         src="/logos/yrgo-logo-white.svg"
@@ -30,6 +37,7 @@ export default function Footer() {
         height={40}
         className={styles.logo}
       />
+      </div>
     </footer>
   );
 }

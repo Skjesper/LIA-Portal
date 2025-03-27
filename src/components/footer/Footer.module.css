@@ -2,21 +2,43 @@
     background-color: var(--bg-black);
     display: flex;
     width: 100vw;
-    height: 13.5rem;
+    height: 14.5rem;
     padding: 1.5rem 1rem;
     justify-content: space-between;
     align-items: center;
     
 }
 
-.Container {
+.Nav {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    height: auto;
-    gap: 1rem;
-    align-self: stretch;
+    max-height: 100%; 
   }
+
+  .NavLinks{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .logoContainer {
+    display: inline-block; /* or flex */
+    margin-bottom: 2.25rem;
+    height: auto;
+    width: fit-content; /* Container will fit the content inside */
+  }
+  
+  .logoContainer img {
+    display: block; /* Removes any extra space around the image */
+    width: 70px;
+    height: 70px;
+    max-width: none; /* Allows image to be its natural size */
+  }
+
+.rightContainer {
+  height: 100%;
+}
 
   .logo {
     display: flex;
