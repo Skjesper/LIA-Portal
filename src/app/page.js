@@ -8,7 +8,10 @@ export default function Home() {
   return (
     <div>
     <Button className={styles.filledBlack}>filled-black</Button>
-    
+    <Button className={styles.warning}>warning</Button>
+    <Button className={styles.success}>warning</Button>
+    <Button className={styles.warning}>warning</Button>
+    <Button className={styles.warning}>warning</Button>
     
     
   </div>
