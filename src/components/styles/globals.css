@@ -1,8 +1,10 @@
 :root {
   --font-inter: 'Inter', system-ui, sans-serif;
-
-
   --border-radius: 1.5rem;
+  
+  
+  --Typography-Primary: #121212;
+  --Button-border-size: 1px;
 }
   
   @media (prefers-color-scheme: dark) {
@@ -20,7 +22,7 @@
   
   body {
     color: var(--foreground);
-    background: var(--background);
+    background: grey;
     font-family: var(--font-inter);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
