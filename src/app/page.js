@@ -3,6 +3,7 @@ import Button from '@/components/ui/Button/Button.jsx';
 import buttonStyles from '@/components/ui/Button/Button.module.css';
 import pageStyles from './page.module.css'; // Importera page.module.css
 import Section from '@/components/Sections/Sections';
+import RSVPCard from '@/components/RSVPCard/RSVPCard';
 
 export default function Home() {
   return (
@@ -13,17 +14,18 @@ export default function Home() {
         <div className={pageStyles.applyWrapper}>
           <h2>01/Anmälan</h2>
           <p>Lorem ipsum dolor sit amet si consectetur. Sagittis faucibus vita in faucibus nunc. Semper nun sodales malesuada. Non habitant.</p>
+          <RSVPCard></RSVPCard>
         </div>
       </Section>
       <Section>
         <div className={pageStyles.applyWrapper}>
-          <h2>02/Anmälan</h2>
+          <h2>02/Företag</h2>
           <p>Lorem ipsum dolor sit amet si consectetur. Sagittis faucibus vita in faucibus nunc. Semper nun sodales malesuada. Non habitant.</p>
         </div>
       </Section>
       <Section>
         <div className={pageStyles.applyWrapper}>
-          <h2>03/Anmälan</h2>
+          <h2>03/Studenter</h2>
           <p>Lorem ipsum dolor sit amet si consectetur. Sagittis faucibus vita in faucibus nunc. Semper nun sodales malesuada. Non habitant.</p>
         </div>
       </Section>
