@@ -1,12 +1,17 @@
 /* Button.module.css */
 .button {
-    display: flex;
-    width: 10rem;
-    padding: 0.5rem 1rem;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
-    gap: 0.5rem;
-    border-radius: var(--border-radius);
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.875rem;
+    transition: transform 0.1s, background-color 0.2s;
+    background-color: #f8f9fa;
+    color: #212529;
   }
   
   .button:hover {
@@ -17,15 +22,65 @@
     transform: translateY(1px);
   }
   
-  /* Om du vill lägga till varianter senare kan du göra det så här */
- 
-/* Lägg till din nya klass här */
-.filled-black {
-    background-color: var(--Button-Primary, #000); /* Fallback till svart om variabeln inte finns */
+  /* Storleksvarianter */
+  .small {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+  }
+  
+  .medium {
+    padding: 8px 16px;
+    font-size: 0.875rem;
+  }
+  
+  .large {
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
+  
+  /* Färgvarianter */
+  .filledBlack {
+    background-color: #000000;
     color: white;
   }
   
-  .secondary {
-    background-color: #ecf0f1;
-    color: #2c3e50;
+  .filledPrimary {
+    background-color: #3498db;
+    color: white;
+  }
+  
+  .filledSecondary {
+    background-color: #6c757d;
+    color: white;
+  }
+  
+  .success {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .warning {
+    background-color: #ffc107;
+    color: #212529;
+  }
+  
+  .danger {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  /* Outline varianter */
+  .outline {
+    background-color: transparent;
+    border: 1px solid currentColor;
+  }
+  
+  .outlineBlack {
+    border-color: #000000;
+    color: #000000;
+  }
+  
+  .outlinePrimary {
+    border-color: #3498db;
+    color: #3498db;
   }
