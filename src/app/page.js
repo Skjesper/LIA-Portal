@@ -1,25 +1,25 @@
-
 import Link from 'next/link';
 import Button from '@/components/ui/Button/Button.jsx';
-import styles from '@/components/ui/Button/Button.module.css'; // Lägg till denna import
-
+import buttonStyles from '@/components/ui/Button/Button.module.css';
+import pageStyles from './page.module.css'; // Importera page.module.css
+import Section from '@/components/Sections/Sections';
 
 export default function Home() {
   return (
-    <div>
-    <Button className={styles.filledBlack}>filled-black</Button>
-    <Button className={styles.warning}>warning</Button>
-    <Button className={styles.success}>warning</Button>
-    <Button className={styles.filledWhite}>filledWhite</Button>
-    <Button className={styles.warning}>warning</Button>
-    <h2>Fokuserad knapp</h2>
-      <Button className={styles.unfilledBlack}>Fokuserad</Button>
-      <Button className={styles.unfilledWhite}>unfilledWhite</Button>
-      <Button className={styles.unfilledBlack}>unfilledBlack</Button>
-      <Button className={styles.underlinedWhite}>
-     Button</Button>
-      <Button className={styles.underlinedBlack}>Button</Button>
-    
-  </div>
+    <main>
+      <h1>Min webbsida</h1>
+      
+      <Section>
+        <div className={pageStyles.applyWrapper}>
+          <h2>01/Anmälan</h2>
+          <p>Lorem ipsum dolor sit amet si consectetur. Sagittis faucibus vita in faucibus nunc. Semper nun sodales malesuada. Non habitant.</p>
+        </div>
+      </Section>
+      
+      <Section className="highlight-section">
+        <h2>En annan sektion</h2>
+        <p>Mer innehåll här...</p>
+      </Section>
+    </main>
   );
 }
