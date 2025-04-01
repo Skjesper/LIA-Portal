@@ -15,6 +15,18 @@ export default function Home() {
           <p>Lorem ipsum dolor sit amet si consectetur. Sagittis faucibus vita in faucibus nunc. Semper nun sodales malesuada. Non habitant.</p>
         </div>
       </Section>
+      <Section>
+        <div className={pageStyles.applyWrapper}>
+          <h2>02/Anmälan</h2>
+          <p>Lorem ipsum dolor sit amet si consectetur. Sagittis faucibus vita in faucibus nunc. Semper nun sodales malesuada. Non habitant.</p>
+        </div>
+      </Section>
+      <Section>
+        <div className={pageStyles.applyWrapper}>
+          <h2>03/Anmälan</h2>
+          <p>Lorem ipsum dolor sit amet si consectetur. Sagittis faucibus vita in faucibus nunc. Semper nun sodales malesuada. Non habitant.</p>
+        </div>
+      </Section>
       
       <Section className="highlight-section">
         <h2>En annan sektion</h2>
