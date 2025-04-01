@@ -2,7 +2,7 @@
   --font-inter: 'Inter', system-ui, sans-serif;
   --border-radius: 1.5rem;
   
-  
+  --Button-underline-offset: 4px;
   --Typography-Primary: #121212;
   --Button-border-size: 1px;
 }

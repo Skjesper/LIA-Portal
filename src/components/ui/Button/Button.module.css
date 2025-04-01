@@ -1,7 +1,5 @@
 /* Button.module.css */
-:root {
-    --Button-border-size-: 1px;
-}
+
 
 .button {
     display: flex;
@@ -10,7 +8,6 @@
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
-    outline: none;
     border: none;
     border-radius: var(--border-radius);
     background-color: transparent;
@@ -20,14 +17,22 @@
     font-weight: 400;
     line-height: 1rem; /* 100% */
     text-transform: uppercase;
+    cursor: pointer;
   }
   
-  .button:hover {
+  /* .button:hover {
     transform: translateY(-1px);
   }
   
   .button:active {
     transform: translateY(1px);
+  } */
+
+  .button:disabled * {
+    background-color: var(--Button-State-Disabled);
+    border-color: var(--Button-State-Disabled);
+    color: var(--Button-State-Disabled);
+    cursor: not-allowed;
   }
   
   .button::selection {
@@ -93,8 +98,31 @@
 
 .underlinedWhite {
     text-decoration: underline;
+    text-underline-offset: var(--Button-underline-offset);
+    
+    outline:none;
 }
+
+.underlinedWhite:active {
+    color: var(--Greyscale-10);
+    
+}
+
+.underlinedWhite:focus {
+    text-decoration-color: var(--Button-State-Focus);
+}
+
 .underlinedBlack {
     text-decoration: underline;
     color: var(--Typography-Primary);
+    text-underline-offset: var(--Button-underline-offset);
+    outline:none;
 }
+
+.underlinedBlack:active {
+    text-decoration: var(--Button-State-Focus) underline;
+}
+
+.underlinedBlack:focus {
+    text-decoration-color: var(--Button-State-Focus);
+  }
