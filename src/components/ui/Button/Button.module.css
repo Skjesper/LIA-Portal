@@ -79,20 +79,20 @@
 }
 
 .unfilledBlack {
-    border: solid var(--Button-Primary);
+    border: var(--Button-border-size) solid var(--Button-Primary);
     color: var(--Button-Primary);
-    
 }
 
 .unfilledBlack:active {
-    border: var(--Greyscale-70);
+    border: var(--Button-border-size) solid var(--Greyscale-70);
+    color: var(--Greyscale-70);
 }
 .unfilledWhite {
-    border: var(--Button-border-size) solid var(--Button-Secondary);
+    border: var(--Button-border-size) solid;
 }
 
 .unfilledWhite:active {
-    border: solid var(--Greyscale-10);
+    border: var(--Button-border-size) solid var(--Greyscale-10);
     color: var(--Greyscale-10);
 }
 
