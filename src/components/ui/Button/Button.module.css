@@ -1,0 +1,31 @@
+/* Button.module.css */
+.button {
+    display: flex;
+    width: 10rem;
+    padding: 0.5rem 1rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: var(--border-radius);
+  }
+  
+  .button:hover {
+    transform: translateY(-1px);
+  }
+  
+  .button:active {
+    transform: translateY(1px);
+  }
+  
+  /* Om du vill lägga till varianter senare kan du göra det så här */
+ 
+/* Lägg till din nya klass här */
+.filled-black {
+    background-color: var(--Button-Primary, #000); /* Fallback till svart om variabeln inte finns */
+    color: white;
+  }
+  
+  .secondary {
+    background-color: #ecf0f1;
+    color: #2c3e50;
+  }

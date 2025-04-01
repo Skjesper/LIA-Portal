@@ -1,5 +1,8 @@
 :root {
   --font-inter: 'Inter', system-ui, sans-serif;
+
+
+  --border-radius: 1.5rem;
 }
   
   @media (prefers-color-scheme: dark) {

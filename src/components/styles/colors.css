@@ -1,3 +1,50 @@
 :root {
     --bg-black: #121212;
+    
+    
+    
+    
+    /* 
+
+    BUTTON STYLING
+
+    */
+    
+    --Button-State-Focus: #1100FF;
+    --Button-State-Disabled: #828282;
+    /* 
+
+    FILLED BLACK
+
+    */
+    
+    --Button-Primary: #121212;
+
+
+     /* 
+
+    FILLED WHITE
+
+    */
+    --Button-Secondary: #FFFFFF;
+    --Greyscale: E0E0E0;
+    
+    /* 
+    WARNING
+    */
+    --Button-State-Warning-Default: #D91717;
+    --Button-State-Warning-Pressed: #B20000;
+    
+     /* 
+    SUCCESS
+    */
+
+    --Button-State-Success-Default: #10BD52;
+    --Button-State-Success-Pressed: #10BD52;
+
+      /* 
+    UNDERLINED WHITE
+    */
+
+    
 }
