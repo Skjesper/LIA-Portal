@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from 'react';
-import styles from './RSVPCard.module.css'; // Antar att du har en CSS-modul
+import styles from './RSVPCard.module.css';
 
 const RSVPCard = ({ title, onSubmit }) => {
   const [formData, setFormData] = useState({
@@ -30,7 +30,7 @@ const RSVPCard = ({ title, onSubmit }) => {
     <div className={styles.rsvpCard}>
       <h2 className={styles.title}>{title || 'ANMÄLAN TILL EVENT'}</h2>
       
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.formGroup}>
           <label htmlFor="companyName" className={styles.label}>
             *FÖRETAGSNAMN

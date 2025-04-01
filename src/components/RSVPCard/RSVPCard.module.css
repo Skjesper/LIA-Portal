@@ -7,7 +7,7 @@
     gap: 2.5rem;
     align-self: stretch;
     border-radius: var(--border-radius);
-
+    width: 100%;
   }
   
   .title {
@@ -19,11 +19,18 @@
     padding: 0.75rem;
     text-transform: uppercase;
     color: white;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+  }
+  
+  .form {
+    width: 100%;
   }
   
   .formGroup {
     margin-bottom: 1.5rem;
-    
+    width: 100%;
   }
   
   .label {
@@ -41,6 +48,7 @@
     background-color: transparent;
     color: white;
     font-size: 1rem;
+    box-sizing: border-box;
   }
   
   .input::placeholder {
@@ -51,6 +59,20 @@
     display: flex;
     justify-content: center;
     margin-top: 2rem;
+    width: 100%;
+  }
+  
+  .submitButton {
+    background-color: white;
+    color: #121212;
+    border: none;
+    border-radius: 4px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
   }
   
   .submitButton:hover {
