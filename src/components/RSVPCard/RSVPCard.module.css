@@ -11,7 +11,7 @@
     max-width: 768px;
   }
   
-  .title {
+  .title h2 {
     font-size: 1.8rem;
     font-weight: bold;
     margin-bottom: 1.5rem;
@@ -19,7 +19,7 @@
     border-radius: 4px;
     padding: 0.75rem;
     text-transform: uppercase;
-    color: white;
+    color: var(--Typography-Secondary) !important;
     width: 100%;
     box-sizing: border-box;
     text-align: center;

@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import styles from './RSVPCard.module.css';
+import Button, { buttonStyles } from '@/components/ui/Button/Button';
 
 const RSVPCard = ({ title, onSubmit }) => {
   const [formData, setFormData] = useState({
@@ -28,7 +29,7 @@ const RSVPCard = ({ title, onSubmit }) => {
 
   return (
     <div className={styles.rsvpCard}>
-      <h2 className={styles.title}>{title || 'ANMÄLAN TILL EVENT'}</h2>
+      <div className={styles.title}>ANMÄLAN TILL EVENT</div>
       
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.formGroup}>
@@ -81,9 +82,9 @@ const RSVPCard = ({ title, onSubmit }) => {
         </div>
 
         <div className={styles.buttonContainer}>
-          <button type="submit" className={styles.submitButton}>
-            ANMÄL TILL EVENT
-          </button>
+        <Button type="submit" className={buttonStyles.filledWhite}>
+        ANMÄL TILL EVENT
+        </Button>
         </div>
       </form>
     </div>
