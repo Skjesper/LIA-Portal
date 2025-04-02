@@ -27,6 +27,7 @@ export default function Home() {
           <p className={pageStyles.text}>Lorem ipsum dolor sit amet si consectetur. Sagittis faucibus vita in faucibus nunc. Semper nun sodales malesuada. Non habitant.</p>
           <Button className={buttonStyles.underlinedBlack}>Se alla företag</Button>
           <CompanyCard></CompanyCard>
+          <CompanyCard></CompanyCard>
         </div>
       </Section>
       <Section>
@@ -35,6 +36,7 @@ export default function Home() {
           <p className={pageStyles.text}>Lorem ipsum dolor sit amet si consectetur. Sagittis faucibus vita in faucibus nunc. Semper nun sodales malesuada. Non habitant.</p>
           <p>Lorem ipsum dolor sit amet si consectetur. Sagittis faucibus vita in faucibus nunc. Semper nun sodales malesuada. Non habitant.</p>
           <Button className={buttonStyles.underlinedBlack}>Se alla studenter</Button>
+          
         </div>
       </Section>
     </main>

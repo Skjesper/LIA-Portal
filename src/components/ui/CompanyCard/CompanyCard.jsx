@@ -22,7 +22,7 @@ const CompanyCard = ({ children, className, ...props }) => {
           />
         </div>
       </section>
-      <p className={styles.companyCard}>Lorem ipsum dolor sit amet consectetur. Pulvinar tempus mi congue elementum lectus. Odio pellentesque posuere sapien enim at lacus.</p>
+      <p className={styles.text}> Lorem ipsum dolor sit amet consectetur. Pulvinar tempus mi congue elementum lectus. Odio pellentesque posuere sapien enim at lacus.</p>
       <Button className={buttonStyles.underlinedWhite} type="submit">Om företaget</Button>
     </div>
   );

@@ -17,6 +17,7 @@
     align-items: flex-start;
     max-height: 100%; 
     margin: auto;
+    justify-content: center;
   }
 
   .NavLinks{
