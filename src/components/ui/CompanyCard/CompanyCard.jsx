@@ -12,7 +12,7 @@ const CompanyCard = ({ title, text, className, ...props }) => {
         <div className={styles.title}>{title}</div>
         <div className={styles.imageContainer}>
           <Image
-            src="/logos/white-main.svg" // Bilden är statisk
+            src="/logos/white-main.svg"
             alt="Company Logo"
             width={100}
             height={100}
