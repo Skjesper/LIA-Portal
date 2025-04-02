@@ -9,13 +9,14 @@
     border-radius: var(--border-radius);
     width: 100%;
 
-    margin: 0 auto;
+    
   }
   
   .titleWrapper {
     display: flex;
     align-items: center;
-    justify-content: space-between
+    justify-content: space-between;
+    width: 100%;
   }
 
   .title {
@@ -37,7 +38,27 @@
     width: 2.5rem;
     height: 2.5rem;
     
+  }
+
+  .imgContainer {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .titleWrapper img {
+      width: 5.9375rem;
+      height: 5.4375rem;
+    }
+
+    .imgContainer {
+      display: block;
+      width: 50%;
+      height: auto;
+    }
+
     
+
+
   }
 
   .form {

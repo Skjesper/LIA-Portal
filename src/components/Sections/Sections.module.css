@@ -8,6 +8,7 @@
     align-self: stretch;
     background-color: var(--background-MediumLight);
     margin-bottom: 1rem;
+    width: 100%;
   }
 
   .section h2 {
