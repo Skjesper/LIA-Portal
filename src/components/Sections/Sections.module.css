@@ -22,13 +22,13 @@
     text-align: left;
   }
 
-  .section p {
-    color: var(--Typography-Primary, #121212);
-   
+  .text {
+
     font-family: Inter;
     font-size: 1rem;
     font-style: normal;
     font-weight: 400;
-    line-height: 1.25rem; /* 125% */
+    line-height: 1.25rem; 
+    color: var(--Typography-Primary);
   }
 
