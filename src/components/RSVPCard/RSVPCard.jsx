@@ -62,8 +62,9 @@ const RSVPCard = ({ title, onSubmit }) => {
   };
 
   return (
-    <div className={styles.rsvpWrapper}>
+    
       <section className={styles.rsvpCard}>
+        
         <div className={styles.titleWrapper}>
           <div className={styles.title}>ANMÄLAN TILL EVENT 23/4</div>
           
@@ -135,11 +136,11 @@ const RSVPCard = ({ title, onSubmit }) => {
             </Button>
           </div>
         </form>
-        
-      </section>
+        </section>
+      
       
      
-    </div>
+    
   );
 };
 
