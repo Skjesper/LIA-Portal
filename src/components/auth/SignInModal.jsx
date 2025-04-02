@@ -77,13 +77,13 @@ export default function SignInModal({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-container">
+    <div className="modalOverlay">
+      <div className="modalContainer">
         <button className="close-button" onClick={onClose}>
           TILLBAKA
         </button>
         
-        <h2 className="modal-title">LOGGA IN</h2>
+        <h2 className="modalTitle">LOGGA IN</h2>
         
         <form onSubmit={handleSignIn}>
           {message && (
@@ -92,7 +92,7 @@ export default function SignInModal({ isOpen, onClose }) {
             </div>
           )}
           
-          <div className="form-group">
+          <div className="formGroup">
             <label htmlFor="email">Email</label>
             <input
               type="email"
@@ -104,7 +104,7 @@ export default function SignInModal({ isOpen, onClose }) {
             />
           </div>
           
-          <div className="form-group">
+          <div className="formGroup">
             <label htmlFor="password">Lösenord</label>
             <input
               type="password"
@@ -119,7 +119,7 @@ export default function SignInModal({ isOpen, onClose }) {
           <button
             type="submit"
             disabled={loading}
-            className="primary-button"
+            className="primaryButton"
           >
             {loading ? 'Loggar in...' : 'LOGGA IN'}
           </button>
@@ -131,7 +131,7 @@ export default function SignInModal({ isOpen, onClose }) {
         
         <button 
           onClick={openSignUp}
-          className="secondary-button"
+          className="secondaryButton"
         >
           SKAPA KONTO
         </button>

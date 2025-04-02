@@ -78,7 +78,7 @@ export default function StudentSignUpForm({ onSuccess }) {
         </div>
       )}
       
-      <div className="form-group">
+      <div className="formGroup">
         <label htmlFor="firstName">First Name</label>
         <input
           type="text"
@@ -89,7 +89,7 @@ export default function StudentSignUpForm({ onSuccess }) {
         />
       </div>
       
-      <div className="form-group">
+      <div className="formGroup">
         <label htmlFor="lastName">Last Name</label>
         <input
           type="text"
@@ -100,7 +100,7 @@ export default function StudentSignUpForm({ onSuccess }) {
         />
       </div>
       
-      <div className="form-group">
+      <div className="formGroup">
         <label htmlFor="email">Email</label>
         <input
           type="email"
@@ -111,7 +111,7 @@ export default function StudentSignUpForm({ onSuccess }) {
         />
       </div>
       
-      <div className="form-group">
+      <div className="formGroup">
         <label htmlFor="password">Password</label>
         <input
           type="password"

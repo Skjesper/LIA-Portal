@@ -75,7 +75,7 @@ export default function CompanySignUpForm({ onSuccess }) {
         </div>
       )}
       
-      <div className="form-group">
+      <div className="formGroup">
         <label htmlFor="companyName">Company Name</label>
         <input
           type="text"
@@ -87,7 +87,7 @@ export default function CompanySignUpForm({ onSuccess }) {
         />
       </div>
       
-      <div className="form-group">
+      <div className="formGroup">
         <label htmlFor="email">Email</label>
         <input
           type="email"
@@ -99,7 +99,7 @@ export default function CompanySignUpForm({ onSuccess }) {
         />
       </div>
       
-      <div className="form-group">
+      <div className="formGroup">
         <label htmlFor="password">Password</label>
         <input
           type="password"
