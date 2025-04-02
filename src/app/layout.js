@@ -3,6 +3,7 @@ import "@/components/styles/globals.css";
 import "@/components/styles/colors.css";
 import Header from '@/components/Header'
 import Footer from '@/components/footer/Footer'
+import "@/app/page.module.css";
 
 const inter = Inter({
   variable: "--font-inter",

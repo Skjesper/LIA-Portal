@@ -3,7 +3,7 @@
 
 .button {
     display: flex;
-    width: 10rem;
+    width: 12rem;
     padding: 0.5rem 1rem;
     justify-content: center;
     align-items: center;
@@ -94,6 +94,16 @@
 .unfilledWhite:active {
     border: var(--Button-border-size) solid var(--Greyscale-10);
     color: var(--Greyscale-10);
+}
+
+
+/*
+Could be nice to find a better place to left align theses
+*/
+.button.underlinedBlack,
+.button.underlinedWhite {
+    padding: 0;
+    justify-content: left;
 }
 
 .underlinedWhite {
