@@ -2,8 +2,10 @@
 
 import React, { useState } from 'react';
 import { createBrowserClient } from '@supabase/ssr';
+import { useRouter } from 'next/navigation';
 
 export default function SignUpForm() {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [userType, setUserType] = useState('student');
@@ -45,6 +47,11 @@ export default function SignUpForm() {
         // Clear form
         setEmail('');
         setPassword('');
+
+        // Add a short delay before redirecting
+      setTimeout(() => {
+        router.push('/edit-profile');
+      }, 1500); // 1.5 seconds
       }
     } catch (error) {
       setMessage({
