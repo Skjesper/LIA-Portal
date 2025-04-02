@@ -1,14 +1,10 @@
-// src/app/companies/page.js
-import Link from 'next/link';
+import CompaniesList from '@/components/ui/CompanyCard/CompaniesList';
 
-export default function Companies() {
+export default function CompaniesPage() {
   return (
-    <div>
-      <h1>Företagssida</h1>
-      <p>Här kommer information om företag att visas.</p>
-      <Link href="/">
-        <button>Tillbaka till startsidan</button>
-      </Link>
-    </div>
+    <main>
+      <h1>Företagslista</h1>
+      <CompaniesList />
+    </main>
   );
 }
