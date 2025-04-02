@@ -1,0 +1,13 @@
+.companyCard {
+
+    display: flex;
+    padding: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2.5rem;
+    align-self: stretch;
+    background-color: var(--Background-Dark);
+    border-radius: 1rem;
+
+}
+

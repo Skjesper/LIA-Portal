@@ -3,6 +3,8 @@ import Button, { buttonStyles } from '@/components/ui/Button/Button';
 import pageStyles from './page.module.css'; // Importera page.module.css
 import Section from '@/components/Sections/Sections';
 import RSVPCard from '@/components/RSVPCard/RSVPCard';
+import Label, { labelStyles } from '@/components/ui/Label/Label';
+import CompanyCard from '@/components/ui/CompanyCard/CompanyCard';
 
 
 export default function Home() {
@@ -24,6 +26,7 @@ export default function Home() {
           <p>Lorem ipsum dolor sit amet si consectetur. Sagittis faucibus vita in faucibus nunc. Semper nun sodales malesuada. Non habitant.</p>
           <p>Lorem ipsum dolor sit amet si consectetur. Sagittis faucibus vita in faucibus nunc. Semper nun sodales malesuada. Non habitant.</p>
           <Button className={buttonStyles.underlinedBlack}>Se alla företag</Button>
+          <CompanyCard></CompanyCard>
         </div>
       </Section>
       <Section>
@@ -34,7 +37,7 @@ export default function Home() {
           <Button className={buttonStyles.underlinedBlack}>Se alla studenter</Button>
         </div>
       </Section>
-      
+      <Label className={labelStyles.filled}>Hej</Label>
     </main>
   );
 }
