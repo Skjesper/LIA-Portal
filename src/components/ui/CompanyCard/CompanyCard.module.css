@@ -14,7 +14,16 @@
     border-radius: 1rem;
     color: var(--background-MediumLight);
     margin-bottom: 1.5rem;
+    max-width: 29.5rem;
+    
+}
 
+@media (min-width: 768px) {
+
+    .companyCard {
+
+       
+    }
 }
 
 /* Mobil/H3/Regular */
