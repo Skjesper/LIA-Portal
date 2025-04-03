@@ -4,6 +4,7 @@
 .button {
     display: flex;
     width: 12rem;
+    
     padding: 0.5rem 1rem;
     justify-content: center;
     align-items: center;
@@ -104,6 +105,8 @@ Could be nice to find a better place to left align theses
 .button.underlinedWhite {
     padding: 0;
     justify-content: left;
+    
+    
 }
 
 .underlinedWhite {

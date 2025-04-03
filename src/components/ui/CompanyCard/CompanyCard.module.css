@@ -18,12 +18,78 @@
     
 }
 
+.sectionWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.applyWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    /* margin-bottom: 2rem; */
+    align-items: left;
+    width: 100%;
+  }
+  
+  .cardText {
+    color: var(--Typography-Secondary);
+    margin-right: 3.62rem;
+  }
+
+  .sectionText {
+    color: var(--Typography-Primary);
+  }
+
+ 
+
 @media (min-width: 768px) {
 
-    .companyCard {
+    .applyWrapper {
 
+       flex-direction: row;
        
+        align-items: flex-start;
+        gap: 8.0625rem;
+        align-self: stretch;
+        
     }
+
+    .sectionHeader {
+       
+        width: 65.75rem;
+        margin-bottom: 1rem;
+
+    }
+
+    .sectionTitle {
+    
+        margin-bottom: 3rem;
+    }
+
+    .companyCard {
+        width: 26.8125rem;
+        height: 34.25rem;
+    }
+
+    .flexCompaniesContainer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: end;
+      }
+
+      .flexCompaniesContainer {
+         /* Ändra till space-between istället för end */
+        gap: 2rem;
+      }
+      
+      .companyCardFlex {
+       
+        max-width: 29.5rem; /* Behåll max-bredden från .companyCard */
+      }
+
+    
 }
 
 /* Mobil/H3/Regular */
