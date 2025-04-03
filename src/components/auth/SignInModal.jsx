@@ -93,7 +93,7 @@ export default function SignInModal({ isOpen, onClose }) {
           )}
           
           <div className="formGroup">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">*EMAIL</label>
             <input
               type="email"
               id="email"
@@ -105,14 +105,14 @@ export default function SignInModal({ isOpen, onClose }) {
           </div>
           
           <div className="formGroup">
-            <label htmlFor="password">Lösenord</label>
+            <label htmlFor="password">*LÖSENORD</label>
             <input
               type="password"
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              placeholder="Ange lösenord"
+              placeholder="Skriv in ditt lösenord"
             />
           </div>
           
