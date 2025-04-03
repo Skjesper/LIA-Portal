@@ -21,7 +21,7 @@
 .sectionWrapper {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    
 }
 
 .applyWrapper {
@@ -38,9 +38,26 @@
     margin-right: 3.62rem;
   }
 
+  .sectionHeader {
+    width: 100%;
+    max-width: 18.75rem;
+  }
   .sectionText {
     color: var(--Typography-Primary);
   }
+
+  .flexCompaniesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1.5rem;
+   
+  }
+
+  .sectionTitle {
+    
+    margin-bottom: 1rem;
+}
 
  
 
@@ -48,8 +65,8 @@
 
     .applyWrapper {
 
-       flex-direction: row;
-       
+        display: flex;
+        flex-direction: row;
         align-items: flex-start;
         gap: 8.0625rem;
         align-self: stretch;
@@ -60,6 +77,7 @@
        
         width: 65.75rem;
         margin-bottom: 1rem;
+        max-width: 65.75rem;
 
     }
 
@@ -76,7 +94,8 @@
     .flexCompaniesContainer {
         display: flex;
         flex-wrap: wrap;
-        justify-content: end;
+        justify-content: center;
+       
       }
 
       .flexCompaniesContainer {
@@ -106,13 +125,17 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    
     /* Height will be determined by its content */
 }
+
+
 
 .imageContainer {
     width: 1.625rem;
     display: flex;
     align-items: center;
+    
 }
 
 .imageContainer img {
