@@ -7,11 +7,10 @@
     gap: 2.5rem;
     align-self: stretch;
     border-radius: var(--border-radius);
-    width: 100%;
+    width: calc(100vw - 2rem);
 
     
   }
-
   
   .titleWrapper {
     display: flex;

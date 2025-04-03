@@ -29,13 +29,13 @@
     flex-direction: column;
     gap: 1rem;
     /* margin-bottom: 2rem; */
-    align-items: left;
     width: 100%;
+    
   }
   
   .cardText {
     color: var(--Typography-Secondary);
-    margin-right: 3.62rem;
+    /* margin-right: 3.62rem; */
   }
 
   .sectionHeader {
@@ -75,9 +75,11 @@
 
     .sectionHeader {
        
-        width: 65.75rem;
+        width: 100vw;
         margin-bottom: 1rem;
-        max-width: 65.75rem;
+        max-width: 60rem;
+        
+       
 
     }
 
@@ -95,6 +97,7 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+        width: 100vw;
        
       }
 
@@ -106,6 +109,10 @@
       .companyCardFlex {
        
         max-width: 29.5rem; /* Behåll max-bredden från .companyCard */
+      }
+
+      .companyCard {
+        justify-content: space-between;
       }
 
     

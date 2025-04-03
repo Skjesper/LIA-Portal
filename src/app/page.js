@@ -6,6 +6,7 @@ import RSVPCard from '@/components/RSVPCard/RSVPCard';
 import Label, { labelStyles } from '@/components/ui/Label/Label';
 import RandomCompanies from '@/components/ui/CompanyCard/RandomCompanies';
 import CompanyCardSection from '@/components/ui/CompanyCard/CompanySection';
+import styles from '@/components/RSVPCard/RSVPCard.module.css';
 
 
 export default function Home() {
@@ -16,7 +17,7 @@ export default function Home() {
       <Section>
         <div className={pageStyles.applyWrapper}>
           <h2>01/Anmälan</h2>
-          <p className={pageStyles.text}>
+          <p className={pageStyles.sectionText}>
             Lorem ipsum dolor sit amet si consectetur. Sagittis faucibus vita in faucibus nunc. 
             Semper nun sodales malesuada. Non habitant.
           </p>
