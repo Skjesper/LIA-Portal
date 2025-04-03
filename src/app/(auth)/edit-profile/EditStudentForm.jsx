@@ -14,8 +14,10 @@ export default function EditStudentForm({ user, profile }) {
     first_name: profile?.first_name || '',
     last_name: profile?.last_name || '',
     education_program: profile?.education_program || '',
+    linkedin_url: profile?.linkedin_url || '',
+    portfolio_url: profile?.portfolio_url || '',
     bio: profile?.bio || '',
-    profile_picture_url: profile?.profile_picture_url || ''
+    profile_picture: profile?.profile_picture || ''
   });
   
   const handleChange = (e) => {
@@ -38,7 +40,7 @@ export default function EditStudentForm({ user, profile }) {
   const handleImageUpload = (url) => {
     setFormData(prev => ({
       ...prev,
-      profile_picture_url: url
+      profile_picture: url
     }));
   };
   
@@ -53,12 +55,14 @@ export default function EditStudentForm({ user, profile }) {
       
       // Prepare the data to update/insert
       const profileData = {
-        user_id: user.id,
+        id: user.id,
         first_name: formData.first_name,
         last_name: formData.last_name,
         education_program: formData.education_program,
+        linkedin_url: formData.linkedin_url,
+        portfolio_url: formData.portfolio_url,
         bio: formData.bio,
-        profile_picture_url: formData.profile_picture_url,
+        profile_picture: formData.profile_picture,
         updated_at: new Date().toISOString()
       };
       
@@ -72,14 +76,13 @@ export default function EditStudentForm({ user, profile }) {
         result = await supabase
           .from('student_profiles')
           .update(profileData)
-          .eq('user_id', user.id);
+          .eq('id', user.id);
       }
       
       if (result.error) throw result.error;
       
       setMessage('Profile updated successfully!');
-      // Refresh the page or navigate to profile view after successful update
-      setTimeout(() => router.push('/profile'), 1500);
+    
     } catch (error) {
       console.error('Error updating profile:', error);
       setMessage(`Error updating profile: ${error.message}`);
@@ -100,7 +103,7 @@ export default function EditStudentForm({ user, profile }) {
         <div className="">
           <div>
             <label htmlFor="first_name" className="">
-              First Name
+              * FÖRNAMN
             </label>
             <input
               type="text"
@@ -115,7 +118,7 @@ export default function EditStudentForm({ user, profile }) {
           
           <div>
             <label htmlFor="last_name" className="">
-              Last Name
+              *EFTERNAMN
             </label>
             <input
               type="text"
@@ -130,47 +133,75 @@ export default function EditStudentForm({ user, profile }) {
         </div>
         
         <div>
-          <fieldset>
+        <fieldset required>
             <legend className="">
-              Education Program
+                *JAG STUDERAR TILL
             </legend>
             <div className="">
-              <div className="">
                 <input
-                  id="digital-design"
-                  name="education_program"
-                  type="checkbox"
-                  value="Digital Design"
-                  checked={formData.education_program === "Digital Design"}
-                  onChange={handleChange}
-                  className=""
-                />
-                <label htmlFor="digital-design" className="">
-                  Digital Design
-                </label>
-              </div>
-              
-              <div className="">
-                <input
-                  id="webbutveckling"
-                  name="education_program"
-                  type="checkbox"
-                  value="Webbutveckling"
-                  checked={formData.education_program === "Webbutveckling"}
-                  onChange={handleChange}
-                  className=""
+                id="webbutveckling"
+                name="education_program"
+                type="radio"
+                value="Webbutveckling"
+                checked={formData.education_program === "Webbutveckling"}
+                onChange={handleChange}
+                className=""
+                required
                 />
                 <label htmlFor="webbutveckling" className="">
-                  Webbutveckling
+                WEBBUTVECKLARE
                 </label>
-              </div>
             </div>
-          </fieldset>
+            <div className="">
+                <div className="">
+                <input
+                    id="digital-design"
+                    name="education_program"
+                    type="radio"
+                    value="Digital Design"
+                    checked={formData.education_program === "Digital Design"}
+                    onChange={handleChange}
+                    className=""
+                />
+                <label htmlFor="digital-design" className="">
+                    DIGITAL DESIGNER
+                </label>
+                </div>
+            </div>
+        </fieldset>
         </div>
-        
+
+        <div>
+            <label htmlFor="linkedin_url" className="">
+              LINKEDIN
+            </label>
+            <input
+              type="text"
+              id="linkedin_url"
+              name="linkedin_url"
+              value={formData.linkedin_url}
+              onChange={handleChange}
+              className=""
+            />
+        </div>
+
+        <div>
+            <label htmlFor="portfolio_url" className="">
+              PORTFOLIO
+            </label>
+            <input
+              type="text"
+              id="portfolio_url"
+              name="portfolio_url"
+              value={formData.portfolio_url}
+              onChange={handleChange}
+              className=""
+            />
+        </div>
+
         <div>
           <label htmlFor="bio" className="">
-            Bio
+            *BIO
           </label>
           <textarea
             id="bio"
@@ -179,7 +210,8 @@ export default function EditStudentForm({ user, profile }) {
             value={formData.bio}
             onChange={handleChange}
             className=""
-            placeholder="Tell us a bit about yourself..."
+            placeholder="Skriv en bio om dig själv, max 200 tecken"
+            required
           />
         </div>
       </div>

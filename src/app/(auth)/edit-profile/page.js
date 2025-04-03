@@ -73,7 +73,7 @@ export default function EditProfilePage() {
   
   return (
     <div className="">
-      <h1 className="">Edit Your Profile</h1>
+      <h1 className="">REDIGERA PROFIL</h1>
       
       {profile?.type === 'student' ? (
         <EditStudentForm user={user} profile={profile.data} />
