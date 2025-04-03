@@ -30,12 +30,11 @@ export default function EditProfilePage() {
         return;
       }
       
-      // Set the user
       setUser(session.user);
       
-      // Get the user type from auth.users (or your custom table)
+      
       const { data: userData, error: userTypeError } = await supabase
-        .from('user_types') // Adjust this to match your actual table name
+        .from('user_types')
         .select('user_type')
         .eq('user_id', session.user.id)
         .single();
