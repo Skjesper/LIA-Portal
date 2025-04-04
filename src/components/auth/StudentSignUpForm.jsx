@@ -79,46 +79,50 @@ export default function StudentSignUpForm({ onSuccess }) {
       )}
       
       <div className="formGroup">
-        <label htmlFor="firstName">First Name</label>
+        <label htmlFor="firstName">*FÖRNAMN</label>
         <input
           type="text"
           id="firstName"
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
+          placeholder="Ex. Anna"
           required
         />
       </div>
       
       <div className="formGroup">
-        <label htmlFor="lastName">Last Name</label>
+        <label htmlFor="lastName">*EFTERNAMN</label>
         <input
           type="text"
           id="lastName"
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
+          placeholder="Ex. Nilsson"
           required
         />
       </div>
       
       <div className="formGroup">
-        <label htmlFor="email">Email</label>
+        <label htmlFor="email">*EMAIL</label>
         <input
           type="email"
           id="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          placeholder="exempel@mail.com"
           required
         />
       </div>
       
       <div className="formGroup">
-        <label htmlFor="password">Password</label>
+        <label htmlFor="password">*LÖSENORD</label>
         <input
           type="password"
           id="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
+          placeholder="Välj ett lösenord"
           minLength={6}
         />
       </div>
