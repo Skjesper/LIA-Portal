@@ -12,8 +12,6 @@ import styles from '@/components/RSVPCard/RSVPCard.module.css';
 export default function Home() {
   return (
     <main>
-      <h1>Min webbsida</h1>
-      
       <Section>
         <div className={pageStyles.applyWrapper}>
           <h2>01/Anmälan</h2>

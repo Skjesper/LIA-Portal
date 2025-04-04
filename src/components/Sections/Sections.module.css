@@ -33,13 +33,5 @@
     color: var(--Typography-Primary);
   }
 
-  .sectionText {
 
-    font-family: Inter;
-    font-size: 1rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1.25rem; 
-    color: var(--Typography-Secondary);
-  }
 
