@@ -1,0 +1,103 @@
+/* MobileMenu.module.css */
+.menuOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #e9ecee; /* Light gray background from image */
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem;
+  }
+  
+  .closeButtonContainer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem 0;
+  }
+  
+  .closeButton {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  
+  .closeIcon {
+    margin-left: 0.5rem;
+    font-size: 1.2rem;
+  }
+  
+  .menuNavigation {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .menuLinks {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+  }
+  
+  .menuLinks li {
+    margin-bottom: 2rem;
+  }
+  
+  .menuLink {
+    color: var(--Typography-Primary, #121212);
+
+/* Mobil/H2/Bold */
+font-family: Inter;
+font-size: 2rem;
+font-style: italic;
+font-weight: 530;
+line-height: 2rem; /* 100% */
+letter-spacing: -0.06rem;
+text-transform: uppercase;
+
+  }
+  
+  .menuFooter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    /* margin-bottom: 10.75rem; */
+  }
+  
+  .loginButton {
+    display: block;
+    width: 100%;
+    max-width: 240px;
+    padding: 0.75rem;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 1.5rem;
+    font-weight: 500;
+  }
+  
+  .registerButton {
+    display: block;
+    width: 100%;
+    max-width: 240px;
+    padding: 0.75rem;
+    background-color: transparent;
+    color: #000;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid #000;
+    border-radius: 1.5rem;
+    font-weight: 500;
+  }
