@@ -20,7 +20,7 @@ export default function Home() {
 
       <Section>
      
-      {/* <CompanyCardSection /> */}
+      <CompanyCardSection />
       </Section>
       
     </main>
