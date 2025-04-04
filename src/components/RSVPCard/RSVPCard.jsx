@@ -63,6 +63,13 @@ const RSVPCard = ({ title, onSubmit }) => {
 
   return (
     
+    <section className={styles.rsvpCardContainer}>
+    <h2 className={styles.sectionTitle}><span>01/</span>Anmälan</h2>
+      <p className={styles.sectionText}>
+        Lorem ipsum dolor sit amet si consectetur. Sagittis faucibus vita in faucibus nunc. 
+        Semper nun sodales malesuada. Non habitant.
+      </p>
+    
       <section className={styles.rsvpCard}>
         
         <div className={styles.titleWrapper}>
@@ -138,7 +145,7 @@ const RSVPCard = ({ title, onSubmit }) => {
         </form>
         </section>
       
-      
+      </section>
      
     
   );
