@@ -8,7 +8,7 @@
     align-self: stretch;
     background-color: var(--background-MediumLight);
     margin-bottom: 1rem;
-    width: 100%;
+    width: 100vw;
   }
 
   .section h2 {
@@ -32,4 +32,6 @@
     line-height: 1.25rem; 
     color: var(--Typography-Primary);
   }
+
+
 
