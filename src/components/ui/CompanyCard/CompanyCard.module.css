@@ -1,0 +1,52 @@
+:root {
+    --Title-height: 1.5rem; 
+}
+
+.companyCard {
+
+    display: flex;
+    padding: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2.5rem;
+    align-self: stretch;
+    background-color: var(--Background-Dark);
+    border-radius: 1rem;
+    color: var(--background-MediumLight);
+    margin-bottom: 1.5rem;
+
+}
+
+/* Mobil/H3/Regular */
+.title {
+    font-family: Inter;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 450;
+    line-height: var(--Title-height); /* 100% */
+}
+
+.titleContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Height will be determined by its content */
+}
+
+.imageContainer {
+    width: 1.625rem;
+    display: flex;
+    align-items: center;
+}
+
+.imageContainer img {
+    height: var(--Title-height); /* Same as title's line-height */
+    width: auto;
+    object-fit: contain;
+}
+
+.text {
+    margin-bottom: 2.5rem;
+}
+

@@ -1,0 +1,138 @@
+/* Button.module.css */
+
+
+.button {
+    display: flex;
+    width: 12rem;
+    padding: 0.5rem 1rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    border: none;
+    border-radius: var(--border-radius);
+    background-color: transparent;
+    font-family: Inter;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1rem; /* 100% */
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  
+  /* .button:hover {
+    transform: translateY(-1px);
+  }
+  
+  .button:active {
+    transform: translateY(1px);
+  } */
+
+  .button:disabled * {
+    background-color: var(--Button-State-Disabled);
+    border-color: var(--Button-State-Disabled);
+    color: var(--Button-State-Disabled);
+    cursor: not-allowed;
+  }
+  
+  .button::selection {
+      border: var(--Button-border-size) solid var(--Button-State-Focus);
+  }
+.warning {
+
+    background-color: var(--Button-State-Warning-Default);
+}
+
+.warning:active {
+    background-color: var(--Button-State-Warning-Pressed);
+}
+
+
+.warning:disabled {
+    background-color: var(--Button-State-Disabled);
+}
+
+.success {
+    background-color: var(--Button-State-Success-Default);
+    color: var(--Button-Primary);
+}
+
+.success:active {
+    background-color: var(--Button-State-Success-Pressed);
+}
+
+.filledWhite {
+    background-color: var(--Button-Secondary);
+    color: var(--Typography-Primary);
+}
+
+.filledWhite:active {
+    background-color: var(--Greyscale-10);
+}
+
+.filledBlack{
+    background-color: var(--Button-Primary);
+}
+
+.filledBlack:active {
+    background-color: var(--Greyscale-70);
+}
+
+.unfilledBlack {
+    border: var(--Button-border-size) solid var(--Button-Primary);
+    color: var(--Button-Primary);
+}
+
+.unfilledBlack:active {
+    border: var(--Button-border-size) solid var(--Greyscale-70);
+    color: var(--Greyscale-70);
+}
+.unfilledWhite {
+    border: var(--Button-border-size) solid;
+}
+
+.unfilledWhite:active {
+    border: var(--Button-border-size) solid var(--Greyscale-10);
+    color: var(--Greyscale-10);
+}
+
+
+/*
+Could be nice to find a better place to left align theses
+*/
+.button.underlinedBlack,
+.button.underlinedWhite {
+    padding: 0;
+    justify-content: left;
+}
+
+.underlinedWhite {
+    text-decoration: underline;
+    text-underline-offset: var(--Button-underline-offset);
+    
+    outline:none;
+}
+
+.underlinedWhite:active {
+    color: var(--Greyscale-10);
+    
+}
+
+.underlinedWhite:focus {
+    text-decoration-color: var(--Button-State-Focus);
+}
+
+.underlinedBlack {
+    text-decoration: underline;
+    color: var(--Typography-Primary);
+    text-underline-offset: var(--Button-underline-offset);
+    outline:none;
+}
+
+.underlinedBlack:active {
+    text-decoration: var(--Button-State-Focus) underline;
+}
+
+.underlinedBlack:focus {
+    text-decoration-color: var(--Button-State-Focus);
+  }

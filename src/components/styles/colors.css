@@ -1,0 +1,49 @@
+:root {
+    --Background-Dark: #121212;
+    --background-MediumLight: #E4E9EB;
+    
+    /* 
+
+    BUTTON STYLING
+
+    */
+    
+    --Button-State-Focus: #1100FF;
+    --Button-State-Disabled: #828282;
+    /* 
+
+    FILLED BLACK
+
+    */
+    
+    --Button-Primary: #121212;
+    --Greyscale-70: #2D2D2D;
+
+
+     /* 
+
+    FILLED WHITE
+
+    */
+    --Button-Secondary: #FFFFFF;
+    --Greyscale-10: #E0E0E0;
+    
+    /* 
+    WARNING
+    */
+    --Button-State-Warning-Default: #D91717;
+    --Button-State-Warning-Pressed: #B20000;
+    
+     /* 
+    SUCCESS
+    */
+
+    --Button-State-Success-Default: #10BD52;
+    --Button-State-Success-Pressed: #11A649;
+
+      /* 
+    UNDERLINED WHITE
+    */
+
+    
+}

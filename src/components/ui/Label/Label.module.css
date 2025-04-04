@@ -1,0 +1,17 @@
+.label {
+display: inline-flex;
+padding: 0.375rem 0.625rem;
+justify-content: center;
+align-items: center;
+gap: 0.5rem;
+border-radius: 1.5rem;
+}
+
+.unfilled {
+    border: 1px solid var(--Typography-Secondary, #FFF);
+}
+
+.filled {
+    background: var(--Background-Dark, #121212);
+    
+}
