@@ -106,6 +106,7 @@ Could be nice to find a better place to left align theses
     padding: 0;
     justify-content: left;
     width: auto;
+    min-width: fit-content;
     
     
 }
