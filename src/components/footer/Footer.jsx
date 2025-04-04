@@ -1,9 +1,14 @@
+'use client';
+
 import styles from './Footer.module.css';
 import Link from 'next/link';
 import Image from 'next/image';
 import Button, { buttonStyles } from '@/components/ui/Button/Button';
+import useBreakpoint from '@/app/hooks/useBreakpoint';
 
 export default function Footer() {
+
+  const isMobile = useBreakpoint(768);
   return (
     <footer className={styles.footer}>
       <div className={styles.logoContainer}>
