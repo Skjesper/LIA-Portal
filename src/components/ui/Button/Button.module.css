@@ -105,6 +105,7 @@ Could be nice to find a better place to left align theses
 .button.underlinedWhite {
     padding: 0;
     justify-content: left;
+    width: auto;
     
     
 }
@@ -130,6 +131,7 @@ Could be nice to find a better place to left align theses
     color: var(--Typography-Primary);
     text-underline-offset: var(--Button-underline-offset);
     outline:none;
+    
 }
 
 .underlinedBlack:active {

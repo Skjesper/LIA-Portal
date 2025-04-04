@@ -1,18 +1,32 @@
 'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
-import styles from './Header.module.css';
+import { useAuth } from '@/components/auth/AuthProvider';
 import useBreakpoint from '@/app/hooks/useBreakpoint';
 import Button, { buttonStyles } from '@/components/ui/Button/Button';
 import MobileDropdown from '@/components/ui/MobileDropdown/MobileDropdown';
+import styles from './Header.module.css';
 
 export default function Header() {
   const isMobile = useBreakpoint(768); // Use 768px as breakpoint
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { isLoggedIn, userType } = useAuth();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  // Get the appropriate profile link based on user type
+  const getProfileLink = () => {
+    if (userType === 'student') {
+      return '/student/profile';
+    } else if (userType === 'company') {
+      return '/company/profile';
+    }
+    
+    return '/profile';
   };
 
   return (
@@ -20,13 +34,15 @@ export default function Header() {
       <header className={styles.header}>
         <section className={styles.headerLeft}>
           <div className={styles.logo}>
-            <Image
-              src="/logos/yrgo-logo-black.svg"
-              alt="Company Logo"
-              width={50}
-              height={30}
-              className={styles.image}
-            />
+            <Link href="/">
+              <Image
+                src="/logos/yrgo-logo-black.svg"
+                alt="Company Logo"
+                width={50}
+                height={30}
+                className={styles.image}
+              />
+            </Link>
           </div>
         </section>
         
@@ -83,9 +99,19 @@ export default function Header() {
               </nav>
             </section>
             <section className={styles.headerRight}>
-              <Button className={buttonStyles.primaryBlack}>
-                Logga in
-              </Button>
+              {isLoggedIn ? (
+                <Link href={getProfileLink()}>
+                  <Button className={buttonStyles.primaryBlack}>
+                    Min Profil
+                  </Button>
+                </Link>
+              ) : (
+                <Link href="/login">
+                  <Button className={buttonStyles.primaryBlack}>
+                    Logga in
+                  </Button>
+                </Link>
+              )}
             </section>
           </>
         )}
