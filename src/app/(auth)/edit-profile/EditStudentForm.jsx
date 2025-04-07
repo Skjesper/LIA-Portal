@@ -9,6 +9,8 @@ export default function EditStudentForm({ user, profile }) {
   const supabase = createClientComponentClient();
   
   const [loading, setLoading] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [file, setFile] = useState(null);
   const [message, setMessage] = useState('');
   const [formData, setFormData] = useState({
     first_name: profile?.first_name || '',
@@ -17,6 +19,7 @@ export default function EditStudentForm({ user, profile }) {
     linkedin_url: profile?.linkedin_url || '',
     portfolio_url: profile?.portfolio_url || '',
     bio: profile?.bio || '',
+    cv: profile?.cv || '',
     profile_picture: profile?.profile_picture || ''
   });
   
@@ -43,6 +46,90 @@ export default function EditStudentForm({ user, profile }) {
       profile_picture: url
     }));
   };
+
+  const handleFileChange = async (e) => {
+    const selectedFile = e.target.files?.[0];
+    if (!selectedFile) {
+      return;
+    }
+    
+    setFile(selectedFile);
+    setUploading(true);
+    setMessage('Laddar upp...');
+
+    const filePath = `${user.id}/${selectedFile.name}`;
+
+    const { data, error } = await supabase.storage
+      .from('cv')
+      .upload(filePath, selectedFile, {
+        cacheControl: '3600',
+        upsert: true, // overwrite if same name
+      });
+
+    if (error) {
+      setMessage(`Upload error: ${error.message}`);
+    } else {
+      // Save the file path to your table
+      const { error: dbError } = await supabase
+        .from('student_profiles')
+        .update({ cv: data.path })
+        .eq('id', user.id);
+
+      if (dbError) {
+        setMessage(`DB update error: ${dbError.message}`);
+      } else {
+        // Update the form data state with the new CV path
+        setFormData(prev => ({
+          ...prev,
+          cv: data.path
+        }));
+        setMessage('CV uploaded successfully!');
+      }
+    }
+
+    setUploading(false);
+  };
+  
+  const handleRemoveCV = async () => {
+    if (!formData.cv) return;
+    
+    setUploading(true);
+    setMessage('Raderar CV...');
+    
+    try {
+      // First, delete the file from storage
+      const { error: storageError } = await supabase.storage
+        .from('cv')
+        .remove([formData.cv]);
+        
+      if (storageError) {
+        throw storageError;
+      }
+      
+      // Then, update the database record
+      const { error: dbError } = await supabase
+        .from('student_profiles')
+        .update({ cv: null })
+        .eq('id', user.id);
+        
+      if (dbError) {
+        throw dbError;
+      }
+      
+      // Update local state
+      setFormData(prev => ({
+        ...prev,
+        cv: ''
+      }));
+      
+      setMessage('CV borttagen');
+    } catch (error) {
+      console.error('Error removing CV:', error);
+      setMessage(`Error removing CV: ${error.message}`);
+    } finally {
+      setUploading(false);
+    }
+  };
   
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -62,6 +149,7 @@ export default function EditStudentForm({ user, profile }) {
         linkedin_url: formData.linkedin_url,
         portfolio_url: formData.portfolio_url,
         bio: formData.bio,
+        cv: formData.cv,
         profile_picture: formData.profile_picture,
         updated_at: new Date().toISOString()
       };
@@ -214,8 +302,47 @@ export default function EditStudentForm({ user, profile }) {
             required
           />
         </div>
+        </div>
+            <label htmlFor="knowledge" className="">
+                *KNOWLEDGE
+            </label>
+            <select name="knowledge" id="knowledge">
+                <option value="Figma">FIGMA</option>
+                <option value="Illustrator">ILLUSTRATOR</option>
+                <option value="Photoshop">PHOTOSHOP</option>
+                <option value="Unreal engine">UNREAL ENGINE</option>
+                <option value="Framer">FRAMER</option>
+            </select>
+        <div>
       </div>
-      
+        <div>
+            <label htmlFor="cv" className="">
+                LADDA UPP CV
+            </label>
+            <input
+                type="file"
+                id="cv"
+                accept="application/pdf"
+                onChange={handleFileChange}
+                disabled={uploading}
+            />
+            {uploading && <p>Laddar upp...</p>}
+            {formData.cv && !uploading && (
+                <div className="mt-2 text-green-600">
+                    CV uppladdad
+                </div>
+            )}
+            {message && message !== 'CV uploaded successfully!' && <p className="mt-2">{message}</p>}
+            {formData.cv && (
+                <button 
+                    type="button" 
+                    className="mt-2"
+                    onClick={handleRemoveCV}
+                >
+                    {formData.cv.split('/').pop()}
+                </button>
+            )}
+        </div>
       <div className="">
         <button
           type="button"
