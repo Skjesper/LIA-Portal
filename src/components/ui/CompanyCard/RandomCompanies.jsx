@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import mockCompanies from '@/data/mockCompanies'; // Ersätt med API-anrop senare
 import CompanyCard from '@/components/ui/CompanyCard/CompanyCard';
+import styles from '@/components/ui/CompanyCard/CompanyCard.module.css';
 
 const RandomCompanies = () => {
   const [randomCompanies, setRandomCompanies] = useState([]);
@@ -13,15 +14,16 @@ const RandomCompanies = () => {
   }, []);
 
   return (
-    <div>
+    <>
       {randomCompanies.map((company) => (
         <CompanyCard 
           key={company.id} 
           title={company.name} 
           text={company.description} 
+          className={styles.companyCardFlex} // Lägg till en specifik klass för flex-items
         />
       ))}
-    </div>
+    </>
   );
 };
 

@@ -20,7 +20,7 @@ const CompanyCard = ({ title, text, className, ...props }) => {
           />
         </div>
       </section>
-      <p className={styles.text}>{text}</p>
+      <p className={styles.cardText}>{text}</p>
       <Button className={buttonStyles.underlinedWhite} type="submit">Om företaget</Button>
     </div>
   );
