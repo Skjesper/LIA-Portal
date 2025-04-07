@@ -54,11 +54,16 @@
     margin-top: auto; /* Pushes the container to the bottom */
     margin: auto;
     align-items: center;
+    justify-content: center;
+
     width: 100%;
   }
 
   .rightContainer img {
     width: 100%;
+    max-width: 42rem;
+    justify-content: center;
+   
   }
 
   .logo {

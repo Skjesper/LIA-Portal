@@ -1,0 +1,65 @@
+.menuOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--background-MediumLight);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem;
+  }
+  
+  .closeButtonContainer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem 0;
+  }
+  
+  .menuNavigation {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .menuLinks {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+  }
+  
+  .menuLinks li {
+    margin-bottom: 2rem;
+  }
+  
+  .menuLink {
+    color: var(--Typography-Primary, #121212);
+    /* Mobil/H2/Bold */
+    font-family: Inter;
+    font-size: 2rem;
+    font-style: italic;
+    font-weight: 530;
+    line-height: 2rem; /* 100% */
+    letter-spacing: -0.06rem;
+    text-transform: uppercase;
+  }
+  
+  .menuFooter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    margin-top: 5rem;
+  }
+  
+  .userInfo {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--Typography-Primary);
+    font-weight: 500;
+  }

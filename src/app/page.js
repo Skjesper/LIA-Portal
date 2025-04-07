@@ -13,14 +13,9 @@ export default function Home() {
   return (
     <main>
       <Section>
-        <div className={pageStyles.applyWrapper}>
-          <h2>01/Anmälan</h2>
-          <p className={pageStyles.sectionText}>
-            Lorem ipsum dolor sit amet si consectetur. Sagittis faucibus vita in faucibus nunc. 
-            Semper nun sodales malesuada. Non habitant.
-          </p>
+       
           <RSVPCard />
-        </div>
+        
       </Section>
 
       <Section>

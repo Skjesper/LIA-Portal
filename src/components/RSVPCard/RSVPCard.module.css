@@ -1,122 +1,165 @@
+
+.rsvpCardContainer {
+
+  display: flex;
+  flex-direction: column;
+}
+
 .rsvpCard {
-    background: var(--Background-Dark, #121212);
-    display: flex;
-    padding: 1.5rem 1rem;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2.5rem;
-    align-self: stretch;
-    border-radius: var(--border-radius);
-    width: calc(100vw - 2rem);
+  background: var(--Background-Dark, #121212);
+  display: flex;
+  padding: 1.5rem 1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2.5rem;
+  align-self: stretch;
+  border-radius: var(--border-radius);
+  width: 100%;
+}
 
-    
-  }
+.titleWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.sectionTitle {
   
-  .titleWrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-  }
+  color: var(--Typography-Primary, #121212);
+  text-transform: uppercase;
+}
 
-  .title {
-    color: var(--Typography-Secondary, #FFF);
-    /* Mobil/H2/Bold */
-    font-family: Inter;
-    font-size: 2.1rem;
-    font-style: italic;
-    font-weight: 530;
-    line-height: 2rem; /* 100% */
-    letter-spacing: -0.06rem;
-    text-transform: uppercase;
-    
-    
-  }
+.sectionText {
+  color: var(--Typography-Primary);
+}
 
-  .titleWrapper img {
-    display: flex;
-    width: 2.5rem;
-    height: 2.5rem;
-    
-  }
+.title {
+  color: var(--Typography-Secondary, #FFF);
+  font-family: Inter;
+  font-size: 2.1rem;
+  font-style: italic;
+  font-weight: 530;
+  line-height: 2rem;
+  letter-spacing: -0.06rem;
+  text-transform: uppercase;
+}
 
-  .imgContainer {
-    display: none;
-  }
+.titleWrapper img {
+  display: flex;
+  width: 2.5rem;
+  height: 2.5rem;
+}
 
-  @media (min-width: 768px) {
-    .titleWrapper img {
-      width: 5.9375rem;
-      height: 5.4375rem;
-    }
+.imgContainer {
+  display: none;
+}
 
-    .imgContainer {
-      display: block;
-      width: 50%;
-      height: auto;
-    }
+.form {
+  width: 100%;
+  max-width: 27.25rem;
+}
 
-    
+.formGroup {
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
 
+.label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
 
+.input {
+  width: 100%;
+  padding: 0.75rem;
+  box-sizing: border-box;
+  background-color: transparent;
+  color: white;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  border: 2px solid var(--Greyscale-AlmostWhite, #F2F2F2);
+}
+
+.input::placeholder {
+  color: #777;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.submitButton {
+  background-color: white;
+  color: #121212;
+  border: none;
+  border-radius: 4px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+}
+
+.submitButton:hover {
+  background-color: #e0e0e0;
+}
+
+/* Tablet and Desktop Styles */
+@media (min-width: 768px) {
+  .rsvpCard {
+    height: 41.25rem;
+    justify-content: space-around;
   }
 
   .form {
-    width: 100%;
-    max-width: 27.25rem;
-    
+    margin-bottom: 5.88rem;
   }
-  
-  .formGroup {
-    margin-bottom: 1.5rem;
-    width: 100%;
+
+  .titleWrapper img {
+    width: 5.9375rem;
+    height: 5.4375rem;
   }
-  
-  .label {
+
+  .imgContainer {
     display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-    font-size: 0.9rem;
-    
+    width: 50%;
+    height: auto;
   }
   
-  .input {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #444;
-    border-radius: 4px;
-    background-color: transparent;
-    color: white;
-    font-size: 1rem;
-    box-sizing: border-box;
-    border-radius: 0.25rem;
-    border: 2px solid var(--Greyscale-AlmostWhite, #F2F2F2);
-  }
-  
-  .input::placeholder {
-    color: #777;
-  }
-  
-  .buttonContainer {
+  .applyWrapper {
     display: flex;
-    justify-content: center;
-    margin-top: 2rem;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 8.0625rem;
+    align-self: stretch;
+  }
+
+  .sectionHeader {
     width: 100%;
+    margin-bottom: 1rem;
+    max-width: 60rem;
   }
-  
-  .submitButton {
-    background-color: white;
-    color: #121212;
-    border: none;
-    border-radius: 4px;
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
+
+  .sectionTitle {
+    margin-bottom: 3rem;
+    color: var(--Typography-Primary, #121212);
+    font-family: Inter;
+    font-size: 6.875rem;
+    font-style: normal;
+    font-weight: 530;
+    line-height: 7.5rem;
+    letter-spacing: -0.20625rem;
     text-transform: uppercase;
-    transition: background-color 0.3s ease;
   }
-  
-  .submitButton:hover {
-    background-color: #e0e0e0;
+
+  .sectionTitle span {
+    font-weight: 200;
   }
+}
