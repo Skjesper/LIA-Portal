@@ -40,14 +40,50 @@ export default function EditStudentForm({ user, profile }) {
     }
   };
   
-  const handleImageUpload = (url) => {
-    setFormData(prev => ({
-      ...prev,
-      profile_picture: url
-    }));
+  const handleImageUpload = async (e) => {
+    const selectedFile = e.target.files?.[0];
+    if (!selectedFile) {
+      return;
+    }
+    
+    setFile(selectedFile);
+    setUploading(true);
+    setMessage('Laddar upp...');
+
+    const filePath = `${user.id}/${selectedFile.name}`;
+
+    const { data, error } = await supabase.storage
+      .from('profile-picture')
+      .upload(filePath, selectedFile, {
+        cacheControl: '3600',
+        upsert: true, // overwrite if same name
+      });
+
+    if (error) {
+      setMessage(`Upload error: ${error.message}`);
+    } else {
+      // Save the file path to your table
+      const { error: dbError } = await supabase
+        .from('student_profiles')
+        .update({ profile_picture: data.path })
+        .eq('id', user.id);
+
+      if (dbError) {
+        setMessage(`DB update error: ${dbError.message}`);
+      } else {
+        // Update the form data state with the new CV path
+        setFormData(prev => ({
+          ...prev,
+          profile_picture: data.path
+        }));
+        setMessage('Profile picture uploaded successfully!');
+      }
+    }
+
+    setUploading(false);
   };
 
-  const handleFileChange = async (e) => {
+  const handleCvUppload = async (e) => {
     const selectedFile = e.target.files?.[0];
     if (!selectedFile) {
       return;
@@ -188,6 +224,33 @@ export default function EditStudentForm({ user, profile }) {
       )}
       
       <div className="">
+            <div>
+                <label htmlFor="profile_picture" className="">
+                </label>
+                <input
+                    type="file"
+                    id="profile_picture"
+                    accept="application/jpg"
+                    onChange={handleImageUpload}
+                    disabled={uploading}
+                />
+                {uploading && <p>Laddar upp...</p>}
+                {formData.profile_picture && !uploading && (
+                    <div className="">
+                        Profilbild uppladdad!
+                    </div>
+                )}
+                {message && message !== 'CV uploaded successfully!' && <p className="">{message}</p>}
+                {formData.cv && (
+                    <button 
+                        type="button" 
+                        className=""
+                        onClick={handleRemoveCV}
+                    >
+                        {formData.cv.split('/').pop()}
+                    </button>
+                )}
+            </div>
         <div className="">
           <div>
             <label htmlFor="first_name" className="">
@@ -323,20 +386,20 @@ export default function EditStudentForm({ user, profile }) {
                 type="file"
                 id="cv"
                 accept="application/pdf"
-                onChange={handleFileChange}
+                onChange={handleCvUppload}
                 disabled={uploading}
             />
             {uploading && <p>Laddar upp...</p>}
             {formData.cv && !uploading && (
-                <div className="mt-2 text-green-600">
+                <div className="">
                     CV uppladdad
                 </div>
             )}
-            {message && message !== 'CV uploaded successfully!' && <p className="mt-2">{message}</p>}
+            {message && message !== 'CV uploaded successfully!' && <p className="">{message}</p>}
             {formData.cv && (
                 <button 
                     type="button" 
-                    className="mt-2"
+                    className=""
                     onClick={handleRemoveCV}
                 >
                     {formData.cv.split('/').pop()}
