@@ -19,6 +19,7 @@ export default function EditStudentForm({ user, profile }) {
     linkedin_url: profile?.linkedin_url || '',
     portfolio_url: profile?.portfolio_url || '',
     bio: profile?.bio || '',
+    knowledge: [],
     cv: profile?.cv || '',
     profile_picture: profile?.profile_picture || ''
   });
@@ -39,6 +40,28 @@ export default function EditStudentForm({ user, profile }) {
       }));
     }
   };
+
+  const handleKnowledgeArray = (e) => {
+    const { name, value, checked } = e.target;
+  
+    if (name === "knowledge") {
+      setFormData((prevData) => {
+        const updatedKnowledge = checked
+          ? [...prevData.knowledge, value] // add if checked
+          : prevData.knowledge.filter((item) => item !== value); // remove if unchecked
+  
+        return {
+          ...prevData,
+          knowledge: updatedKnowledge,
+        };
+      });
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
+  };  
   
   const handleImageUpload = async (e) => {
     const selectedFile = e.target.files?.[0];
@@ -119,7 +142,6 @@ export default function EditStudentForm({ user, profile }) {
           ...prev,
           cv: data.path
         }));
-        setMessage('CV uploaded successfully!');
       }
     }
 
@@ -185,6 +207,7 @@ export default function EditStudentForm({ user, profile }) {
         linkedin_url: formData.linkedin_url,
         portfolio_url: formData.portfolio_url,
         bio: formData.bio,
+        knowledge: formData.knowledge,
         cv: formData.cv,
         profile_picture: formData.profile_picture,
         updated_at: new Date().toISOString()
@@ -369,6 +392,45 @@ export default function EditStudentForm({ user, profile }) {
             <label htmlFor="knowledge" className="">
                 *KNOWLEDGE
             </label>
+            <input
+                id="Figma"
+                name="knowledge"
+                type="checkbox"
+                value="Figma"
+                checked={formData.knowledge.includes("Figma")}
+                onChange={handleKnowledgeArray}
+                className=""
+                required
+            />
+            <label htmlFor="Figma" className="">
+            FIGMA
+            </label>
+            <input
+                id="Illustrator"
+                name="knowledge"
+                type="checkbox"
+                value="Illustrator"
+                checked={formData.knowledge.includes("Illustrator")}
+                onChange={handleKnowledgeArray}
+                className=""
+                
+            />
+            <label htmlFor="Illustrator" className="">
+            ILLUSTRATOR
+            </label>
+            <input
+                id="Photoshop"
+                name="knowledge"
+                type="checkbox"
+                value="Photoshop"
+                checked={formData.knowledge.includes("Photoshop")}
+                onChange={handleKnowledgeArray}
+                className=""
+                
+            />
+            <label htmlFor="Photoshop" className="">
+            PHOTOSHOP
+            </label>
             <select name="knowledge" id="knowledge">
                 <option value="Figma">FIGMA</option>
                 <option value="Illustrator">ILLUSTRATOR</option>
@@ -390,11 +452,6 @@ export default function EditStudentForm({ user, profile }) {
                 disabled={uploading}
             />
             {uploading && <p>Laddar upp...</p>}
-            {formData.cv && !uploading && (
-                <div className="">
-                    CV uppladdad
-                </div>
-            )}
             {message && message !== 'CV uploaded successfully!' && <p className="">{message}</p>}
             {formData.cv && (
                 <button 
