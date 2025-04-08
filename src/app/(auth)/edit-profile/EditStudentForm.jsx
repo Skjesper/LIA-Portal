@@ -19,7 +19,7 @@ export default function EditStudentForm({ user, profile }) {
     linkedin_url: profile?.linkedin_url || '',
     portfolio_url: profile?.portfolio_url || '',
     bio: profile?.bio || '',
-    knowledge: [],
+    knowledge: profile?.knowledge || [],
     cv: profile?.cv || '',
     profile_picture: profile?.profile_picture || ''
   });
