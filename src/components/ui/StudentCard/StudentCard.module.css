@@ -1,0 +1,9 @@
+.studentCard {
+
+display: flex;
+width: 22.375rem;
+padding: 1rem;
+flex-direction: column;
+align-items: flex-start;
+gap: 2.5rem;
+}

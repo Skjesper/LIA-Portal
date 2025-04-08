@@ -7,11 +7,13 @@ import Label, { labelStyles } from '@/components/ui/Label/Label';
 import RandomCompanies from '@/components/ui/CompanyCard/RandomCompanies';
 import CompanyCardSection from '@/components/ui/CompanyCard/CompanySection';
 import styles from '@/components/RSVPCard/RSVPCard.module.css';
+import YrgoHero from '@/components/Hero/YrgoHero';
 
 
 export default function Home() {
   return (
     <main>
+      <YrgoHero/>
       <Section>
        
           <RSVPCard />
