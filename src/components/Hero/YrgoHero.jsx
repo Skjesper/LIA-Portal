@@ -6,7 +6,7 @@ import Button, { buttonStyles } from '@/components/ui/Button/Button';
 const YrgoHero = () => {
   return (
 <section className={styles.heroSection}>
-      <h1 className={styles.heroTitle}>Välkommen på mingel hos Yrgo</h1>
+      <h1 className={styles.heroTitle}>Välkommen på mingel <span>hos Yrgo</span></h1>
     <section className={styles.infoTextContainer}>
         <section className={styles.infoText}>
             <p className={styles.text}>
@@ -26,12 +26,12 @@ const YrgoHero = () => {
 
         </section>
         <section className={styles.aboutEventContainer}>
-            <div className={styles.text}>
-                Om eventet:
-            </div>
-            <div className={styles.text}>
-            Välkomna på mingelevent för att hitta framtida medarbetare i ert företag eller bara jobba tillsammans under LIA. Ni kommer att träffa Webbutvecklare och Digital Designers från Yrgo som vill visa vad de har jobbat med under året och vi hoppas att ni hittar en match. 
-            </div>
+    <div className={`${styles.text} ${styles.textLeft}`}>
+        Om eventet:
+    </div>
+    <div className={`${styles.text} ${styles.textRight}`}>
+        Välkomna på mingelevent för att hitta framtida medarbetare i ert företag eller bara jobba tillsammans under LIA. Ni kommer att träffa Webbutvecklare och Digital Designers från Yrgo som vill visa vad de har jobbat med under året och vi hoppas att ni hittar en match. 
+    </div>
         </section>
     </section>
   );

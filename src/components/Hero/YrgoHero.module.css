@@ -21,6 +21,7 @@
     align-self: stretch;
     margin-top: 3rem;
     background: var(--Background-Light, #FFF);
+    padding: 2rem 1.5rem;
 }
 
 .infoTextContainer {
@@ -48,4 +49,18 @@ align-self: stretch;
     font-style: normal;
     font-weight: 400;
     line-height: 1.25rem; /* 125% */
+}
+
+.textRight {
+    /* Specifika stilar för höger text (brödtexten) */
+    width: 60%;
+    /* Andra specifika stilar för brödtexten */
+}
+
+.aboutEventContainer {
+
+display: flex;
+justify-content: space-between;
+align-items: flex-start;
+align-self: stretch;
 }
