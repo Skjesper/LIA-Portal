@@ -3,13 +3,13 @@ import styles from '@/components/Hero/YrgoHero.module.css';
 import '@/components/styles/colors.css';
 import Button, { buttonStyles } from '@/components/ui/Button/Button';
 
-const companies = ["spöket", "aino", "sould", "grebban", "volvo", "knowit", "simma lugnt", "forsman"];
+const companies = ["spöket", "aino", "sould", "grebban", "volvo", "knowit", "simma lugnt"];
 
 const YrgoHero = () => {
   return (
 <section className={styles.heroSection}>
       <h1 className={styles.heroTitle}>
-        <span>Välkommen på</span> 
+        <span>Välkommen på </span> 
         <span>mingel </span>
       <span>hos Yrgo</span>
       </h1>

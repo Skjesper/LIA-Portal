@@ -36,7 +36,7 @@
     cursor: not-allowed;
   }
   
-  .button::selection {
+.button::selection {
       border: var(--Button-border-size) solid var(--Button-State-Focus);
   }
 .warning {
