@@ -7,20 +7,17 @@ import Label, { labelStyles } from '@/components/ui/Label/Label';
 import RandomCompanies from '@/components/ui/CompanyCard/RandomCompanies';
 import CompanyCardSection from '@/components/ui/CompanyCard/CompanySection';
 import styles from '@/components/RSVPCard/RSVPCard.module.css';
+import YrgoHero from '@/components/Hero/YrgoHero';
 
 
 export default function Home() {
   return (
     <main>
+      <YrgoHero/>
       <Section>
-        <div className={pageStyles.applyWrapper}>
-          <h2>01/Anmälan</h2>
-          <p className={pageStyles.sectionText}>
-            Lorem ipsum dolor sit amet si consectetur. Sagittis faucibus vita in faucibus nunc. 
-            Semper nun sodales malesuada. Non habitant.
-          </p>
+       
           <RSVPCard />
-        </div>
+        
       </Section>
 
       <Section>

@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 
-// Component that only renders its children on the client side
 export default function ClientOnly({ children }) {
   const [isMounted, setIsMounted] = useState(false);
 

@@ -1,11 +1,10 @@
-/* Header.module.css */
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 1.5rem;
+    padding: 1rem;
     width: 100%;
-    background-color: var(--Background-Light);
+    background-color: var(--background-MediumLight);
   }
   
   .headerLeft {
@@ -14,7 +13,13 @@
   }
   
   .logo {
-    /* Style your logo here */
+    cursor: pointer;
+  }
+  
+  .image {
+    display: block;
+    max-width: 100%;
+    height: auto;
   }
   
   .headerCenter {
@@ -40,31 +45,6 @@
   }
   
   .menuButton {
-    /* Style your mobile menu button */
-    padding: 0.5rem;
     cursor: pointer;
-  }
-  
-  .mobileMenuDropdown {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    /* background-color: white; */
-    padding: 1rem;
-    z-index: 10;
-    /* Add shadow or other styling as needed */
-  }
-  
-  .mobileMenuDropdown ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  .loginButton {
-    padding: 0.5rem 1rem;
-    /* Add more styling as needed */
+    padding: 0.5rem;
   }

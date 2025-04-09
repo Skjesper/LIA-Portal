@@ -36,7 +36,7 @@
     cursor: not-allowed;
   }
   
-  .button::selection {
+.button::selection {
       border: var(--Button-border-size) solid var(--Button-State-Focus);
   }
 .warning {
@@ -105,6 +105,8 @@ Could be nice to find a better place to left align theses
 .button.underlinedWhite {
     padding: 0;
     justify-content: left;
+    width: auto;
+    min-width: fit-content;
     
     
 }
@@ -130,6 +132,7 @@ Could be nice to find a better place to left align theses
     color: var(--Typography-Primary);
     text-underline-offset: var(--Button-underline-offset);
     outline:none;
+    
 }
 
 .underlinedBlack:active {
