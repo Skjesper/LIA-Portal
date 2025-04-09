@@ -1,9 +1,76 @@
+/* Grundklassen som alltid används */
 .studentCard {
-
-display: flex;
-width: 22.375rem;
-padding: 1rem;
-flex-direction: column;
-align-items: flex-start;
-gap: 2.5rem;
-}
+    display: flex;
+    padding: 1.875rem 1.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2.5rem;
+    align-self: stretch;
+    border-radius: 1rem;
+    margin-bottom: 1.5rem;
+    max-width: 29.5rem;
+    box-sizing: border-box;
+    /* Standardfärger (designer-varianten) */
+    background-color: var(--Primary-Red, #e63946);
+    color: white;
+  }
+  
+  /* Varianter som överskrider bara det som behövs */
+  .designer {
+    /* Behövs inte explicit eftersom det är standard */
+  }
+  
+  .webDev {
+    background-color: var(--Background-Light, #ffffff);
+    color: var(--Typography-Primary, #121212);
+  }
+  
+  /* Övriga stilar som är desamma för alla varianter */
+  .titleContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .title {
+    font-family: Inter;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 450;
+    line-height: var(--Title-height);
+  }
+  
+  .count {
+    font-family: Inter;
+    font-size: 4rem;
+    font-style: normal;
+    font-weight: 530;
+    line-height: 4rem;
+    letter-spacing: -0.12rem;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  
+  .cardText {
+    margin: 0;
+  }
+  
+  .imageContainer {
+    width: 3rem;
+    height: auto;
+    display: flex;
+    align-items: center;
+  }
+  
+  .imageContainer img {
+    width: 3rem;
+    height: 3rem;
+    object-fit: contain;
+  }
+  
+  @media (min-width: 768px) {
+    .count {
+      font-size: 4.5rem;
+    }
+  }
