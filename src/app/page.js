@@ -9,6 +9,7 @@ import CompanyCardSection from '@/components/ui/CompanyCard/CompanySection';
 import styles from '@/components/RSVPCard/RSVPCard.module.css';
 import YrgoHero from '@/components/Hero/YrgoHero';
 import StudentCard from '@/components/ui/StudentCard/StudentCard';
+import StudentCardSection from '@/components/ui/StudentCard/StudentCardSection';
 
 
 export default function Home() {
@@ -21,19 +22,9 @@ export default function Home() {
         
       </Section>
       <Section>
-      <StudentCard 
-        title="DIGITAL DESIGNERS"
-        count="25 ST."
-        variant="student"
-        
-      />
+    
 
-      <StudentCard 
-        title="WEBBUTVECKLARE"
-        count="25 ST."
-        variant="webDev"
-        
-      />
+      <StudentCardSection/>
       </Section>
 
       <Section>
