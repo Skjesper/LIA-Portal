@@ -297,7 +297,7 @@ export default function EditStudentForm({ user, profile }) {
                 <Label className={labelStyles.unfilled}>Test</Label>
                 <label htmlFor="profile_picture" className="">
                 </label>
-                <nput
+                <input
                     type="file"
                     id="profile_picture"
                     accept="application/jpg"
@@ -332,7 +332,7 @@ export default function EditStudentForm({ user, profile }) {
               name="first_name"
               value={formData.first_name}
               onChange={handleChange}
-              className={inputStyles.inputWhite}
+              className={inputStyles.inputBlack}
               required
             />
           </div>
@@ -347,7 +347,7 @@ export default function EditStudentForm({ user, profile }) {
               name="last_name"
               value={formData.last_name}
               onChange={handleChange}
-              className={inputStyles.inputWhite}
+              className={inputStyles.inputBlack}
               required
             />
           </div>
@@ -402,7 +402,7 @@ export default function EditStudentForm({ user, profile }) {
               name="linkedin_url"
               value={formData.linkedin_url}
               onChange={handleChange}
-              className={inputStyles.inputWhite}
+              className={inputStyles.inputBlack}
             />
         </div>
 
@@ -507,14 +507,14 @@ export default function EditStudentForm({ user, profile }) {
             {formData.cv && (
                 <Button 
                     type="button" 
-                    className={labelStyles.filledBlack}
+                    className={buttonStyles.labelButton}
                     onClick={handleRemoveCV}
                 >
                     {formData.cv.split('/').pop()}
                     <Image
                     src="/icons/exit-white.svg"
                     alt="icon for removing"
-                    width={30}
+                    width={10}
                     height={10}
                     className=""
                     />
