@@ -7,7 +7,7 @@ const StudentCardSection = () => {
   return (
     <div className={styles.sectionWrapper}>
         <div className={styles.sectionHeader}>
-        <h2 className={styles.sectionTitle}><span>03/</span>Företag</h2>
+        <h2 className={styles.sectionTitle}><span>02/</span>Studenter</h2>
 
         
         <div className={styles.infoWrapper}>
