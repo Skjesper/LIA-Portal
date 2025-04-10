@@ -4,6 +4,10 @@ import { useState } from 'react';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useRouter } from 'next/navigation';
 import Button, { buttonStyles } from '@/components/ui/Button/Button';
+import Label, { labelStyles } from '@/components/ui/Label/Label';
+import Input, { inputStyles } from '@/components/ui/Input/Input';
+import Textarea, { textareaStyles } from '@/components/ui/Textarea/Textarea';
+import Image from 'next/image';
 
 export default function EditStudentForm({ user, profile }) {
   const router = useRouter();
@@ -107,7 +111,7 @@ export default function EditStudentForm({ user, profile }) {
     setUploading(false);
   };
 
-  const handleCvUppload = async (e) => {
+  const handleCvUpload = async (e) => {
     const selectedFile = e.target.files?.[0];
     if (!selectedFile) {
       return;
@@ -290,9 +294,10 @@ export default function EditStudentForm({ user, profile }) {
 
       <div className="">
             <div>
+                <Label className={labelStyles.unfilled}>Test</Label>
                 <label htmlFor="profile_picture" className="">
                 </label>
-                <input
+                <nput
                     type="file"
                     id="profile_picture"
                     accept="application/jpg"
@@ -321,13 +326,13 @@ export default function EditStudentForm({ user, profile }) {
             <label htmlFor="first_name" className="">
               * FÖRNAMN
             </label>
-            <input
+            <Input
               type="text"
               id="first_name"
               name="first_name"
               value={formData.first_name}
               onChange={handleChange}
-              className=""
+              className={inputStyles.inputWhite}
               required
             />
           </div>
@@ -336,13 +341,13 @@ export default function EditStudentForm({ user, profile }) {
             <label htmlFor="last_name" className="">
               *EFTERNAMN
             </label>
-            <input
+            <Input
               type="text"
               id="last_name"
               name="last_name"
               value={formData.last_name}
               onChange={handleChange}
-              className=""
+              className={inputStyles.inputWhite}
               required
             />
           </div>
@@ -391,13 +396,13 @@ export default function EditStudentForm({ user, profile }) {
             <label htmlFor="linkedin_url" className="">
               LINKEDIN
             </label>
-            <input
+            <Input
               type="text"
               id="linkedin_url"
               name="linkedin_url"
               value={formData.linkedin_url}
               onChange={handleChange}
-              className=""
+              className={inputStyles.inputWhite}
             />
         </div>
 
@@ -405,13 +410,13 @@ export default function EditStudentForm({ user, profile }) {
             <label htmlFor="portfolio_url" className="">
               PORTFOLIO
             </label>
-            <input
+            <Input
               type="text"
               id="portfolio_url"
               name="portfolio_url"
               value={formData.portfolio_url}
               onChange={handleChange}
-              className=""
+              className={inputStyles.inputBlack}
             />
         </div>
 
@@ -419,13 +424,13 @@ export default function EditStudentForm({ user, profile }) {
           <label htmlFor="bio" className="">
             *BIO
           </label>
-          <textarea
+          <Textarea
             id="bio"
             name="bio"
             rows={4}
             value={formData.bio}
             onChange={handleChange}
-            className=""
+            className={textareaStyles.textareaBlack}
             placeholder="Skriv en bio om dig själv, max 200 tecken"
             required
           />
@@ -483,25 +488,36 @@ export default function EditStudentForm({ user, profile }) {
         <div>
       </div>
         <div>
-            <label htmlFor="cv" className="">
-                LADDA UPP CV
-            </label>
-            <input
-                type="file"
-                id="cv"
-                accept="application/pdf"
-                onChange={handleCvUppload}
-                disabled={uploading}
-            />
-            {uploading && <p>Laddar upp...</p>}
-            {message && message !== 'CV uploaded successfully!' && <p className="">{message}</p>}
+        <Button 
+            type="button" 
+            className={buttonStyles.filledBlack}
+            onClick={() => document.getElementById('cv').click()}
+            disabled={uploading}
+        >
+            {uploading ? 'LADDAR UPP CV...' : 'TRYCK HÄR FÖR ATT LADDA UPP CV'}
+        </Button>
+        <input 
+            type="file" 
+            id="cv" 
+            accept="application/pdf" 
+            onChange={handleCvUpload} 
+            disabled={uploading}
+            style={{ display: 'none' }} 
+        />
             {formData.cv && (
                 <Button 
                     type="button" 
-                    className={buttonStyles.filledWhite}
+                    className={labelStyles.filledBlack}
                     onClick={handleRemoveCV}
                 >
                     {formData.cv.split('/').pop()}
+                    <Image
+                    src="/icons/exit-white.svg"
+                    alt="icon for removing"
+                    width={30}
+                    height={10}
+                    className=""
+                    />
                 </Button>
             )}
         </div>
