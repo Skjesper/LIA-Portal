@@ -1,25 +1,30 @@
-
 import Link from 'next/link';
-import Button from '@/components/ui/Button/Button.jsx';
-import styles from '@/components/ui/Button/Button.module.css'; // Lägg till denna import
+import Button, { buttonStyles } from '@/components/ui/Button/Button';
+import pageStyles from './page.module.css'; // Importera page.module.css
+import Section from '@/components/Sections/Sections';
+import RSVPCard from '@/components/RSVPCard/RSVPCard';
+import Label, { labelStyles } from '@/components/ui/Label/Label';
+import RandomCompanies from '@/components/ui/CompanyCard/RandomCompanies';
+import CompanyCardSection from '@/components/ui/CompanyCard/CompanySection';
+import styles from '@/components/RSVPCard/RSVPCard.module.css';
+import YrgoHero from '@/components/Hero/YrgoHero';
 
 
 export default function Home() {
   return (
-    <div>
-    <Button className={styles.filledBlack}>filled-black</Button>
-    <Button className={styles.warning}>warning</Button>
-    <Button className={styles.success}>warning</Button>
-    <Button className={styles.filledWhite}>filledWhite</Button>
-    <Button className={styles.warning}>warning</Button>
-    <h2>Fokuserad knapp</h2>
-      <Button className={styles.unfilledBlack}>Fokuserad</Button>
-      <Button className={styles.unfilledWhite}>unfilledWhite</Button>
-      <Button className={styles.unfilledBlack}>unfilledBlack</Button>
-      <Button className={styles.underlinedWhite}>
-     Button</Button>
-      <Button className={styles.underlinedBlack}>Button</Button>
-    
-  </div>
+    <main>
+      <YrgoHero/>
+      <Section>
+       
+          <RSVPCard />
+        
+      </Section>
+
+      <Section>
+     
+      <CompanyCardSection />
+      </Section>
+      
+    </main>
   );
 }

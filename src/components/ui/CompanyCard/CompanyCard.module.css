@@ -1,0 +1,142 @@
+
+  
+  .companyCard {
+    display: flex;
+    padding: 1.875rem 1.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2.5rem;
+    align-self: stretch;
+    background-color: var(--Background-Dark);
+    border-radius: 1rem;
+    color: var(--background-MediumLight);
+    margin-bottom: 1.5rem;
+    max-width: 29.5rem;
+    box-sizing: border-box; /* Viktigt: inkludera padding i bredden */
+  }
+  
+  .sectionWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%; /* Säkerställ att wrapper inte är bredare än föräldraelementet */
+  }
+  
+  .applyWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    box-sizing: border-box; /* Inkludera padding i bredden */
+  }
+  
+  .cardText {
+    color: var(--Typography-Secondary);
+  }
+  
+  .sectionHeader {
+    width: 100%;
+    max-width: 18.75rem;
+  }
+  
+  .sectionText {
+    color: var(--Typography-Primary);
+  }
+  
+  .sectionTitle {
+    color: var(--Typography-Primary, #121212);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  
+  .flexCompaniesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1.5rem;
+    width: 100%; /* Begränsa till föräldrabredden */
+    box-sizing: border-box;
+  }
+  
+  /* Mobil/H3/Regular */
+  .title {
+    font-family: Inter;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 450;
+    line-height: var(--Title-height);
+  }
+  
+  .titleContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .imageContainer {
+    width: 1.625rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .imageContainer img {
+    height: var(--Title-height);
+    width: auto;
+    object-fit: contain;
+  }
+  
+  .text {
+    margin-bottom: 2.5rem;
+  }
+  
+  @media (min-width: 768px) {
+    .applyWrapper {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+      gap: 8.0625rem;
+      align-self: stretch;
+    }
+  
+    .sectionHeader {
+      margin-bottom: 1rem;
+      max-width: 60rem;
+    }
+  
+    .sectionTitle {
+      margin-bottom: 3rem;
+      color: var(--Typography-Primary, #121212);
+      font-family: Inter;
+      font-size: 6.875rem;
+      font-style: normal;
+      font-weight: 530;
+      line-height: 7.5rem;
+      letter-spacing: -0.20625rem;
+      text-transform: uppercase;
+    }
+  
+    .sectionTitle span {
+      font-weight: 200;
+    }
+  
+    .companyCard {
+      width: 26.8125rem;
+      height: 34.25rem;
+    }
+  
+    .flexCompaniesContainer {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      width: 100%; /* Ta bort 100vw här som orsakar sidoscroll */
+    }
+  
+    .companyCardFlex {
+      max-width: 29.5rem;
+    }
+  
+    .companyCard {
+      justify-content: space-between;
+    }
+  }

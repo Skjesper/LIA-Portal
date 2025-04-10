@@ -3,7 +3,8 @@
 
 .button {
     display: flex;
-    width: 10rem;
+    width: 12rem;
+    
     padding: 0.5rem 1rem;
     justify-content: center;
     align-items: center;
@@ -35,7 +36,7 @@
     cursor: not-allowed;
   }
   
-  .button::selection {
+.button::selection {
       border: var(--Button-border-size) solid var(--Button-State-Focus);
   }
 .warning {
@@ -96,6 +97,20 @@
     color: var(--Greyscale-10);
 }
 
+
+/*
+Could be nice to find a better place to left align theses
+*/
+.button.underlinedBlack,
+.button.underlinedWhite {
+    padding: 0;
+    justify-content: left;
+    width: auto;
+    min-width: fit-content;
+    
+    
+}
+
 .underlinedWhite {
     text-decoration: underline;
     text-underline-offset: var(--Button-underline-offset);
@@ -117,6 +132,7 @@
     color: var(--Typography-Primary);
     text-underline-offset: var(--Button-underline-offset);
     outline:none;
+    
 }
 
 .underlinedBlack:active {
@@ -125,4 +141,20 @@
 
 .underlinedBlack:focus {
     text-decoration-color: var(--Button-State-Focus);
+  }
+
+  /* 
+  PRIMARY BUTTONS DESKTOP
+  */
+
+  .primaryBlack {
+display: inline-flex;
+padding: 0.7rem 1.2rem;
+flex-direction: column;
+align-items: center;
+width: 100%;
+gap: 1.5rem;
+border-radius: 2.5rem;
+background: var(--Button-Primary, #121212);
+font-size: 0.8rem;
   }

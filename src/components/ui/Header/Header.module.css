@@ -1,0 +1,50 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    width: 100%;
+    background-color: var(--background-MediumLight);
+  }
+  
+  .headerLeft {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo {
+    cursor: pointer;
+  }
+  
+  .image {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .headerCenter {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .headerRight {
+    display: flex;
+    align-items: center;
+  }
+  
+  .desktopNavbar {
+    display: flex;
+  }
+  
+  .desktopNavbar ul {
+    display: flex;
+    list-style: none;
+    gap: 1rem;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .menuButton {
+    cursor: pointer;
+    padding: 0.5rem;
+  }

@@ -1,7 +1,7 @@
 :root {
-    --bg-black: #121212;
-    
-    
+    --Background-Dark: #121212;
+    --Background-Light: #FFFFFF;
+    --background-MediumLight: #E4E9EB;
     
     
     /* 
@@ -18,7 +18,7 @@
 
     */
     
-    --Button-Primary: #121212;
+    --Button-Primary: #001A52;
     --Greyscale-70: #2D2D2D;
 
 
