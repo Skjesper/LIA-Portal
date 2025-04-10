@@ -188,6 +188,47 @@ export default function EditStudentForm({ user, profile }) {
       setUploading(false);
     }
   };
+
+  const handleRemoveImage = async () => {
+    if (!formData.profile_picture) return;
+    
+    setUploading(true);
+    setMessage('Raderar profilbild...');
+    
+    try {
+      // First, delete the file from storage
+      const { error: storageError } = await supabase.storage
+        .from('profile-picture')
+        .remove([formData.profile_picture]);
+        
+      if (storageError) {
+        throw storageError;
+      }
+      
+      // Then, update the database record
+      const { error: dbError } = await supabase
+        .from('student_profiles')
+        .update({ profile_picture: null })
+        .eq('id', user.id);
+        
+      if (dbError) {
+        throw dbError;
+      }
+      
+      // Update local state
+      setFormData(prev => ({
+        ...prev,
+        profile_picture: ''
+      }));
+      
+      setMessage('CV borttagen');
+    } catch (error) {
+      console.error('Error removing profile picture:', error);
+      setMessage(`Error removing profile picture: ${error.message}`);
+    } finally {
+      setUploading(false);
+    }
+  };
   
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -263,14 +304,14 @@ export default function EditStudentForm({ user, profile }) {
                         Profilbild uppladdad!
                     </div>
                 )}
-                {message && message !== 'CV uploaded successfully!' && <p className="">{message}</p>}
-                {formData.cv && (
+                {message && message !== 'Profile picture uploaded successfully!' && <p className="">{message}</p>}
+                {formData.profile_picture && (
                     <button 
                         type="button" 
                         className=""
-                        onClick={handleRemoveCV}
+                        onClick={handleRemoveImage}
                     >
-                        {formData.cv.split('/').pop()}
+                        {formData.profile_picture.split('/').pop()}
                     </button>
                 )}
             </div>
