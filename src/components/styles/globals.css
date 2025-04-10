@@ -3,6 +3,10 @@
   --border-radius: 1.5rem;
   
   --Title-height: 1.5rem;
+
+  
+
+  
   
   
   --Button-underline-offset: 4px;
@@ -78,7 +82,7 @@
   
   body {
     color: var(--foreground);
-    background: grey;
+    background: #FFFFFF;
     font-family: var(--font-inter);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

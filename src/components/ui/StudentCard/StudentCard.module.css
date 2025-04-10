@@ -8,7 +8,7 @@
     align-self: stretch;
     border-radius: 1rem;
     margin-bottom: 1.5rem;
-    max-width: 29.5rem;
+    max-width: 31rem;
     box-sizing: border-box;
     /* Standardfärger (designer-varianten) */
     background-color: var(--Primary-Red, #e63946);
@@ -20,6 +20,9 @@
     margin-top: 2rem;
     display: flex;
     flex-direction: column;
+    width: 100%;
+    max-width: 32rem;
+    
     
   }
   
@@ -88,6 +91,7 @@
     font-style: normal;
     font-weight: 400;
     line-height: 1.25rem; /* 125% */
+    width: 70%;
   }
   .infoWrapper {
 
@@ -113,6 +117,7 @@
     .infoWrapper {
 
       flex-direction: row;
+      margin-bottom: 3.5rem;
       
     }
 .sectionText {
@@ -120,6 +125,11 @@
     display: flex;
     width: 20rem;
 }
+
+    .sectionTitle {
+
+      margin-bottom: 3rem;
+    }
 
    
 

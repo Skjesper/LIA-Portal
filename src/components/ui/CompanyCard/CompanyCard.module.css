@@ -11,7 +11,7 @@
     border-radius: 1rem;
     color: var(--background-MediumLight);
     margin-bottom: 1.5rem;
-    max-width: 29.5rem;
+    max-width: 100%;
     box-sizing: border-box; /* Viktigt: inkludera padding i bredden */
   }
 
@@ -58,7 +58,7 @@
   .flexCompaniesContainer {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
     margin-top: 1.5rem;
     width: 100%; /* Begränsa till föräldrabredden */
     box-sizing: border-box;
@@ -99,12 +99,7 @@
   @media (min-width: 768px) {
 
 
-    .companyCard {
-
-      
-
-    }
-
+    
     .applyWrapper {
       display: flex;
       flex-direction: row;
@@ -135,8 +130,8 @@
     }
   
     .companyCard {
-      width: 26.8125rem;
-      height: 34.25rem;
+      width: 25.5rem;
+      height: 30rem;
     }
   
     .flexCompaniesContainer {

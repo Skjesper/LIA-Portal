@@ -4,7 +4,8 @@
     align-items: center;
     padding: 1rem;
     width: 100%;
-    background-color: var(--background-MediumLight);
+    background-color: var(--Background-Light);
+    /* background-color: var(--background-MediumLight); */
   }
   
   .headerLeft {
