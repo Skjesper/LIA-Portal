@@ -3,8 +3,10 @@
 import { useEffect, useState } from 'react';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useRouter } from 'next/navigation';
+import Button, { buttonStyles } from '@/components/ui/Button/Button';
 import EditStudentForm from './EditStudentForm';
 import EditCompanyForm from './EditCompanyForm';
+import Image from 'next/image';
 
 export default function EditProfilePage() {
   const [user, setUser] = useState(null);
@@ -70,11 +72,25 @@ export default function EditProfilePage() {
   
   if (loading) return <div className="">Loading profile information...</div>;
   if (error) return <div className="">{error}</div>;
-  
+
   return (
     <div className="">
-      <h1 className="">REDIGERA PROFIL</h1>
+      <Button
+        type="button"
+        onClick={() => router.back()}
+        className={buttonStyles.underlinedBlack}
+      >
+        <Image
+          src="/icons/arrow-left-black.svg"
+          alt="Return Arrow"
+          width={50}
+          height={30}
+          className=""
+        />
+        Tillbaka
+      </Button>
       
+      <h1 className="">REDIGERA PROFIL</h1>
       {profile?.type === 'student' ? (
         <EditStudentForm user={user} profile={profile.data} />
       ) : profile?.type === 'company' ? (

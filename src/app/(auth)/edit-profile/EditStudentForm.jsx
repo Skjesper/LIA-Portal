@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useRouter } from 'next/navigation';
+import Button, { buttonStyles } from '@/components/ui/Button/Button';
 
 export default function EditStudentForm({ user, profile }) {
   const router = useRouter();
@@ -286,7 +287,7 @@ export default function EditStudentForm({ user, profile }) {
           {message}
         </div>
       )}
-      
+
       <div className="">
             <div>
                 <label htmlFor="profile_picture" className="">
@@ -495,30 +496,23 @@ export default function EditStudentForm({ user, profile }) {
             {uploading && <p>Laddar upp...</p>}
             {message && message !== 'CV uploaded successfully!' && <p className="">{message}</p>}
             {formData.cv && (
-                <button 
+                <Button 
                     type="button" 
-                    className=""
+                    className={buttonStyles.filledWhite}
                     onClick={handleRemoveCV}
                 >
                     {formData.cv.split('/').pop()}
-                </button>
+                </Button>
             )}
         </div>
       <div className="">
-        <button
-          type="button"
-          onClick={() => router.back()}
-          className=""
-        >
-          Cancel
-        </button>
-        <button
+        <Button
           type="submit"
           disabled={loading}
-          className=""
+          className={buttonStyles.filledBlack}
         >
           {loading ? 'Saving...' : 'Save Profile'}
-        </button>
+        </Button>
       </div>
     </form>
   );
