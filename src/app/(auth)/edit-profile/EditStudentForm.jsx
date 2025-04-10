@@ -293,8 +293,6 @@ export default function EditStudentForm({ user, profile }) {
         </div>
       )}
 
-      <div className="">
-            <div>
                 <label htmlFor="profile_picture" className="">
                 </label>
                 <input
@@ -320,11 +318,9 @@ export default function EditStudentForm({ user, profile }) {
                         {formData.profile_picture.split('/').pop()}
                     </button>
                 )}
-            </div>
         <fieldset className={style.nameField}>
             <label htmlFor="first_name" className={style.label}>
               * FÖRNAMN
-            </label>
             <Input
               type="text"
               id="first_name"
@@ -334,9 +330,9 @@ export default function EditStudentForm({ user, profile }) {
               className={inputStyles.inputBlack}
               required
             />
+            </label>
             <label htmlFor="last_name" className={style.label}>
               *EFTERNAMN
-            </label>
             <Input
               type="text"
               id="last_name"
@@ -346,12 +342,14 @@ export default function EditStudentForm({ user, profile }) {
               className={inputStyles.inputBlack}
               required
             />
+            </label>
         </fieldset>
-        <div>
-        <fieldset required>
+        <fieldset required className={style.educationField}>
             <legend className={style.label}>
                 *JAG STUDERAR TILL
             </legend>
+                <label htmlFor="webbutveckling" className={style.educationChoice}>
+                WEBBUTVECKLARE
                 <input
                 id="webbutveckling"
                 name="education_program"
@@ -359,66 +357,60 @@ export default function EditStudentForm({ user, profile }) {
                 value="Webbutveckling"
                 checked={formData.education_program === "Webbutveckling"}
                 onChange={handleChange}
-                className=""
+                className={style.educationCheckbox}
                 required
                 />
-                <label htmlFor="webbutveckling" className="">
-                WEBBUTVECKLARE
                 </label>
-                <input
+                <label htmlFor="digital-design" className={style.educationChoice}>
+                    DIGITAL DESIGNER
+                    <input
                     id="digital-design"
                     name="education_program"
                     type="radio"
                     value="Digital Design"
                     checked={formData.education_program === "Digital Design"}
                     onChange={handleChange}
-                    className=""
-                />
-                <label htmlFor="digital-design" className="">
-                    DIGITAL DESIGNER
+                    className={style.educationCheckbox}
+                    />
                 </label>
         </fieldset>
-        </div>
-        <fieldset className='linkField'>
+        <fieldset className={style.linkField}>
             <label htmlFor="linkedin_url" className={style.label}>
-              LINKEDIN
+                LINKEDIN
+                <Input
+                type="text"
+                id="linkedin_url"
+                name="linkedin_url"
+                value={formData.linkedin_url}
+                onChange={handleChange}
+                className={inputStyles.inputBlack}
+                />
             </label>
-            <Input
-              type="text"
-              id="linkedin_url"
-              name="linkedin_url"
-              value={formData.linkedin_url}
-              onChange={handleChange}
-              className={inputStyles.inputBlack}
-            />
             <label htmlFor="portfolio_url" className={style.label}>
-              PORTFOLIO
+                PORTFOLIO
+                <Input
+                type="text"
+                id="portfolio_url"
+                name="portfolio_url"
+                value={formData.portfolio_url}
+                onChange={handleChange}
+                className={inputStyles.inputBlack}
+                />
             </label>
-            <Input
-              type="text"
-              id="portfolio_url"
-              name="portfolio_url"
-              value={formData.portfolio_url}
-              onChange={handleChange}
-              className={inputStyles.inputBlack}
-            />
         </fieldset>
-        <div>
-          <label htmlFor="bio" className={style.label}>
-            *BIO
-          </label>
-          <Textarea
-            id="bio"
-            name="bio"
-            rows={4}
-            value={formData.bio}
-            onChange={handleChange}
-            className={textareaStyles.textareaBlack}
-            placeholder="Skriv en bio om dig själv, max 200 tecken"
-            required
-          />
-        </div>
-        </div>
+            <label htmlFor="bio" className={style.label}>
+                *BIO
+            <Textarea
+                id="bio"
+                name="bio"
+                rows={4}
+                value={formData.bio}
+                onChange={handleChange}
+                className={textareaStyles.textareaBlack}
+                placeholder="Skriv en bio om dig själv, max 200 tecken"
+                required
+            />
+            </label>
             <label htmlFor="knowledge" className={style.label}>
                 *KNOWLEDGE
             </label>
@@ -470,7 +462,6 @@ export default function EditStudentForm({ user, profile }) {
             </select>
         <div>
       </div>
-        <div>
         <Button 
             type="button" 
             className={buttonStyles.filledBlack}
@@ -503,14 +494,13 @@ export default function EditStudentForm({ user, profile }) {
                     />
                 </Button>
             )}
-        </div>
       <div className="">
         <Button
           type="submit"
           disabled={loading}
           className={buttonStyles.filledBlack}
         >
-          {loading ? 'Saving...' : 'Save Profile'}
+          {loading ? 'SPARAR...' : 'SPARA ÄNDRINGAR'}
         </Button>
       </div>
     </form>
