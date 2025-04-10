@@ -6,6 +6,7 @@
     background-color: var(--Background-Light);
     border-radius: 1rem;
     margin: 2rem;
+    padding: 3rem 1.5rem;
 }
 
 .nameField {
@@ -44,6 +45,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    border: none;
 }
 
 
