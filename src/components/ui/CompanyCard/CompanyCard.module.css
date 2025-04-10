@@ -14,6 +14,13 @@
     max-width: 29.5rem;
     box-sizing: border-box; /* Viktigt: inkludera padding i bredden */
   }
+
+  .companiesList {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   
   .sectionWrapper {
     display: flex;
@@ -90,6 +97,14 @@
   }
   
   @media (min-width: 768px) {
+
+
+    .companyCard {
+
+      
+
+    }
+
     .applyWrapper {
       display: flex;
       flex-direction: row;

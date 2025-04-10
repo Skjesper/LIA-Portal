@@ -18,6 +18,9 @@
   .studentCardContainer {
 
     margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    
   }
   
   /* Varianter som överskrider bara det som behövs */
@@ -35,7 +38,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    /* align-items: center; */
   }
   
   .title {
@@ -74,6 +77,8 @@
     object-fit: contain;
   }
 
+ 
+
   .sectionText {
 
     color: var(--Typography-Primary, #121212);
@@ -103,5 +108,69 @@
   @media (min-width: 768px) {
     .count {
       font-size: 4.5rem;
+    }
+
+    .infoWrapper {
+
+      flex-direction: row;
+      
+    }
+.sectionText {
+
+    display: flex;
+    width: 20rem;
+}
+
+   
+
+    .cardText {
+
+      font-size: 6.875rem;
+    }
+
+    .studentCard {
+
+      width: 50%;
+      max-width: 50%;
+      height: 34rem;
+      justify-content: space-between;
+      
+    }
+
+    .sectionTitle {
+
+      color: var(--Typography-Primary, #121212);
+/* Desktop/H2_Thin */
+font-family: Inter;
+font-size: 6.875rem;
+font-style: normal;
+font-weight: 530;
+line-height: 7.5rem; /* 109.091% */
+letter-spacing: -0.20625rem;
+text-transform: uppercase;
+    }
+
+    .sectionTitle span {
+      font-weight: 200;
+    }
+
+    /* .imageContainer img {
+      width: 8.5rem;
+      height: 7.6875rem;
+    } */
+
+    /* .imageContainer {
+      width: 8.5rem;
+      height: 7.6875rem;
+      align-items: start;
+    } */
+
+    .studentCardContainer {
+
+      
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+
     }
   }

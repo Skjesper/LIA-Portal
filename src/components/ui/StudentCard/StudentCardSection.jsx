@@ -19,7 +19,6 @@ const StudentCardSection = () => {
             Lorem ipsum dolor sit amet si consectetur. Sagittis faucibus vita in faucibus nunc. 
             Semper nun sodales malesuada. Non habitant.
         </p>
-        <Button className={buttonStyles.underlinedBlack}>Se alla företag</Button>
         </div>
         </div>
         <section className={styles.studentCardContainer}>

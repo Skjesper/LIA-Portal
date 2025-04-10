@@ -108,7 +108,7 @@ align-self: stretch;
 margin-top: 0.5rem;
 }
 
-@media (min-width: 768) {
+@media (min-width: 768px) {
 
     .heroImage {
 
@@ -151,5 +151,11 @@ margin-top: 0.5rem;
       
       .heroTitle span:nth-child(2) {
         margin-right: 0.3em; /* Lite mellanrum efter "mingel" */
+      }
+
+      .infoText {
+        display: flex;
+        flex-direction: column; /* eller column, row-reverse, column-reverse */
+        /* andra stilar du vill ha... */
       }
 }
