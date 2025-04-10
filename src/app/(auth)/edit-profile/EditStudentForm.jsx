@@ -8,6 +8,7 @@ import Label, { labelStyles } from '@/components/ui/Label/Label';
 import Input, { inputStyles } from '@/components/ui/Input/Input';
 import Textarea, { textareaStyles } from '@/components/ui/Textarea/Textarea';
 import Image from 'next/image';
+import style from './EditStudentForm.module.css';
 
 export default function EditStudentForm({ user, profile }) {
   const router = useRouter();
@@ -285,7 +286,7 @@ export default function EditStudentForm({ user, profile }) {
   };
   
   return (
-    <form onSubmit={handleSubmit} className="">
+    <form onSubmit={handleSubmit} className={style.editStudentForm}>
       {message && (
         <div className={`p-4 rounded ${message.includes('Error') ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`}>
           {message}
@@ -294,7 +295,6 @@ export default function EditStudentForm({ user, profile }) {
 
       <div className="">
             <div>
-                <Label className={labelStyles.unfilled}>Test</Label>
                 <label htmlFor="profile_picture" className="">
                 </label>
                 <input
@@ -321,9 +321,8 @@ export default function EditStudentForm({ user, profile }) {
                     </button>
                 )}
             </div>
-        <div className="">
-          <div>
-            <label htmlFor="first_name" className="">
+        <fieldset className={style.nameField}>
+            <label htmlFor="first_name" className={style.label}>
               * FÖRNAMN
             </label>
             <Input
@@ -335,10 +334,7 @@ export default function EditStudentForm({ user, profile }) {
               className={inputStyles.inputBlack}
               required
             />
-          </div>
-          
-          <div>
-            <label htmlFor="last_name" className="">
+            <label htmlFor="last_name" className={style.label}>
               *EFTERNAMN
             </label>
             <Input
@@ -350,15 +346,12 @@ export default function EditStudentForm({ user, profile }) {
               className={inputStyles.inputBlack}
               required
             />
-          </div>
-        </div>
-        
+        </fieldset>
         <div>
         <fieldset required>
-            <legend className="">
+            <legend className={style.label}>
                 *JAG STUDERAR TILL
             </legend>
-            <div className="">
                 <input
                 id="webbutveckling"
                 name="education_program"
@@ -372,9 +365,6 @@ export default function EditStudentForm({ user, profile }) {
                 <label htmlFor="webbutveckling" className="">
                 WEBBUTVECKLARE
                 </label>
-            </div>
-            <div className="">
-                <div className="">
                 <input
                     id="digital-design"
                     name="education_program"
@@ -387,13 +377,10 @@ export default function EditStudentForm({ user, profile }) {
                 <label htmlFor="digital-design" className="">
                     DIGITAL DESIGNER
                 </label>
-                </div>
-            </div>
         </fieldset>
         </div>
-
-        <div>
-            <label htmlFor="linkedin_url" className="">
+        <fieldset className='linkField'>
+            <label htmlFor="linkedin_url" className={style.label}>
               LINKEDIN
             </label>
             <Input
@@ -404,10 +391,7 @@ export default function EditStudentForm({ user, profile }) {
               onChange={handleChange}
               className={inputStyles.inputBlack}
             />
-        </div>
-
-        <div>
-            <label htmlFor="portfolio_url" className="">
+            <label htmlFor="portfolio_url" className={style.label}>
               PORTFOLIO
             </label>
             <Input
@@ -418,10 +402,9 @@ export default function EditStudentForm({ user, profile }) {
               onChange={handleChange}
               className={inputStyles.inputBlack}
             />
-        </div>
-
+        </fieldset>
         <div>
-          <label htmlFor="bio" className="">
+          <label htmlFor="bio" className={style.label}>
             *BIO
           </label>
           <Textarea
@@ -436,7 +419,7 @@ export default function EditStudentForm({ user, profile }) {
           />
         </div>
         </div>
-            <label htmlFor="knowledge" className="">
+            <label htmlFor="knowledge" className={style.label}>
                 *KNOWLEDGE
             </label>
             <input
