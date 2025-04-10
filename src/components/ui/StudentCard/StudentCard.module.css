@@ -181,6 +181,7 @@ text-transform: uppercase;
       flex-direction: row;
       justify-content: space-between;
       width: 100%;
+      max-width: 100%;
 
     }
   }
