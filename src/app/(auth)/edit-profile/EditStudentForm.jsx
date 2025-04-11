@@ -7,8 +7,26 @@ import Button, { buttonStyles } from '@/components/ui/Button/Button';
 import Label, { labelStyles } from '@/components/ui/Label/Label';
 import Input, { inputStyles } from '@/components/ui/Input/Input';
 import Textarea, { textareaStyles } from '@/components/ui/Textarea/Textarea';
+import MultiSelectDropdown from '@/components/ui/MultiSelectDropdown/MultiSelectDropdown';
 import Image from 'next/image';
 import style from './EditStudentForm.module.css';
+
+// Sample options array
+const knowledgeOptions = [
+  { value: 'Figma', label: 'FIGMA' },
+  { value: 'Illustrator', label: 'ILLUSTRATOR' },
+  { value: 'Photoshop', label: 'PHOTOSHOP' },
+  { value: 'Unreal engine', label: 'UNREAL ENGINE' },
+  { value: 'Framer', label: 'FRAMER' },
+  { value: 'php', label: 'PHP' },
+  { value: 'html', label: 'HTML' },
+  { value: 'css', label: 'CSS' },
+  { value: 'react', label: 'REACT' },
+  { value: 'nextjs', label: 'NEXT' },
+  { value: 'tailwind', label: 'TAILWIND CSS' },
+  { value: 'typescript', label: 'TYPESCRIPT' },
+  { value: 'node', label: 'NODE' },
+];
 
 export default function EditStudentForm({ user, profile }) {
   const router = useRouter();
@@ -33,11 +51,11 @@ export default function EditStudentForm({ user, profile }) {
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     
-    // For checkboxes handling the education_program field
-    if (type === 'checkbox' && name === 'education_program') {
+    // For radio buttons handling the education_program field
+    if (type === 'radio' && name === 'education_program') {
       setFormData(prev => ({
         ...prev,
-        education_program: checked ? value : ''
+        education_program: value
       }));
     } else {
       setFormData(prev => ({
@@ -47,7 +65,15 @@ export default function EditStudentForm({ user, profile }) {
     }
   };
 
-  const handleKnowledgeArray = (e) => {
+  // Handle knowledge multi-select
+  const handleKnowledgeChange = (selectedValues) => {
+    setFormData(prev => ({
+      ...prev,
+      knowledge: selectedValues
+    }));
+  };
+
+  const handleCheckboxChange = (e) => {
     const { name, value, checked } = e.target;
   
     if (name === "knowledge") {
@@ -61,11 +87,6 @@ export default function EditStudentForm({ user, profile }) {
           knowledge: updatedKnowledge,
         };
       });
-    } else {
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
     }
   };  
   
@@ -427,57 +448,17 @@ export default function EditStudentForm({ user, profile }) {
                 required
             />
             </label>
-            <label htmlFor="knowledge" className={style.label}>
-                *KNOWLEDGE
-            </label>
-            <input
-                id="Figma"
-                name="knowledge"
-                type="checkbox"
-                value="Figma"
-                checked={formData.knowledge.includes("Figma")}
-                onChange={handleKnowledgeArray}
-                className=""
-                required
-            />
-            <label htmlFor="Figma" className="">
-            FIGMA
-            </label>
-            <input
-                id="Illustrator"
-                name="knowledge"
-                type="checkbox"
-                value="Illustrator"
-                checked={formData.knowledge.includes("Illustrator")}
-                onChange={handleKnowledgeArray}
-                className=""
-                
-            />
-            <label htmlFor="Illustrator" className="">
-            ILLUSTRATOR
-            </label>
-            <input
-                id="Photoshop"
-                name="knowledge"
-                type="checkbox"
-                value="Photoshop"
-                checked={formData.knowledge.includes("Photoshop")}
-                onChange={handleKnowledgeArray}
-                className=""
-                
-            />
-            <label htmlFor="Photoshop" className="">
-            PHOTOSHOP
-            </label>
-            <select name="knowledge" id="knowledge">
-                <option value="Figma">FIGMA</option>
-                <option value="Illustrator">ILLUSTRATOR</option>
-                <option value="Photoshop">PHOTOSHOP</option>
-                <option value="Unreal engine">UNREAL ENGINE</option>
-                <option value="Framer">FRAMER</option>
-            </select>
-        <div>
-      </div>
+            <legend className={style.label}>*KUNSKAPER
+            <div className={style.multiSelectContainer}>
+                <MultiSelectDropdown
+                    options={knowledgeOptions}
+                    selectedValues={formData.knowledge}
+                    onChange={handleKnowledgeChange}
+                    placeholder="Välj kunskaper"
+                    maxHeight="250px"
+                />
+            </div>
+            </legend>
         <Button 
             type="button" 
             className={buttonStyles.filledBlack}
