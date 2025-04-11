@@ -10,7 +10,7 @@
     background-color: var(--Background-Dark);
     border-radius: 1rem;
     color: var(--background-MediumLight);
-    margin-bottom: 1.5rem;
+    /* margin-bottom: 1.5rem; */
     max-width: 100%;
     box-sizing: border-box; /* Viktigt: inkludera padding i bredden */
   }
@@ -60,6 +60,7 @@
     flex-wrap: wrap;
     justify-content: space-between;
     margin-top: 1.5rem;
+    gap: 1rem;
     width: 100%; /* Begränsa till föräldrabredden */
     box-sizing: border-box;
   }
