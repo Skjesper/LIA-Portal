@@ -292,32 +292,47 @@ export default function EditStudentForm({ user, profile }) {
           {message}
         </div>
       )}
-
-                <label htmlFor="profile_picture" className="">
-                </label>
-                <input
-                    type="file"
-                    id="profile_picture"
-                    accept="application/jpg"
-                    onChange={handleImageUpload}
-                    disabled={uploading}
-                />
-                {uploading && <p>Laddar upp...</p>}
-                {formData.profile_picture && !uploading && (
-                    <div className="">
-                        Profilbild uppladdad!
-                    </div>
-                )}
-                {message && message !== 'Profile picture uploaded successfully!' && <p className="">{message}</p>}
-                {formData.profile_picture && (
-                    <button 
-                        type="button" 
-                        className=""
-                        onClick={handleRemoveImage}
-                    >
-                        {formData.profile_picture.split('/').pop()}
-                    </button>
-                )}
+        <fieldset className={style.profilePicture}>
+            <Button 
+            type="button" 
+            className={style.uploadProfilePicture}
+            onClick={() => document.getElementById('profile_picture').click()}
+            disabled={uploading}
+            >
+            <Image
+            src="/icons/photo_camera.svg"
+            alt="icon for removing"
+            width={40}
+            height={40}
+            className=""
+            />
+            {uploading ? 'LADDAR UPP...' : 'VÄLJ PROFILBILD'}
+            <input
+                type="file"
+                id="profile_picture"
+                accept="application/jpg"
+                onChange={handleImageUpload}
+                disabled={uploading}
+                style={{ display: 'none' }} 
+            />
+            </Button>
+        </fieldset>
+            {uploading && <p>Laddar upp...</p>}
+            {formData.profile_picture && !uploading && (
+                <div className="">
+                    Profilbild uppladdad!
+                </div>
+            )}
+            {message && message !== 'Profile picture uploaded successfully!' && <p className="">{message}</p>}
+            {formData.profile_picture && (
+                <button 
+                    type="button" 
+                    className=""
+                    onClick={handleRemoveImage}
+                >
+                    {formData.profile_picture.split('/').pop()}
+                </button>
+            )}
         <fieldset className={style.nameField}>
             <label htmlFor="first_name" className={style.label}>
               * FÖRNAMN
@@ -478,22 +493,22 @@ export default function EditStudentForm({ user, profile }) {
             disabled={uploading}
             style={{ display: 'none' }} 
         />
-            {formData.cv && (
-                <Button 
-                    type="button" 
-                    className={buttonStyles.labelButton}
-                    onClick={handleRemoveCV}
-                >
-                    {formData.cv.split('/').pop()}
-                    <Image
-                    src="/icons/exit-white.svg"
-                    alt="icon for removing"
-                    width={10}
-                    height={10}
-                    className=""
-                    />
-                </Button>
-            )}
+        {formData.cv && (
+            <Button 
+                type="button" 
+                className={buttonStyles.labelButton}
+                onClick={handleRemoveCV}
+            >
+                {formData.cv.split('/').pop()}
+                <Image
+                src="/icons/exit-white.svg"
+                alt="icon for removing"
+                width={10}
+                height={10}
+                className=""
+                />
+            </Button>
+        )}
       <div className="">
         <Button
           type="submit"
