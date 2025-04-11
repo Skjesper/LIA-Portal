@@ -483,7 +483,7 @@ export default function EditStudentForm({ user, profile }) {
                     type="button" 
                     className={buttonStyles.labelButton}
                     onClick={handleRemoveCV}
-                    style={{ margin: '0.5rem' }} 
+                    style={{ margin: '0.5rem 0rem' }} 
                 >
                     {formData.cv.split('/').pop()}
                     <Image

@@ -79,18 +79,20 @@ export default function EditProfilePage() {
         type="button"
         onClick={() => router.back()}
         className={buttonStyles.underlinedBlack}
+        style={{ margin: '0 0 0 2rem' }} 
       >
         <Image
           src="/icons/arrow-left-black.svg"
           alt="Return Arrow"
-          width={50}
-          height={30}
-          className=""
+          width={15}
+          height={15}
         />
         Tillbaka
       </Button>
       
-      <h1 className="">REDIGERA PROFIL</h1>
+      <h1 
+      style={{ margin: '1.5rem 0 0.5rem 2rem', color: 'var(--Primary-Red)', fontStyle: 'italic' }} 
+      > REDIGERA PROFIL</h1>
       {profile?.type === 'student' ? (
         <EditStudentForm user={user} profile={profile.data} />
       ) : profile?.type === 'company' ? (
