@@ -143,7 +143,9 @@ const RSVPCard = ({ title, onSubmit }) => {
             </Button>
           </div>
         </form>
+       
         </section>
+
       
       </section>
      

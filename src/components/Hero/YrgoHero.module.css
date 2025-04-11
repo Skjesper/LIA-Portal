@@ -25,7 +25,7 @@
     align-items: flex-start;
     gap: 0.5rem;
     align-self: stretch;
-    margin-top: 3rem;
+    
     background: var(--Background-Light, #FFF);
     padding: 2rem 1.5rem;
 }
@@ -108,7 +108,7 @@ align-self: stretch;
 margin-top: 0.5rem;
 }
 
-@media (min-width: 768) {
+@media (min-width: 768px) {
 
     .heroImage {
 
@@ -126,6 +126,11 @@ margin-top: 0.5rem;
         font-size: 6rem;
         line-height: 6rem;
         margin-bottom: 8.75rem;
+    }
+
+    .infoTextContainer {
+        justify-content: flex-start; 
+        justify-content: flex-end;
     }
 
     .text {
@@ -151,5 +156,19 @@ margin-top: 0.5rem;
       
       .heroTitle span:nth-child(2) {
         margin-right: 0.3em; /* Lite mellanrum efter "mingel" */
+      }
+
+      .infoText {
+        display: flex;
+        flex-direction: row;
+        width: 30rem; 
+        gap: 2rem;
+        margin-right: 2rem;
+      }
+
+      .heroSection {
+
+
+        margin-top: 3rem;
       }
 }

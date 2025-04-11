@@ -3,8 +3,7 @@ import CompanyCard from '@/components/ui/CompanyCard/CompanyCard';
 
 export default function CompaniesList() {
   return (
-    <div>
-      {mockCompanies.map((company) => (
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '15px', justifyContent: 'center', }}>      {mockCompanies.map((company) => (
         <CompanyCard 
           key={company.id} 
           title={company.name} 

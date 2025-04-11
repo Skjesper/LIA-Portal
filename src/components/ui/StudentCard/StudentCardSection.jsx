@@ -1,16 +1,16 @@
 import React from 'react';
 import Button, { buttonStyles } from '@/components/ui/Button/Button';
-import RandomCompanies from '@/components/ui/CompanyCard/RandomCompanies';
-import styles from '@/components/ui/CompanyCard/CompanyCard.module.css';
+import StudentCard from './StudentCard';
+import styles from '@/components/ui/StudentCard/StudentCard.module.css';
 
-const CompanySection = () => {
+const StudentCardSection = () => {
   return (
     <div className={styles.sectionWrapper}>
         <div className={styles.sectionHeader}>
-        <h2 className={styles.sectionTitle}><span>03/</span>Företag</h2>
+        <h2 className={styles.sectionTitle}><span>02/</span>Studenter</h2>
 
         
-        <div className={styles.applyWrapper}>
+        <div className={styles.infoWrapper}>
         <p className={styles.sectionText}>
             Lorem ipsum dolor sit amet si consectetur. Sagittis faucibus vita in faucibus nunc. 
             Semper nun sodales malesuada. Non habitant.
@@ -19,14 +19,25 @@ const CompanySection = () => {
             Lorem ipsum dolor sit amet si consectetur. Sagittis faucibus vita in faucibus nunc. 
             Semper nun sodales malesuada. Non habitant.
         </p>
-        <Button className={buttonStyles.underlinedBlack}>Se alla företag</Button>
         </div>
         </div>
-        <div className={styles.flexCompaniesContainer}>
-        <RandomCompanies />
-      </div>
+        <section className={styles.studentCardContainer}>
+        <StudentCard 
+        title="DIGITAL DESIGNERS"
+        count="25 ST."
+        variant="student"
+        
+      />
+
+      <StudentCard 
+        title="WEBBUTVECKLARE"
+        count="25 ST."
+        variant="webDev"
+        
+      />
+      </section>
     </div>
   );
 };
 
-export default CompanySection;
+export default StudentCardSection;

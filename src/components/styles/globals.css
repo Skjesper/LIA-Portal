@@ -3,6 +3,10 @@
   --border-radius: 1.5rem;
   
   --Title-height: 1.5rem;
+
+  
+
+  
   
   
   --Button-underline-offset: 4px;
@@ -10,6 +14,56 @@
   --Typography-Secondary: #FFFFFF;
   --Button-border-size: 1px;
   --Primary-Red: #E51336;
+  
+
+  --Background-Dark: #001A52;
+  --Background-Light: #FFFFFF;
+  --background-MediumLight: #E4E9EB;
+  
+  
+  /* 
+
+  BUTTON STYLING
+
+  */
+  
+  --Button-State-Focus: #1100FF;
+  --Button-State-Disabled: #828282;
+  /* 
+
+  FILLED BLACK
+
+  */
+  
+  --Button-Primary: #001A52;
+  --Greyscale-70: #2D2D2D;
+
+
+   /* 
+
+  FILLED WHITE
+
+  */
+  --Button-Secondary: #FFFFFF;
+  --Greyscale-10: #E0E0E0;
+  
+  /* 
+  WARNING
+  */
+  --Button-State-Warning-Default: #D91717;
+  --Button-State-Warning-Pressed: #B20000;
+  
+   /* 
+  SUCCESS
+  */
+
+  --Button-State-Success-Default: #10BD52;
+  --Button-State-Success-Pressed: #11A649;
+
+    /* 
+  UNDERLINED WHITE
+  */
+
   
 }
   
@@ -28,7 +82,7 @@
   
   body {
     color: var(--foreground);
-    background: grey;
+    background: #FFFFFF;
     font-family: var(--font-inter);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

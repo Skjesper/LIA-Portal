@@ -1,9 +1,187 @@
+/* Grundklassen som alltid används */
 .studentCard {
+    display: flex;
+    padding: 1.875rem 1.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2.5rem;
+    align-self: stretch;
+    border-radius: 1rem;
+    margin-bottom: 1.5rem;
+    max-width: 31rem;
+    box-sizing: border-box;
+    /* Standardfärger (designer-varianten) */
+    background-color: var(--Primary-Red, #e63946);
+    color: white;
+  }
 
-display: flex;
-width: 22.375rem;
-padding: 1rem;
-flex-direction: column;
-align-items: flex-start;
-gap: 2.5rem;
+  .studentCardContainer {
+
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 32rem;
+    
+    
+  }
+  
+  /* Varianter som överskrider bara det som behövs */
+  .designer {
+    /* Behövs inte explicit eftersom det är standard */
+  }
+  
+  .webDev {
+    background-color: var(--Background-Light, #ffffff);
+    color: var(--Typography-Primary, #121212);
+  }
+  
+  /* Övriga stilar som är desamma för alla varianter */
+  .titleContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+  }
+  
+  .title {
+    font-family: Inter;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 450;
+    line-height: var(--Title-height);
+  }
+  
+  .count {
+    font-family: Inter;
+    font-size: 4rem;
+    font-style: normal;
+    font-weight: 530;
+    line-height: 4rem;
+    letter-spacing: -0.12rem;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  
+  .cardText {
+    margin: 0;
+  }
+  
+  .imageContainer {
+    width: 3rem;
+    height: auto;
+    display: flex;
+    align-items: center;
+  }
+  
+  .imageContainer img {
+    width: 3rem;
+    height: 3rem;
+    object-fit: contain;
+  }
+
+ 
+
+  .sectionText {
+
+    color: var(--Typography-Primary, #121212);
+    /* Mobil/Body/Regular */
+    font-family: Inter;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.25rem; /* 125% */
+    width: 70%;
+  }
+  .infoWrapper {
+
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
+      
+      box-sizing: border-box;
+  }
+
+  .sectionTitle {
+    color: var(--Typography-Primary, #121212);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  
+  @media (min-width: 768px) {
+    .count {
+      font-size: 4.5rem;
+    }
+
+    .infoWrapper {
+
+      flex-direction: row;
+      margin-bottom: 3.5rem;
+      
+    }
+.sectionText {
+
+    display: flex;
+    width: 20rem;
 }
+
+    .sectionTitle {
+
+      margin-bottom: 3rem;
+    }
+
+   
+
+    .cardText {
+
+      font-size: 6.875rem;
+    }
+
+    .studentCard {
+
+      width: 50%;
+      max-width: 50%;
+      height: 34rem;
+      justify-content: space-between;
+      
+    }
+
+    .sectionTitle {
+
+      color: var(--Typography-Primary, #121212);
+/* Desktop/H2_Thin */
+font-family: Inter;
+font-size: 6.875rem;
+font-style: normal;
+font-weight: 530;
+line-height: 7.5rem; /* 109.091% */
+letter-spacing: -0.20625rem;
+text-transform: uppercase;
+    }
+
+    .sectionTitle span {
+      font-weight: 200;
+    }
+
+    /* .imageContainer img {
+      width: 8.5rem;
+      height: 7.6875rem;
+    } */
+
+    /* .imageContainer {
+      width: 8.5rem;
+      height: 7.6875rem;
+      align-items: start;
+    } */
+
+    .studentCardContainer {
+
+      
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 100%;
+
+    }
+  }

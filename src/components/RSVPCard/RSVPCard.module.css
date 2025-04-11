@@ -159,6 +159,12 @@
     text-transform: uppercase;
   }
 
+  .desktopImage {
+    background-color: grey;
+    width: 50%;
+    height: 300px; /* eller annat värde */
+  }
+
   .sectionTitle span {
     font-weight: 200;
   }
