@@ -286,6 +286,7 @@ export default function EditStudentForm({ user, profile }) {
   };
   
   return (
+    <div className={style.editStudentView}>
     <form onSubmit={handleSubmit} className={style.editStudentForm}>
       {message && (
         <div className={`p-4 rounded ${message.includes('Error') ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`}>
@@ -519,5 +520,6 @@ export default function EditStudentForm({ user, profile }) {
         </Button>
       </div>
     </form>
+    </div>
   );
 }
