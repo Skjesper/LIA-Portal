@@ -81,6 +81,9 @@
     border: none;
 }
 
+.cvField {
+    border: none;
+}
 
 .label {
     width: 100%;

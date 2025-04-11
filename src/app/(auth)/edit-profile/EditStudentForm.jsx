@@ -459,39 +459,42 @@ export default function EditStudentForm({ user, profile }) {
                 />
             </div>
             </legend>
-        <Button 
-            type="button" 
-            className={buttonStyles.filledBlack}
-            onClick={() => document.getElementById('cv').click()}
-            disabled={uploading}
-        >
-            {uploading ? 'LADDAR UPP CV...' : 'TRYCK HÄR FÖR ATT LADDA UPP CV'}
-        </Button>
-        <input 
-            type="file" 
-            id="cv" 
-            accept="application/pdf" 
-            onChange={handleCvUpload} 
-            disabled={uploading}
-            style={{ display: 'none' }} 
-        />
-        {formData.cv && (
+            <legend className={style.label}>LADDA UPP CV
+            </legend>
+        <fieldset className={style.cvField}>
             <Button 
                 type="button" 
-                className={buttonStyles.labelButton}
-                onClick={handleRemoveCV}
+                className={buttonStyles.filledBlack}
+                onClick={() => document.getElementById('cv').click()}
+                disabled={uploading}
             >
-                {formData.cv.split('/').pop()}
-                <Image
-                src="/icons/exit-white.svg"
-                alt="icon for removing"
-                width={10}
-                height={10}
-                className=""
-                />
+                {uploading ? 'LADDAR UPP CV...' : 'TRYCK HÄR FÖR ATT LADDA UPP CV'}
             </Button>
-        )}
-      <div className="">
+            <input 
+                type="file" 
+                id="cv" 
+                accept="application/pdf" 
+                onChange={handleCvUpload} 
+                disabled={uploading}
+                style={{ display: 'none' }} 
+            />
+            {formData.cv && (
+                <Button 
+                    type="button" 
+                    className={buttonStyles.labelButton}
+                    onClick={handleRemoveCV}
+                    style={{ margin: '0.5rem' }} 
+                >
+                    {formData.cv.split('/').pop()}
+                    <Image
+                    src="/icons/exit-white.svg"
+                    alt="icon for removing"
+                    width={10}
+                    height={10}
+                    />
+                </Button>
+            )}
+        </fieldset>
         <Button
           type="submit"
           disabled={loading}
@@ -499,7 +502,6 @@ export default function EditStudentForm({ user, profile }) {
         >
           {loading ? 'SPARAR...' : 'SPARA ÄNDRINGAR'}
         </Button>
-      </div>
     </form>
     </div>
   );
