@@ -66,16 +66,6 @@ export default function Header() {
               <nav className={styles.desktopNavbar} aria-label="Main Navigation">
                 <ul>
                   <li>
-                    <Link href="/companies">
-                      <Button 
-                        className={buttonStyles.underlinedBlack}
-                        style={{ width: '100%', textAlign: 'center', textDecoration: 'none' }}
-                      >
-                        companies
-                      </Button>
-                    </Link>
-                  </li>
-                  <li>
                     <Link href="/event">
                       <Button 
                         className={buttonStyles.underlinedBlack}
@@ -86,12 +76,22 @@ export default function Header() {
                     </Link>
                   </li>
                   <li>
-                    <Link href="/instruments">
+                    <Link href="/companies">
                       <Button 
                         className={buttonStyles.underlinedBlack}
                         style={{ width: '100%', textAlign: 'center', textDecoration: 'none' }}
                       >
-                        instruments
+                        Företag
+                      </Button>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/students">
+                      <Button 
+                        className={buttonStyles.underlinedBlack}
+                        style={{ width: '100%', textAlign: 'center', textDecoration: 'none' }}
+                      >
+                        Studenter
                       </Button>
                     </Link>
                   </li>

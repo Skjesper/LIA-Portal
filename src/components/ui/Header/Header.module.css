@@ -35,6 +35,7 @@
   
   .desktopNavbar {
     display: flex;
+    margin-right: 45rem;
   }
   
   .desktopNavbar ul {

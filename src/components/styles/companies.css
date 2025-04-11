@@ -18,3 +18,20 @@
   text-transform: uppercase;
   margin-bottom: 1.25rem;
 }
+
+@media (min-width: 768px) {
+  
+  .companiesTitle {
+
+    color: var(--Primary-Red_2017, #E51336);
+/* Desktop/H2_Bold */
+ 
+  font-size: 6.875rem;
+  font-style: italic;
+  font-weight: 530;
+  line-height: 7.5rem; /* 109.091% */
+  letter-spacing: -0.20625rem;
+  
+  }
+
+}

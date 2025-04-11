@@ -1,14 +1,16 @@
-// src/app/companies/page.js
-import Link from 'next/link';
+import CompaniesList from '@/components/ui/CompanyCard/CompaniesList';
+import Section from '@/components/Sections/Sections';
+import '@/components/styles/companies.css'
 
-export default function Companies() {
+export default function StudentsPage() {
   return (
-    <div>
-      <h1>Företagssida</h1>
-      <p>Här kommer information om företag att visas.</p>
-      <Link href="/">
-        <button>Tillbaka till startsidan</button>
-      </Link>
-    </div>
+    <main>
+    <Section style={{ background: 'var(--Background-Light)' }}>
+        <h2 className="companiesTitle">Studenter</h2>
+        <div className="companiesListContainer">
+        <CompaniesList />
+        </div>
+      </Section>
+    </main>
   );
 }
