@@ -1,0 +1,91 @@
+.editStudentView {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    background-color: var(--Background-Light);
+    border-radius: 1rem;
+    margin: 0rem 2rem;
+    padding: 3rem 1.5rem;
+}
+
+.editStudentForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    max-width: 51.25rem;
+}
+
+.profilePicture {
+    border-radius: 100%;
+    width: 9.4rem;
+    height: 9.4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: var(--background-MediumLight);
+    border: none;
+  }
+
+.uploadProfilePicture {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--Typography-Primary);
+    font-size: 0.875rem;
+  }
+
+.nameField {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    border: none;
+}
+
+
+.educationField {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border: none;
+    gap: 0.25rem;
+}
+
+
+.educationChoice {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1 0 0;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    background-color: var(--Greyscale-10);
+    color: var(--Typography-Primary);
+}
+
+.educationCheckbox {
+    align-self: end;
+}
+
+
+.linkField {
+    display: flex;
+    align-items: flex-start;
+    align-self: stretch;
+    gap: 1rem;
+    border: none;
+}
+
+.cvField {
+    border: none;
+}
+
+.label {
+    width: 100%;
+    color: var(--Typography-Primary);
+}
