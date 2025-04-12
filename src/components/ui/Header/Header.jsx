@@ -10,7 +10,7 @@ import MobileDropdown from '@/components/ui/MobileDropdown/MobileDropdown';
 import styles from './Header.module.css';
 
 export default function Header() {
-  const isMobile = useBreakpoint(768); // Use 768px as breakpoint
+  const isMobile = useBreakpoint(1279); // Use 768px as breakpoint
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isLoggedIn, userType } = useAuth();
 

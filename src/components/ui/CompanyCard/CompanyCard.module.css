@@ -63,7 +63,17 @@
     gap: 1rem;
     width: 100%; /* Begränsa till föräldrabredden */
     box-sizing: border-box;
+    
   }
+
+  .companyCardFlex {
+
+    display: flex;
+    width: 100%;
+
+  }
+
+
   
   /* Mobil/H3/Regular */
   .title {
@@ -140,7 +150,7 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 2rem;
-      width: 100%; /* Ta bort 100vw här som orsakar sidoscroll */
+      width: 100%; 
     }
   
     .companyCardFlex {
