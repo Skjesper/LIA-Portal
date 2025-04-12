@@ -29,7 +29,7 @@ export default function CompanySignUpForm({ onSuccess }) {
         options: {
           data: {
             user_type: 'company',
-            company_name: companyName
+            name: companyName
           },
         },
       });
