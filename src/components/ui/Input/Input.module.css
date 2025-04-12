@@ -1,0 +1,62 @@
+/* Input.module.css */
+
+/* White */
+
+.inputWhite {
+    width: 100%;
+    padding: 0.75rem;
+    box-sizing: border-box;
+    background-color: transparent;
+    color: var(--Background-Light);
+    font-size: 1.125rem;
+    border-radius: 0.25rem;
+    border: 2px solid var(--Background-Light);
+  }
+  
+.inputWhite::placeholder {
+    color: var(--Greyscale-10);
+}
+
+.inputWhite:disabled {
+    color: var(--Button-State-Disabled);
+    border: 2px solid var(--Button-State-Disabled);
+}
+
+
+/* Black */
+
+.inputBlack {
+    width: 100%;
+    padding: 0.75rem;
+    box-sizing: border-box;
+    background-color: transparent;
+    color: var(--Background-Dark);
+    font-size: 1.125rem;
+    border-radius: 0.25rem;
+    border: 2px solid var(--Background-Dark);
+  }
+  
+.inputBlack::placeholder {
+color: var(--Greyscale-40);
+}
+
+.inputBlack:disabled {
+    color: var(--Button-State-Disabled);
+    border: 2px solid var(--Button-State-Disabled);
+}
+
+.inputBlack:required:invalid {
+    border: 2px solid var(--Primary-Red);
+}
+
+/* Required */
+
+.inputRequired {
+    width: 100%;
+    padding: 0.75rem;
+    box-sizing: border-box;
+    background-color: transparent;
+    font-size: 1.125rem;
+    border-radius: 0.25rem;
+    border: 2px solid var(--Primary-Red);
+  }

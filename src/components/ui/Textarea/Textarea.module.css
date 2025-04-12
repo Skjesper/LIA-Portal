@@ -1,0 +1,45 @@
+/* Textarea.module.css */
+
+/* White */
+
+.textareaWhite {
+    width: 100%;
+    padding: 0.75rem;
+    box-sizing: border-box;
+    background-color: transparent;
+    color: var(--Background-Light);
+    font-size: 1.125rem;
+    border-radius: 0.25rem;
+    border: 2px solid var(--Background-Light);
+  }
+  
+.textareaWhite::placeholder {
+    color: var(--Greyscale-10);
+}
+
+.textareaWhite:disabled {
+    color: var(--Button-State-Disabled);
+    border: 2px solid var(--Button-State-Disabled);
+}
+
+/* Black */
+
+.textareaBlack {
+    width: 100%;
+    padding: 0.75rem;
+    box-sizing: border-box;
+    background-color: transparent;
+    color: var(--Background-Dark);
+    font-size: 1.125rem;
+    border-radius: 0.25rem;
+    border: 2px solid var(--Background-Dark);
+  }
+  
+.textareaBlack::placeholder {
+    color: var(--Greyscale-40);
+}
+
+.textareaBlack:disabled {
+    color: var(--Button-State-Disabled);
+    border: 2px solid var(--Button-State-Disabled);
+}
