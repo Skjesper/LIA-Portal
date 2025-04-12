@@ -21,7 +21,7 @@ export default function Header() {
   // Get the appropriate profile link based on user type
   const getProfileLink = () => {
     if (userType === 'student') {
-      return '/student/profile';
+      return '/edit-profile';
     } else if (userType === 'company') {
       return '/company/profile';
     }

@@ -30,9 +30,8 @@ const StudentCardSection = () => {
       />
 
       <StudentCard 
-        title="WEBBUTVECKLARE"
-        count="25 ST."
-        variant="webDev"
+       title="WEBBUTVECKLARE"
+      variant="webDev"
         
       />
       </section>
