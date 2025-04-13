@@ -43,8 +43,7 @@ export default function StudentsPage() {
       const { data, error } = await supabase
         .from('student_profiles')
         .select('*')
-        .ilike('first_name', `%${searchQuery}%`)
-        .or(`last_name.ilike.%${searchQuery}%`);
+        .or(`first_name.ilike.%${searchQuery}%,last_name.ilike.%${searchQuery}%`);
       
       if (error) {
         throw error;
@@ -109,10 +108,10 @@ export default function StudentsPage() {
                 values.map(value => (
                   <span key={`${column}-${value}`} className={styles.filterTag}>
                     {column === 'education_program' ? 'Inriktning' : 
-                     column === 'knowledge' ? 'Kompetens' :
+                     column === 'knowledge' ? '' :
                      column === 'lia_period' ? 'LIA Period' :
                      column === 'location' ? 'Ort' :
-                     column === 'remote_options' ? 'Distans' : column}: {value}
+                     column === 'remote_options' ? 'Distans' : column} {value}
                   </span>
                 ))
               ))}

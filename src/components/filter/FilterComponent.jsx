@@ -281,7 +281,9 @@ const FilterComponent = ({
         const { data, error } = await query;
         
         if (error) {
-          console.error('Error applying filters:', error);
+          console.error('Error applying filters:', error, JSON.stringify(error));
+          // Alternativt logga hela query-objektet för att se vad som skickas till Supabase
+          console.error('Query state:', activeFilters);
           return;
         }
         
