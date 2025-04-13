@@ -3,7 +3,7 @@
     color: var(--Typography-Primary);
 }
 
-.locationStatusField {
+.checkboxField {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -11,7 +11,7 @@
     gap: 0.25rem;
 }
 
-.locationStatusChoice {
+.checkboxChoice {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -22,6 +22,6 @@
     color: var(--Typography-Primary);
 }
 
-.locationStatusCheckbox {
+.checkbox {
     align-self: end;
 }
