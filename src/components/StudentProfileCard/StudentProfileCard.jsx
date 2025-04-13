@@ -1,5 +1,5 @@
 'use client';
-
+import Label, {labelStyles} from '@/components/ui/Label/Label';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from '@/components/StudentProfileCard/StudentProfileCard.module.css';
@@ -52,9 +52,10 @@ const StudentProfileCard = ({ student }) => {
         </div>
         
         <div className={styles.studentInfo}>
-          <div className={styles.programBadge}>
-            {getProgramDisplay(student.education_program)}
-          </div>
+  <Label className={labelStyles.unfilled}>
+    {getProgramDisplay(student.education_program)}
+  </Label>
+
           
           <ul className={styles.skillsList}>
             {student.knowledge && student.knowledge.map((skill) => (

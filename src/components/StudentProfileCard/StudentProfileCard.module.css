@@ -31,7 +31,7 @@
 
 .imageContainer {
   flex: 1;  /* Tar upp halva utrymmet */
-  min-width: 100px;
+  min-width: 120px;
   min-height: 120px;  /* Minsta bredd för att garantera att bilden visas ordentligt */
   max-width: 50%;
   height: 12.625rem;
