@@ -5,14 +5,14 @@
     padding: 1.875rem 1.5rem;
     flex-direction: column;
     align-items: flex-start;
-    gap: 2.5rem;
+    gap: 1.5rem;
     align-self: stretch;
     background-color: var(--Background-Dark);
     border-radius: 1rem;
     color: var(--background-MediumLight);
     /* margin-bottom: 1.5rem; */
     max-width: 100%;
-    box-sizing: border-box; /* Viktigt: inkludera padding i bredden */
+    
   }
 
   .companiesList {
@@ -141,8 +141,8 @@
     }
   
     .companyCard {
-      width: 25.5rem;
-      height: 30rem;
+      width: 22rem;
+      height: 25rem;
     }
   
     .flexCompaniesContainer {
@@ -160,4 +160,6 @@
     .companyCard {
       justify-content: space-between;
     }
+
+    
   }

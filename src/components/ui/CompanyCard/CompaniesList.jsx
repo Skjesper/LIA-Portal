@@ -43,7 +43,7 @@ export default function CompaniesList() {
   if (error) return <div>{error}</div>;
 
   return (
-    <div style={{ display: 'flex', gap: '15px', justifyContent: 'center', width: '100%' }}>
+    <div style={{ display: 'flex', gap: '15px', justifyContent: 'flex-end', width: '100%' }}>
       {companies.map((company) => (
         <CompanyCard 
           key={company.id} 

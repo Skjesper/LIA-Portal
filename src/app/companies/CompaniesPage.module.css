@@ -1,0 +1,139 @@
+.searchFilterContainer {
+  display: flex;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.searchForm {
+  display: flex;
+  flex: 1;
+  position: relative;
+  max-width: 400px;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  padding-right: 4rem;
+  border: 1px solid var(--Background-Dark, #121212);
+  border-radius: 1.5rem;
+  font-size: 0.875rem;
+  outline: none;
+}
+
+.searchButton {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  padding: 0.5rem 1rem;
+  background-color: var(--Background-Dark, #121212);
+  color: white;
+  border: none;
+  border-radius: 0 1.5rem 1.5rem 0;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.searchButton:disabled {
+  background-color: var(--Button-State-Disabled, #828282);
+}
+
+.filterButton {
+  padding: 0.5rem 1rem;
+  height: 100%;
+}
+
+.activeFilters {
+  margin-bottom: 1.5rem;
+}
+
+.filterTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.filterTag {
+  display: inline-block;
+  padding: 0.375rem 0.75rem;
+  background-color: var(--Background-Dark, #121212);
+  color: white;
+  border-radius: 1.5rem;
+  font-size: 0.75rem;
+}
+
+.resultsContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.resultsCount {
+  font-size: 0.875rem;
+  color: var(--Typography-Primary, #121212);
+  opacity: 0.7;
+}
+
+.noResults {
+  text-align: center;
+  padding: 2rem 0;
+  color: var(--Typography-Primary, #121212);
+  opacity: 0.7;
+}
+
+.companiesContainer {
+  width: 100%;
+}
+
+.companiesGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Bas styling för kort som fungerar på de flesta skärmar */
+.companiesGrid > * {
+  flex: 0 1 calc(30% - 1rem); /* Anpassad för tre kort per rad */
+  min-width: 280px; /* Minsta bredd för ett kort innan det flyttas ner */
+  max-width: 380px; /* Maxbredd så att korten inte blir för stora */
+  margin: 0.25rem;
+}
+
+/* Mellan-stora skärmar: 2 kort per rad */
+@media (max-width: 1100px) and (min-width: 769px) {
+  .companiesGrid > * {
+    flex: 0 1 calc(45% - 1rem); /* Anpassad för två kort per rad */
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .searchFilterContainer {
+    flex-wrap: wrap;
+  }
+
+  .searchForm {
+    max-width: none;
+    width: calc(100% - 50px);
+  }
+
+  .filterButton {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
+  
+  .companiesGrid > * {
+    flex: 1 1 100%; /* Fullt utrymme på mobil */
+    margin: 0.5rem 0;
+  }
+}

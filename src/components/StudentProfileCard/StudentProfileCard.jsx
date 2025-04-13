@@ -38,18 +38,18 @@ const StudentProfileCard = ({ student }) => {
   return (
     <article className={styles.studentCard}>
       <h2 className={styles.studentName}>{studentName}</h2>
-      
-      <div className={styles.cardContent}>
-        {/* <div className={styles.imageContainer}>
-          <Image 
+
+          <div className={styles.cardContent}>
+        <div className={styles.imageContainer}>
+          {/* <Image 
             src={profileImage}
             alt={`Profilbild av ${studentName}`}
             width={224}
             height={224}
             className={styles.profileImage}
             priority
-          />
-        </div> */}
+          /> */}
+        </div>
         
         <div className={styles.studentInfo}>
           <div className={styles.programBadge}>
