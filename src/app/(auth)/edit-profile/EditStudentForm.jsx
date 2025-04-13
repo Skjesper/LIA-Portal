@@ -387,7 +387,7 @@ export default function EditStudentForm({ user, profile }) {
             </legend>
                 <label htmlFor="webbutveckling" className={style.educationChoice}>
                 WEBBUTVECKLARE
-                <input
+                <Input
                 id="webbutveckling"
                 name="education_program"
                 type="radio"
@@ -400,7 +400,7 @@ export default function EditStudentForm({ user, profile }) {
                 </label>
                 <label htmlFor="digital-design" className={style.educationChoice}>
                     DIGITAL DESIGNER
-                    <input
+                    <Input
                     id="digital-design"
                     name="education_program"
                     type="radio"

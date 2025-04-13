@@ -3,6 +3,12 @@
 import { useState } from 'react';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useRouter } from 'next/navigation';
+import Button, { buttonStyles } from '@/components/ui/Button/Button';
+import Label, { labelStyles } from '@/components/ui/Label/Label';
+import Input, { inputStyles } from '@/components/ui/Input/Input';
+import Textarea, { textareaStyles } from '@/components/ui/Textarea/Textarea';
+import Image from 'next/image';
+import style from './EditCompanyForm.module.css';
 
 export default function EditCompanyForm({ user, profile }) {
   const router = useRouter();
@@ -10,13 +16,18 @@ export default function EditCompanyForm({ user, profile }) {
   
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
+  const [newCity, setNewCity] = useState('');
   const [formData, setFormData] = useState({
-    company_name: profile?.company_name || '',
-    industry: profile?.industry || '',
-    website: profile?.website || '',
-    location: profile?.location || '',
-    company_size: profile?.company_size || '',
-    description: profile?.description || ''
+    name: profile?.name || '',
+    city: profile?.city || [],
+    location_status: profile?.location_status || '',
+    accepts_digital_designer: profile?.accepts_digital_designer || false,
+    accepts_webb_developer: profile?.accepts_webb_developer || false,
+    linkedin_url: profile?.linkedin_url || '',
+    website_url: profile?.website_url || '',
+    contact: profile?.contact || '',
+    bio: profile?.bio || '',
+    fun_benefits: profile?.fun_benefits || [],
   });
   
   const handleChange = (e) => {
@@ -26,12 +37,56 @@ export default function EditCompanyForm({ user, profile }) {
       [name]: value
     }));
   };
-  
-  const handleImageUpload = (url) => {
+
+  const handleAddCity = () => {
+    if (!newCity.trim()) return;
+    
     setFormData(prev => ({
       ...prev,
-      logo_url: url
+      city: [...prev.city, newCity.trim()]
     }));
+    
+    setNewCity('');
+  };
+
+  const handleRemoveCity = async (cityToRemove) => {
+    setUploading(true);
+    setMessage('Raderar ort...');
+    
+    try {
+      // Get the current city array from database
+      const { data, error: fetchError } = await supabase
+        .from('company_profiles')
+        .select('city')
+        .eq('id', user.id)
+        /* .single(); */
+        
+      if (fetchError) throw fetchError;
+      
+      // Filter out the city to remove
+      const updatedCities = data.city.filter(city => city !== cityToRemove);
+      
+      // Update the database with the new array
+      const { error: updateError } = await supabase
+        .from('company_profiles')
+        .update({ city: updatedCities })
+        .eq('id', user.id);
+        
+      if (updateError) throw updateError;
+      
+      // Update local state
+      setFormData(prev => ({
+        ...prev,
+        city: updatedCities
+      }));
+      
+      setMessage('Ort borttagen');
+    } catch (error) {
+      console.error('Error removing ort:', error);
+      setMessage(`Error removing ort: ${error.message}`);
+    } finally {
+      setUploading(false);
+    }
   };
   
   const handleSubmit = async (e) => {
@@ -45,14 +100,16 @@ export default function EditCompanyForm({ user, profile }) {
       
       // Prepare the data to update/insert
       const profileData = {
-        user_id: user.id,
-        company_name: formData.company_name,
-        industry: formData.industry,
-        website: formData.website,
-        location: formData.location,
-        company_size: formData.company_size,
-        description: formData.description,
-        logo_url: formData.logo_url,
+        name: formData.name,
+        city: formData.city,
+        location_status: formData.location_status,
+        accepts_digital_designer: formData.accepts_digital_designer,
+        accepts_webb_developer: formData.accepts_webb_developer,
+        linkedin_url: formData.linkedin_url,
+        website_url: formData.website_url,
+        contact: formData.contact,
+        bio: formData.bio,
+        fun_benefits: formData.fun_benefits,
         updated_at: new Date().toISOString()
       };
       
@@ -66,7 +123,7 @@ export default function EditCompanyForm({ user, profile }) {
         result = await supabase
           .from('company_profiles')
           .update(profileData)
-          .eq('user_id', user.id);
+          .eq('id', user.id);
       }
       
       if (result.error) throw result.error;
@@ -93,54 +150,105 @@ export default function EditCompanyForm({ user, profile }) {
       <div className="">
 
         <div>
-          <label htmlFor="company_name" className="">
-            Company Name
+          <label htmlFor="name" className="">
+          *FÖRETAGSNAMN
           </label>
-          <input
+          <Input
             type="text"
-            id="company_name"
-            name="company_name"
-            value={formData.company_name}
+            id="name"
+            name="name"
+            value={formData.name}
             onChange={handleChange}
-            className=""
+            className={inputStyles.inputBlack}
             required
           />
         </div>
         
         <div className="">
-          <div>
-            <label htmlFor="industry" className="">
-              Industry
-            </label>
-            <input
-              type="text"
-              id="industry"
-              name="industry"
-              value={formData.industry}
-              onChange={handleChange}
-              className=""
+        <div>
+    <label htmlFor="newCity" className="">
+      *ORT
+    </label>
+      <Input
+        type="text"
+        id="newCity"
+        name="newCity"
+        value={newCity}
+        onChange={(e) => setNewCity(e.target.value)}
+        className={inputStyles.inputBlack}
+      />
+      <Button 
+        type="button"
+        onClick={handleAddCity}
+        className={buttonStyles.labelButton}
+      >
+        Lägg till
+      </Button>
+    
+      {formData.city && formData.city.length > 0 && (
+        formData.city.map((city, index) => (
+          <Button
+            key={index}
+            type="button"
+            className={buttonStyles.labelButton}
+            onClick={() => handleRemoveCity(city)}
+            style={{ margin: '0.5rem 0.5rem 0.5rem 0rem' }}
+          >
+            {city}
+            <Image
+              src="/icons/exit-white.svg"
+              alt="icon for removing"
+              width={10}
+              height={10}
+              style={{ marginLeft: '0.5rem' }}
             />
-          </div>
+          </Button>
+        ))
+      )}
+  </div>
           
-          <div>
-            <label htmlFor="company_size" className="">
-              Company Size
-            </label>
-            <select
-              id="company_size"
-              name="company_size"
-              value={formData.company_size}
-              onChange={handleChange}
-              className=""
-            >
-              <option value="">Select size</option>
-              <option value="1-10">1-10 employees</option>
-              <option value="11-50">11-50 employees</option>
-              <option value="51-200">51-200 employees</option>
-              <option value="201-500">201-500 employees</option>
-              <option value="501+">501+ employees</option>
-            </select>
-          </div>
+  <fieldset required className={style.locationStatusField}>
+            <legend className={style.label}>
+                *DISTANS
+            </legend>
+                <Label htmlFor="webbutveckling" className={style.locationStatusChoice}>
+                ON SITE
+                <Input
+                id="on_site"
+                name="location_status"
+                type="radio"
+                value="on site"
+                checked={formData.location_status === "On site"}
+                onChange={handleChange}
+                className={style.locationStatusCheckbox}
+                required
+                />
+                </Label>
+                <Label htmlFor="digital-design" className={style.locationStatusChoice}>
+                    HYBRID
+                    <Input
+                    id="Hybrid"
+                    name="location_status"
+                    type="radio"
+                    value="Hybrid"
+                    checked={formData.location_status === "Hybrid"}
+                    onChange={handleChange}
+                    className={style.locationStatusCheckbox}
+                    />
+                </Label>
+                <Label htmlFor="digital-design" className={style.locationStatusChoice}>
+                    REMOTE
+                    <Input
+                    id="Remote"
+                    name="location_status"
+                    type="radio"
+                    value="Remote"
+                    checked={formData.location_status === "Remote"}
+                    onChange={handleChange}
+                    className={style.locationStatusCheckbox}
+                    />
+                </Label>
+        </fieldset>
         </div>
         
         <div className="">

@@ -7,6 +7,7 @@ import Button, { buttonStyles } from '@/components/ui/Button/Button';
 import EditStudentForm from './EditStudentForm';
 import EditCompanyForm from './EditCompanyForm';
 import Image from 'next/image';
+import Section from '@/components/Sections/Sections';
 
 export default function EditProfilePage() {
   const [user, setUser] = useState(null);
