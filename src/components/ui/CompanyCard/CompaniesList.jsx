@@ -16,9 +16,16 @@ export default function CompaniesList() {
       try {
         const { data, error } = await supabase
           .from('company_profiles')
-          .select('id, name, bio');
+          .select('id, name, bio, accepts_digital_designer, accepts_webb_developer');
         
         if (error) throw error;
+        
+        // För felsökning - logga den första företagsposten
+        if (data.length > 0) {
+          console.log("Första företaget:", data[0]);
+          console.log("Digital Designer:", data[0].accepts_digital_designer, typeof data[0].accepts_digital_designer);
+          console.log("Webb Developer:", data[0].accepts_webb_developer, typeof data[0].accepts_webb_developer);
+        }
         
         setCompanies(data);
       } catch (err) {
@@ -41,7 +48,9 @@ export default function CompaniesList() {
         <CompanyCard 
           key={company.id} 
           title={company.name} 
-          text={company.bio} // Use bio from database instead of description
+          text={company.bio}
+          acceptsDigitalDesigner={company.accepts_digital_designer}
+          acceptsWebDeveloper={company.accepts_webb_developer}
         />
       ))}
     </div>

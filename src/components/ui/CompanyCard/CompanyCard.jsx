@@ -2,8 +2,20 @@ import React from 'react';
 import Image from 'next/image';
 import styles from '@/components/ui/CompanyCard/CompanyCard.module.css';
 import Button, { buttonStyles } from '@/components/ui/Button/Button';
+import Label, { labelStyles } from '../Label/Label';
 
-const CompanyCard = ({ title, text, className, ...props }) => {
+
+const CompanyCard = ({ 
+  title, 
+  text, 
+  className, 
+  acceptsDigitalDesigner,
+  acceptsWebDeveloper,
+  ...props 
+}) => {
+  // För felsökning
+  console.log("Digital Designer:", acceptsDigitalDesigner, typeof acceptsDigitalDesigner);
+  console.log("Web Developer:", acceptsWebDeveloper, typeof acceptsWebDeveloper);
   const companyCardClassName = className ? `${styles.companyCard} ${className}` : styles.companyCard;
 
   return (
@@ -20,7 +32,19 @@ const CompanyCard = ({ title, text, className, ...props }) => {
           />
         </div>
       </section>
-      <p className={styles.cardText}>{text}</p>
+      
+      {/* Display job types accepted by the company */}
+      <div className={styles.jobTypes}>
+        {(acceptsDigitalDesigner === true || acceptsDigitalDesigner === 'TRUE') && (
+          <Label className={labelStyles.unfilled}>Digital Designer</Label>
+          
+        )}
+        {(acceptsWebDeveloper === true || acceptsWebDeveloper === 'TRUE') && (
+          <Label className={labelStyles.unfilled}>Webbutvecklare</Label>
+        )}
+      </div>
+        <p className={styles.cardText}>{text}</p>
+      
       <Button className={buttonStyles.underlinedWhite} type="submit">Om företaget</Button>
     </div>
   );
