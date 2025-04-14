@@ -352,7 +352,12 @@ export default function EditStudentForm({ user, profile }) {
                     className=""
                     onClick={handleRemoveImage}
                 >
-                    {formData.profile_picture.split('/').pop()}
+                    <Image
+                    src="/icons/delete.svg"
+                    alt="Delete icon"
+                    width={15}
+                    height={15}
+                    />
                 </button>
             )}
         <fieldset className={style.nameField}>

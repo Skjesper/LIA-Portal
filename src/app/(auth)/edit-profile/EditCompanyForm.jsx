@@ -143,6 +143,102 @@ const handleRemoveCity = async (cityToRemove, index) => {
   }
 };
 
+// Function to add a city to both local state and Supabase immediately
+const handleAddFunBenefit = async () => {
+  if (!newFunBenefit.trim()) return;
+  
+  setLoading(true);
+  setMessage('Lägger till fördel...');
+  
+  try {
+    // First get current city array from database to ensure we have the latest
+    const { data, error: fetchError } = await supabase
+      .from('company_profiles')
+      .select('fun_benefits')
+      .eq('id', user.id)
+      .single();
+      
+    if (fetchError) throw fetchError;
+    
+    // Prepare the updated city array
+    const currentFunBenefits = Array.isArray(data?.fun_benefits) ? [...data.fun_benefits] : [];
+    const updatedFunBenefits = [...currentFunBenefits, newFunBenefit.trim()];
+    
+    // Update the database immediately
+    const { error: updateError } = await supabase
+      .from('company_profiles')
+      .update({ fun_benefits: updatedFunBenefits })
+      .eq('id', user.id);
+      
+    if (updateError) throw updateError;
+    
+    // Update local state to match database
+    setFormData(prev => ({
+      ...prev,
+      fun_benefits: updatedFunBenefits
+    }));
+    
+    // Clear the input field
+    setNewFunBenefit('');
+  } catch (error) {
+    console.error('Error adding benefit:', error);
+    setMessage(`Error adding benefit: ${error.message}`);
+  } finally {
+    setLoading(false);
+  }
+};
+
+// Function to remove a city from both local state and Supabase immediately
+const handleRemoveFunBenefit = async (benefitToRemove, index) => {
+  setLoading(true);
+  setMessage('Raderar fördel...');
+  
+  try {
+    // Get the current city array from database
+    const { data, error: fetchError } = await supabase
+      .from('company_profiles')
+      .select('fun_benefits')
+      .eq('id', user.id)
+      .single();
+      
+    if (fetchError) throw fetchError;
+    
+    // Prepare the updated city array
+    const currentFunBenefits = Array.isArray(data?.fun_benefits) ? [...data.fun_benefits] : [];
+    
+    // Remove the city at the specified index
+    let updatedFunBenefits;
+    if (index === 0) {
+      updatedFunBenefits = currentFunBenefits.length === 1 ? [] : currentFunBenefits.slice(1);
+    } else {
+      updatedFunBenefits = [
+        ...currentFunBenefits.slice(0, index),
+        ...currentFunBenefits.slice(index + 1)
+      ];
+    }
+    
+    // Update the database immediately
+    const { error: updateError } = await supabase
+      .from('company_profiles')
+      .update({ fun_benefits: updatedFunBenefits })
+      .eq('id', user.id);
+      
+    if (updateError) throw updateError;
+    
+    // Update local state to match database
+    setFormData(prev => ({
+      ...prev,
+      fun_benefits: updatedFunBenefits
+    }));
+
+  } catch (error) {
+    console.error('Error removing benefit:', error);
+    setMessage(`Error removing benefit: ${error.message}`);
+  } finally {
+    setLoading(false);
+  }
+};
+
   
 const handleSubmit = async (e) => {
   e.preventDefault();
@@ -221,8 +317,6 @@ const handleSubmit = async (e) => {
             required
           />
         </fieldset>
-        
-        <div className="">
     <label htmlFor="newCity" className={style.label}>
       *ORT
     </label>
@@ -241,7 +335,7 @@ const handleSubmit = async (e) => {
       >
         Lägg till
       </Button>
-    
+      
       {formData.city && formData.city.length > 0 && (
         formData.city.map((city, index) => (
           <Button
@@ -305,7 +399,6 @@ const handleSubmit = async (e) => {
                     />
                 </Label>
         </fieldset>
-        </div>
         <fieldset className={style.checkboxField}>
           <legend className={style.label}>
             *SÖKER
@@ -384,8 +477,8 @@ const handleSubmit = async (e) => {
             placeholder="Skriv en kort bio om ert företag, max 200 tecken"
           />
           </label>
-    {/*   <label htmlFor="fun_benefits" className="">
-      *FÖRDELAR PÅ VÅRT KONTOR
+      <label htmlFor="fun_benefits" className={style.label}>
+      FÖRDELAR PÅ VÅRT KONTOR
       </label>
         <Input
           type="text"
@@ -412,7 +505,7 @@ const handleSubmit = async (e) => {
               onClick={() => handleRemoveFunBenefit(fun_benefits, index)}
               style={{ margin: '0.5rem 0.5rem 0.5rem 0rem' }}
             >
-              {city}
+              {fun_benefits}
               <Image
                 src="/icons/exit-white.svg"
                 alt="icon for removing"
@@ -422,7 +515,7 @@ const handleSubmit = async (e) => {
               />
             </Button>
           ))
-        )} */}
+        )}
       
         <Button
           type="submit"
