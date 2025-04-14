@@ -64,10 +64,11 @@ const StudentProfileCard = ({ student }) => {
               </li>
             ))}
           </ul>
-          
+          <div className={styles.buttonWrapper}>
           <Link href={`/students/${student.id}`} className={styles.profileLink}>
             SE PROFIL
           </Link>
+          </div>
         </div>
       </div>
     </article>

@@ -11,8 +11,14 @@
     border-radius: 1rem;
     color: var(--background-MediumLight);
     /* margin-bottom: 1.5rem; */
-    max-width: 100%;
+    max-width: 30rem;
+    width: 100%;
+    min-height: 15rem;
     
+  }
+
+  .buttonWrapper {
+    margin-top: auto;
   }
 
   .companiesList {
@@ -144,6 +150,10 @@
       width: 22rem;
       height: 25rem;
     }
+
+    .cardText {
+      margin-top: 3rem;
+    }
   
     .flexCompaniesContainer {
       display: flex;
@@ -156,9 +166,12 @@
     .companyCardFlex {
       max-width: 29.5rem;
     }
-  
-    .companyCard {
-      justify-content: space-between;
+
+    .jobTypes {
+
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap
     }
 
     

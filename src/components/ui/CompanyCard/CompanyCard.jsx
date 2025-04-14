@@ -44,8 +44,9 @@ const CompanyCard = ({
         )}
       </div>
         <p className={styles.cardText}>{text}</p>
-      
+        <div className={styles.buttonWrapper}>
       <Button className={buttonStyles.underlinedWhite} type="submit">Om företaget</Button>
+      </div>
     </div>
   );
 };
