@@ -12,7 +12,7 @@ import styles from './Header.module.css';
 export default function Header() {
   const isMobile = useBreakpoint(1279); // Use 768px as breakpoint
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { isLoggedIn, userType } = useAuth();
+  const { isLoggedIn, userType, userProfile, signOut } = useAuth();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -27,6 +27,11 @@ export default function Header() {
     }
     
     return '/profile';
+  };
+
+  const handleSignOut = async () => {
+    await signOut();
+    onClose();
   };
 
   return (
@@ -101,11 +106,25 @@ export default function Header() {
             </section>
             <section className={styles.headerRight}>
               {isLoggedIn ? (
-                <Link href={getProfileLink()}>
-                  <Button className={buttonStyles.primaryBlack}>
-                    Min Profil
+                <ul>
+                  <li>
+                  <Link href={getProfileLink()}>
+                    <Button className={buttonStyles.underlinedBlack}
+                    style={{ width: '100%', textAlign: 'center', textDecoration: 'none' }}
+                    >
+                      Min Profil
+                    </Button>
+                  </Link>
+                </li>
+                <li>
+                  <Button 
+                    className={buttonStyles.filledBlack} 
+                    onClick={handleSignOut}
+                  >
+                    LOGGA UT
                   </Button>
-                </Link>
+                </li>
+                </ul>
               ) : (
                 <Link href="/login">
                   <Button className={buttonStyles.primaryBlack}>
