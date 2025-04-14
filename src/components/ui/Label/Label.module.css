@@ -6,6 +6,9 @@ align-items: center;
 gap: 0.5rem;
 border-radius: 1.5rem;
 white-space: nowrap;
+text-transform: uppercase;
+
+font-size: 0.875rem;
 }
 
 .unfilled {

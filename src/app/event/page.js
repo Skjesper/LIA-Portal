@@ -1,14 +1,16 @@
 // src/app/companies/page.js
+import CompanyProfileView from '@/components/Profile/Company/Company';
+import StudentProfileView from '@/components/Profile/Student/Student';
 import Link from 'next/link';
 
 export default function Companies() {
   return (
-    <div>
-      <h1>Event</h1>
-      <p>Här kommer information om LIA-eventet att visas.</p>
-      <Link href="/">
-        <button>Tillbaka till startsidan</button>
-      </Link>
-    </div>
+    // <StudentProfileView>
+
+    // </StudentProfileView>
+
+    <CompanyProfileView>
+      
+    </CompanyProfileView>
   );
 }

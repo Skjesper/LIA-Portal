@@ -66,8 +66,7 @@ const RSVPCard = ({ title, onSubmit }) => {
     <section className={styles.rsvpCardContainer}>
     <h2 className={styles.sectionTitle}><span>01/</span>Anmälan</h2>
       <p className={styles.sectionText}>
-        Lorem ipsum dolor sit amet si consectetur. Sagittis faucibus vita in faucibus nunc. 
-        Semper nun sodales malesuada. Non habitant.
+      Detta är ett unikt tillfälle att bygga relationer med studerande från Yrgo och för att hitta nya kompetenser till ert team. Anmäl ert företag idag för att hitta potentiella praktikanter och för att få delta på ett underbart event! 
       </p>
     
       <section className={styles.rsvpCard}>
