@@ -25,17 +25,19 @@
     width: 100%;
     margin-bottom: 1.8rem;
     height: 16rem; /* Ger utrymme för båda elementen */
-    transform: translateX(4rem);
+    transform: translateX(5rem);
   }
 
 .profileImg {
     position: absolute;
     left: 47%;
-    transform: translateX(-100%) rotate(172.178deg); /* Centrera från vänster + rotation */
+    transform: translateX(-110%) translateY(10%) rotate(-8deg);
+     /* Centrera från vänster + rotation */
     width: 12.5rem;
     height: 15.625rem;
     background-color: beige;
     border-radius: 0.875rem;
+    overflow: hidden;
     z-index: 1; /* Lägre z-index = bakom */
   }
 
@@ -64,6 +66,13 @@
 
 .profileKnowledge, .profileBio, .profileCv {
     max-width: 28rem;
+}
+
+.knowledgeList {
+    display: flex;
+    margin-top: 1rem;
+    gap: 0.4rem;
+    color: var(--Typography-Secondary);
 }
 
 .profileKnowledge {
@@ -104,13 +113,15 @@
     background-color: var(--Primary-Red);
     display: flex;
     flex-direction: column; /* Ändrat till column för bättre struktur */
-    width: 12.625rem;
-    height: 13.625rem;
-    padding: 1.5rem 1rem;
+    width: 13.3125rem;
+    height: 14.6875rem;
+    padding: 2rem 1.5rem;
     justify-content: space-between; /* För att sprida ut innehållet */
     align-items: flex-start; /* Vänsterjustera innehållet */
     gap: 0.5rem;
     border-radius: 0.75rem;
     z-index: 2; /* Högre z-index = framför */
-    left: -2rem; /* För att överlappa profilbilden */
+     
+    top: 2rem;/* För att överlappa profilbilden */
+    margin-top: auto;
   }

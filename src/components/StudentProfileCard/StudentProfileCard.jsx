@@ -69,7 +69,7 @@ const StudentProfileCard = ({ student }) => {
             ))}
           </ul>
           <div className={styles.buttonWrapper}>
-          <Link href={`/students/${student.id}`} className={styles.profileLink}>
+          <Link href={`/student/${student.id}`} className={styles.profileLink}>
             SE PROFIL
           </Link>
           </div>
