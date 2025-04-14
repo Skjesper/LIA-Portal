@@ -9,14 +9,14 @@ const CompanyProfileView = ({ company }) => {
   const {
     name,
     email,
-    location,
+    city,
     bio,
     perks,
     linkedin,
     website,
   } = company;
 
-  const cities = location?.split(',').map((city) => city.trim());
+
 
   return (
     <div className={styles.componentContainer}>
@@ -64,10 +64,10 @@ const CompanyProfileView = ({ company }) => {
             <p>{bio}</p>
           </section>
 
-          {cities && (
+          {city && (
             <section className={styles.profileCity}>
               <h3>Ort</h3>
-              {cities.map((city, index) => (
+              {city.map((city, index) => (
                 <h2 key={index}>{city}</h2>
               ))}
             </section>
