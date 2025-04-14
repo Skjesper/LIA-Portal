@@ -122,6 +122,12 @@
     justify-content: space-around;
   }
 
+  .sectionText {
+   
+    width: 40%;
+  
+  }
+
   .form {
     margin-bottom: 5.88rem;
   }

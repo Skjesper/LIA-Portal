@@ -46,12 +46,14 @@ export default function CompaniesList() {
     <div style={{ display: 'flex', gap: '15px', justifyContent: 'flex-end', width: '100%' }}>
       {companies.map((company) => (
         <CompanyCard 
-          key={company.id} 
-          title={company.name} 
-          text={company.bio}
-          acceptsDigitalDesigner={company.accepts_digital_designer}
-          acceptsWebDeveloper={company.accepts_webb_developer}
-        />
+        key={company.id}
+        id={company.id} 
+        title={company.name} 
+        text={company.bio}
+        acceptsDigitalDesigner={company.accepts_digital_designer}
+        acceptsWebDeveloper={company.accepts_webb_developer}
+      />
+      
       ))}
     </div>
   );

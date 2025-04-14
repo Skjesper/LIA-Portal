@@ -5,8 +5,11 @@ import Image from 'next/image';
 import styles from './Company.module.css';
 import Button, { buttonStyles } from '@/components/ui/Button/Button';
 import Label, { labelStyles } from '@/components/ui/Label/Label';
+import { useAuth } from '@/components/auth/AuthProvider';
 
 const CompanyProfileView = ({ company }) => {
+  const { isLoggedIn, userType, user } = useAuth();
+  
   const {
     name,
     email,
@@ -17,7 +20,8 @@ const CompanyProfileView = ({ company }) => {
     website,
   } = company;
 
-
+  // Check if the current user is the owner of this company profile
+  const isCompanyOwner = isLoggedIn && userType === 'company' && user?.id === company.id;
 
   return (
     <div className={styles.componentContainer}>
@@ -28,11 +32,14 @@ const CompanyProfileView = ({ company }) => {
       </div>
 
       <section className={styles.companyContainer}>
-        <div className={styles.editProfile}>
-          <Link href={`/profile/company/${company.id}/edit`}>
-            <Button className={buttonStyles.filledBlack}>Redigera Profil</Button>
-          </Link>
-        </div>
+        {/* Only show edit button if the user is the company owner */}
+        {isCompanyOwner && (
+          <div className={styles.editProfile}>
+            <Link href={`/profile/company/${company.id}/edit`}>
+              <Button className={buttonStyles.filledBlack}>Redigera Profil</Button>
+            </Link>
+          </div>
+        )}
 
         <section className={styles.cardContainer}>
           <section className={styles.profileHeader}>
