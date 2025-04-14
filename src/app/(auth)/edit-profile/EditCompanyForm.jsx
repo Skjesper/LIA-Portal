@@ -13,7 +13,6 @@ import style from './EditCompanyForm.module.css';
 export default function EditCompanyForm({ user, profile }) {
   const router = useRouter();
   const supabase = createClientComponentClient();
-  
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [message, setMessage] = useState('');
@@ -48,139 +47,158 @@ export default function EditCompanyForm({ user, profile }) {
     }));
   };
 
-  const handleAddCity = () => {
-    if (!newCity.trim()) return;
+  // Function to add a city to both local state and Supabase immediately
+const handleAddCity = async () => {
+  if (!newCity.trim()) return;
+  
+  setLoading(true);
+  setMessage('Lägger till ort...');
+  
+  try {
+    // First get current city array from database to ensure we have the latest
+    const { data, error: fetchError } = await supabase
+      .from('company_profiles')
+      .select('city')
+      .eq('id', user.id)
+      .single();
+      
+    if (fetchError) throw fetchError;
     
+    // Prepare the updated city array
+    const currentCities = Array.isArray(data?.city) ? [...data.city] : [];
+    const updatedCities = [...currentCities, newCity.trim()];
+    
+    // Update the database immediately
+    const { error: updateError } = await supabase
+      .from('company_profiles')
+      .update({ city: updatedCities })
+      .eq('id', user.id);
+      
+    if (updateError) throw updateError;
+    
+    // Update local state to match database
     setFormData(prev => ({
       ...prev,
-      city: [...prev.city, newCity.trim()]
+      city: updatedCities
     }));
     
+    // Clear the input field
     setNewCity('');
-  };
-  
+  } catch (error) {
+    console.error('Error adding city:', error);
+    setMessage(`Error adding city: ${error.message}`);
+  } finally {
+    setLoading(false);
+  }
+};
 
-  const handleRemoveCity = async (cityToRemove, index) => {
-    setUploading(true);
-    setMessage('Raderar ort...');
+// Function to remove a city from both local state and Supabase immediately
+const handleRemoveCity = async (cityToRemove, index) => {
+  setLoading(true);
+  setMessage('Raderar ort...');
+  
+  try {
+    // Get the current city array from database
+    const { data, error: fetchError } = await supabase
+      .from('company_profiles')
+      .select('city')
+      .eq('id', user.id)
+      .single();
+      
+    if (fetchError) throw fetchError;
     
-    try {
-      console.log(`Attempting to remove city at index ${index}: "${cityToRemove}"`);
+    // Prepare the updated city array
+    const currentCities = Array.isArray(data?.city) ? [...data.city] : [];
+    
+    // Remove the city at the specified index
+    let updatedCities;
+    if (index === 0) {
+      updatedCities = currentCities.length === 1 ? [] : currentCities.slice(1);
+    } else {
+      updatedCities = [
+        ...currentCities.slice(0, index),
+        ...currentCities.slice(index + 1)
+      ];
+    }
+    
+    // Update the database immediately
+    const { error: updateError } = await supabase
+      .from('company_profiles')
+      .update({ city: updatedCities })
+      .eq('id', user.id);
       
-      // Get the current city array from database
-      const { data, error: fetchError } = await supabase
+    if (updateError) throw updateError;
+    
+    // Update local state to match database
+    setFormData(prev => ({
+      ...prev,
+      city: updatedCities
+    }));
+
+  } catch (error) {
+    console.error('Error removing city:', error);
+    setMessage(`Error removing city: ${error.message}`);
+  } finally {
+    setLoading(false);
+  }
+};
+
+  
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+  setMessage('');
+  
+  try {
+    // Check if profile exists
+    const isNewProfile = !profile?.id;
+
+    // Making sure at least one of the education programs are selected
+    if (!formData.accepts_webb_developer && !formData.accepts_digital_designer) {
+      setError("Please select at least one education option");
+      return;
+    }
+    
+    // Prepare the data to update/insert
+    const profileData = {
+      name: formData.name,
+      city: formData.city,
+      location_status: formData.location_status,
+      accepts_digital_designer: formData.accepts_digital_designer,
+      accepts_webb_developer: formData.accepts_webb_developer,
+      linkedin_url: formData.linkedin_url,
+      website_url: formData.website_url,
+      contact: formData.contact,
+      bio: formData.bio,
+      fun_benefits: formData.fun_benefits,
+      updated_at: new Date().toISOString()
+    };
+    
+    // If it's a new profile, we need to insert; otherwise update
+    let result;
+    if (isNewProfile) {
+      result = await supabase
         .from('company_profiles')
-        .select('city')
-        .eq('id', user.id)
-        .single();
-        
-      if (fetchError) throw fetchError;
-      
-      // Safety check for the city array
-      const currentCities = Array.isArray(data?.city) ? [...data.city] : [];
-      console.log('Current cities from DB:', currentCities);
-      
-      // Create a new array by removing the element at the specified index
-      let updatedCities;
-      
-      if (index === 0) {
-        // Special handling for first element
-        console.log('Special handling for first element');
-        if (currentCities.length === 1) {
-          // If there's only one element, set to empty array
-          updatedCities = [];
-        } else {
-          // Otherwise remove just the first element
-          updatedCities = currentCities.slice(1);
-        }
-      } else {
-        // For other elements, use the normal approach
-        updatedCities = [
-          ...currentCities.slice(0, index),
-          ...currentCities.slice(index + 1)
-        ];
-      }
-      
-      console.log('Updated cities array after removal:', updatedCities);
-      
-      // Update the database with the new array
-      const { error: updateError } = await supabase
+        .insert([{ ...profileData, created_at: new Date().toISOString() }]);
+    } else {
+      result = await supabase
         .from('company_profiles')
-        .update({ city: updatedCities })
+        .update(profileData)
         .eq('id', user.id);
-        
-      if (updateError) throw updateError;
-      
-      // Update local state
-      setFormData(prev => ({
-        ...prev,
-        city: updatedCities
-      }));
-      
-      setMessage('Ort borttagen');
-    } catch (error) {
-      console.error('Error removing ort:', error);
-      setMessage(`Error removing ort: ${error.message}`);
-    } finally {
-      setUploading(false);
     }
-  };
-  
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setMessage('');
     
-    try {
-      // Check if profile exists
-      const isNewProfile = !profile?.id;
-
-      // Making sure at least one of the education programs are selected
-      if (!formData.accepts_webb_developer && !formData.accepts_digital_designer) {
-        setError("Please select at least one education option");
-        return;
-      }
-      
-      // Prepare the data to update/insert
-      const profileData = {
-        name: formData.name,
-        city: formData.city,
-        location_status: formData.location_status,
-        accepts_digital_designer: formData.accepts_digital_designer,
-        accepts_webb_developer: formData.accepts_webb_developer,
-        linkedin_url: formData.linkedin_url,
-        website_url: formData.website_url,
-        contact: formData.contact,
-        bio: formData.bio,
-        fun_benefits: formData.fun_benefits,
-        updated_at: new Date().toISOString()
-      };
-      
-      // If it's a new profile, we need to insert; otherwise update
-      let result;
-      if (isNewProfile) {
-        result = await supabase
-          .from('company_profiles')
-          .insert([{ ...profileData, created_at: new Date().toISOString() }]);
-      } else {
-        result = await supabase
-          .from('company_profiles')
-          .update(profileData)
-          .eq('id', user.id);
-      }
-      
-      if (result.error) throw result.error;
-      
-      setMessage('Company profile updated successfully!');
-      // Refresh the page or navigate to profile view after successful update
-      setTimeout(() => router.push('/profile'), 1500);
-    } catch (error) {
-      console.error('Error updating company profile:', error);
-      setMessage(`Error updating profile: ${error.message}`);
-    } finally {
-      setLoading(false);
-    }
-  };
+    if (result.error) throw result.error;
+    
+    setMessage('Company profile updated successfully!');
+    // Refresh the page or navigate to profile view after successful update
+    setTimeout(() => router.push('/profile'), 1500);
+  } catch (error) {
+    console.error('Error updating company profile:', error);
+    setMessage(`Error updating profile: ${error.message}`);
+  } finally {
+    setLoading(false);
+  }
+};
   
   return (
     <form onSubmit={handleSubmit} className={style.editCompanyForm}>
