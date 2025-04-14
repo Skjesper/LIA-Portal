@@ -1,6 +1,19 @@
+.editCompanyForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    max-width: 51.25rem;
+}
+
 .label {
     width: 100%;
     color: var(--Typography-Primary);
+}
+
+.nameField, .mailField {
+    width: 100%;
+    border: none;
 }
 
 .checkboxField {
@@ -24,4 +37,12 @@
 
 .checkbox {
     align-self: end;
+}
+
+.linkField {
+    display: flex;
+    align-items: flex-start;
+    align-self: stretch;
+    gap: 1rem;
+    border: none;
 }

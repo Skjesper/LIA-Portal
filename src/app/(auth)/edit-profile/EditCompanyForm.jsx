@@ -183,17 +183,14 @@ export default function EditCompanyForm({ user, profile }) {
   };
   
   return (
-    <form onSubmit={handleSubmit} className="">
+    <form onSubmit={handleSubmit} className={style.editCompanyForm}>
       {message && (
         <div className={`p-4 rounded ${message.includes('Error') ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`}>
           {message}
         </div>
       )}
-      
-      <div className="">
-
-        <fieldset>
-          <label htmlFor="name" className="">
+        <fieldset className={style.nameField}>
+          <label htmlFor="name" className={style.label}>
           *FÖRETAGSNAMN
           </label>
           <Input
@@ -208,7 +205,7 @@ export default function EditCompanyForm({ user, profile }) {
         </fieldset>
         
         <div className="">
-    <label htmlFor="newCity" className="">
+    <label htmlFor="newCity" className={style.label}>
       *ORT
     </label>
       <Input
@@ -319,9 +316,8 @@ export default function EditCompanyForm({ user, profile }) {
           </label>
       </fieldset>
       <fieldset className={style.linkField}>
-          <label htmlFor="linkedin_url" className="">
+          <label htmlFor="linkedin_url" className={style.label}>
           LINKEDIN
-          </label>
           <Input
             type="url"
             id="linkedin_url"
@@ -331,9 +327,9 @@ export default function EditCompanyForm({ user, profile }) {
             className={inputStyles.inputBlack}
             placeholder="Infoga länk till er Linkedin"
           />
-          <label htmlFor="website_url" className="">
-            HEMSIDA
           </label>
+          <label htmlFor="website_url" className={style.label}>
+            HEMSIDA
           <Input
             type="url"
             id="website_url"
@@ -343,9 +339,10 @@ export default function EditCompanyForm({ user, profile }) {
             className={inputStyles.inputBlack}
             placeholder="Infoga länk till er hemsida"
           />
+          </label>
         </fieldset>
-        <fieldset>
-          <label htmlFor="name" className="">
+        <fieldset className={style.mailField}>
+          <label htmlFor="name" className={style.label}>
           MAIL
           </label>
           <Input
@@ -357,9 +354,8 @@ export default function EditCompanyForm({ user, profile }) {
             className={inputStyles.inputBlack}
           />
         </fieldset>
-          <label htmlFor="bio" className="">
+          <label htmlFor="bio" className={style.label}>
             *OM FÖRETAGET
-          </label>
           <Textarea
             id="bio"
             name="bio"
@@ -369,7 +365,7 @@ export default function EditCompanyForm({ user, profile }) {
             className={textareaStyles.textareaBlack}
             placeholder="Skriv en kort bio om ert företag, max 200 tecken"
           />
-      </div>
+          </label>
     {/*   <label htmlFor="fun_benefits" className="">
       *FÖRDELAR PÅ VÅRT KONTOR
       </label>

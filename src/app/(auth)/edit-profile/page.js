@@ -7,7 +7,7 @@ import Button, { buttonStyles } from '@/components/ui/Button/Button';
 import EditStudentForm from './EditStudentForm';
 import EditCompanyForm from './EditCompanyForm';
 import Image from 'next/image';
-import Section from '@/components/Sections/Sections';
+import Section, { sectionStyles } from '@/components/Sections/Sections';
 
 export default function EditProfilePage() {
   const [user, setUser] = useState(null);
@@ -128,12 +128,20 @@ const handleDeleteAccount = async () => {
 };
 
   return (
-    <div className="">
+    <div className="" 
+    style={{
+      backgroundColor:"var(--background-MediumLight)", 
+      display:"flex", 
+      flexDirection:"column", 
+      alignItems:"flex-start"
+      }}>
       <Button
         type="button"
         onClick={() => router.back()}
         className={buttonStyles.underlinedBlack}
-        style={{ margin: '0 0 0 2rem' }} 
+        style={{ 
+          margin: '1.5rem 0 1.5rem 2rem'
+        }} 
       >
         <Image
           src="/icons/arrow-left-black.svg"
@@ -145,8 +153,17 @@ const handleDeleteAccount = async () => {
       </Button>
       
       <h1 
-      style={{ margin: '1.5rem 0 0.5rem 2rem', color: 'var(--Primary-Red)', fontStyle: 'italic' }} 
+      style={{ 
+        color: 'var(--Primary-Red)', 
+        alignSelf:"center", 
+        fontSize: "2rem",
+        fontStyle: "italic",
+        fontWeight: "530",
+        lineHeight: "2rem",
+        letterSpacing: "-0.06rem",
+      }} 
       > REDIGERA PROFIL</h1>
+      <Section className={sectionStyles.sectionInvertedColors}>
       {profile?.type === 'student' ? (
         <EditStudentForm user={user} profile={profile.data} />
       ) : profile?.type === 'company' ? (
@@ -154,12 +171,16 @@ const handleDeleteAccount = async () => {
       ) : (
         <div>Unknown profile type. Please contact support.</div>
       )}
+      </Section>
       <Button
         type="button"
         onClick={handleDeleteAccount}
         disabled={loading}
         className={buttonStyles.underlinedBlack}
-        style={{margin: '1.5rem 0 2rem 0' }}
+        style={{
+          margin: '1.5rem 0 2rem 0',
+          alignSelf:"center" 
+        }}
       >
         <Image
           src="/icons/delete.svg"
