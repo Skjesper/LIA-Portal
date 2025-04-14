@@ -5,7 +5,19 @@ import Image from 'next/image';
 import styles from './Company.module.css';
 import Button, { buttonStyles } from '@/components/ui/Button/Button';
 
-const CompanyProfileView = () => {
+const CompanyProfileView = ({ company }) => {
+  const {
+    name,
+    email,
+    location,
+    bio,
+    perks,
+    linkedin,
+    website,
+  } = company;
+
+  const cities = location?.split(',').map((city) => city.trim());
+
   return (
     <div className={styles.componentContainer}>
       <div className={styles.returnButton}>
@@ -13,85 +25,61 @@ const CompanyProfileView = () => {
           <Button className={buttonStyles.underlinedBlack}>Tillbaka</Button>
         </Link>
       </div>
+
       <section className={styles.companyContainer}>
-        {/* Redigera profil knapp */}
         <div className={styles.editProfile}>
-          <Link href="/profile/student/123/edit">
+          <Link href={`/profile/company/${company.id}/edit`}>
             <Button className={buttonStyles.filledBlack}>Redigera Profil</Button>
           </Link>
         </div>
 
         <section className={styles.cardContainer}>
-           
+          <section className={styles.profileHeader}>
+            <h2>{name}</h2>
 
-            <section className={styles.profileHeader}>
-            <h2>Företagnamn</h2>
-            
             <section className={styles.linksContainer}>
-              <div className={styles.links}>
-                <Image 
-                  src="/logos/LinkedinLogo.svg" 
-                  alt="LinkedIn ikon" 
-                  width={24} 
-                  height={24} 
-                />
-                <span>LINKEDIN</span>
-              </div>
-              <div className={styles.links}>
-                <Image 
-                  src="/logos/Desktop.svg" 
-                  alt="LinkedIn ikon" 
-                  width={24} 
-                  height={24} 
-                />
-                <span>HEMSIDA</span>
-              </div>
-            
-              <div className={styles.links}>
-                <Image 
-                  src="/logos/mail.svg" 
-                  alt="Portfolio ikon" 
-                  width={24} 
-                  height={24} 
-                />
-                <span>MAIL</span>
-              </div>
+              {linkedin && (
+                <div className={styles.links}>
+                  <Image src="/logos/LinkedinLogo.svg" alt="LinkedIn ikon" width={24} height={24} />
+                  <a href={linkedin} target="_blank" rel="noopener noreferrer">LINKEDIN</a>
+                </div>
+              )}
+              {website && (
+                <div className={styles.links}>
+                  <Image src="/logos/Desktop.svg" alt="Webbplats ikon" width={24} height={24} />
+                  <a href={website} target="_blank" rel="noopener noreferrer">HEMSIDA</a>
+                </div>
+              )}
+              {email && (
+                <div className={styles.links}>
+                  <Image src="/logos/mail.svg" alt="Mail ikon" width={24} height={24} />
+                  <a href={`mailto:${email}`}>MAIL</a>
+                </div>
+              )}
             </section>
+          </section>
 
-            </section>
-            <section className={styles.profileBio}>
+          <section className={styles.profileBio}>
             <h2>Om företaget</h2>
-            <p>
-                texttext text text texttext text text texttext text text texttext 
-                text text texttext text text texttext text text texttext text text 
-                texttext text text
-            </p>
-            </section>
+            <p>{bio}</p>
+          </section>
 
+          {cities && (
             <section className={styles.profileCity}>
-            <h3>Ort</h3>
-            <h2>Göteborg</h2>
-            <h2>Stockholm</h2>
+              <h3>Ort</h3>
+              {cities.map((city, index) => (
+                <h2 key={index}>{city}</h2>
+              ))}
             </section>
+          )}
 
-            <section className={styles.profilePerks}>
+          <section className={styles.profilePerks}>
             <h2>Roliga förmåner</h2>
-            <p>
-                texttext text text texttext text text texttext text text texttext 
-                text text texttext text text texttext text text texttext text text 
-                texttext text text
-            </p>
-            </section>
-          
+            <p>{perks}</p>
+          </section>
         </section>
-
-       
-
-        
-    
       </section>
-      </div>
-    
+    </div>
   );
 };
 
