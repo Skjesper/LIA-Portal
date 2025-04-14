@@ -118,7 +118,7 @@ export default function Header() {
                 </li>
                 <li>
                   <Button 
-                    className={buttonStyles.filledBlack} 
+                    className={buttonStyles.filledRed} 
                     onClick={handleSignOut}
                   >
                     LOGGA UT
@@ -127,7 +127,7 @@ export default function Header() {
                 </ul>
               ) : (
                 <Link href="/login">
-                  <Button className={buttonStyles.primaryBlack}>
+                  <Button className={buttonStyles.filledRed}>
                     Logga in
                   </Button>
                 </Link>

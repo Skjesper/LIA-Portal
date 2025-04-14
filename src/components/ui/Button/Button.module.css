@@ -70,12 +70,20 @@
     background-color: var(--Greyscale-10);
 }
 
-.filledBlack{
+.filledBlack {
     background-color: var(--Button-Primary);
 }
 
 .filledBlack:active {
     background-color: var(--Greyscale-70);
+}
+
+.filledRed {
+    background-color: var(--Primary-Red);
+}
+
+.filledRed:active {
+    background-color: var(--Primary-Red);
 }
 
 .unfilledBlack {
@@ -156,7 +164,7 @@ gap: 1.5rem;
 border-radius: 2.5rem;
 background: var(--Button-Primary, #121212);
 font-size: 0.8rem;
-  }
+}
 
 
 /* Label buttons */
