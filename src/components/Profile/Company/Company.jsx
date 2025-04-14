@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import styles from './Company.module.css';
 import Button, { buttonStyles } from '@/components/ui/Button/Button';
+import Label, { labelStyles } from '@/components/ui/Label/Label';
 
 const CompanyProfileView = ({ company }) => {
   const {
@@ -11,7 +12,7 @@ const CompanyProfileView = ({ company }) => {
     email,
     city,
     bio,
-    perks,
+    fun_benefits,
     linkedin,
     website,
   } = company;
@@ -75,7 +76,15 @@ const CompanyProfileView = ({ company }) => {
 
           <section className={styles.profilePerks}>
             <h2>Roliga förmåner</h2>
-            <p>{perks}</p>
+            {fun_benefits && fun_benefits.length > 0 ? (
+                <div className={styles.benefitsList}>
+                {fun_benefits.map((benefit, index) => (
+                    <Label className={labelStyles.filled} key={index}>{benefit}</Label>
+                ))}
+                </div>
+            ) : (
+                <p>Inga förmåner angivna</p>
+            )}
           </section>
         </section>
       </section>
