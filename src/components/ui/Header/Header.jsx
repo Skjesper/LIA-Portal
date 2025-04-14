@@ -8,15 +8,20 @@ import useBreakpoint from '@/app/hooks/useBreakpoint';
 import Button, { buttonStyles } from '@/components/ui/Button/Button';
 import MobileDropdown from '@/components/ui/MobileDropdown/MobileDropdown';
 import styles from './Header.module.css';
+import SignInModal from '@/components/auth/SignInModal';
 
 export default function Header() {
   const isMobile = useBreakpoint(1279); // Use 768px as breakpoint
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
   const { isLoggedIn, userType, userProfile, signOut } = useAuth();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  const openSignInModal = () => setIsSignInModalOpen(true);
+  const closeSignInModal = () => setIsSignInModalOpen(false);
 
   // Get the appropriate profile link based on user type
   const getProfileLink = () => {
@@ -126,11 +131,13 @@ export default function Header() {
                 </li>
                 </ul>
               ) : (
-                <Link href="/login">
-                  <Button className={buttonStyles.filledRed}>
+                  <Button 
+                  type="button" 
+                  className={buttonStyles.filledRed}
+                    onClick={openSignInModal}
+                  >
                     Logga in
                   </Button>
-                </Link>
               )}
             </section>
           </>
@@ -139,6 +146,8 @@ export default function Header() {
 
       {/* Mobile dropdown */}
       <MobileDropdown isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+      {/* Sign-in and sign-up pop-up */}
+      <SignInModal isOpen={isSignInModalOpen} onClose={() => setIsSignInModalOpen(false)} />
     </>
   );
 }

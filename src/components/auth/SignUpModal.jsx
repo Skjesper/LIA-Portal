@@ -2,9 +2,14 @@
 import React, { useState } from 'react';
 import StudentSignUpForm from './StudentSignUpForm';
 import CompanySignUpForm from './CompanySignUpForm';
+import Button, { buttonStyles } from '@/components/ui/Button/Button';
+import Input, { inputStyles } from '@/components/ui/Input/Input';
+import Image from 'next/image';
+import style from './SignUpModal.module.css';
 
 export default function SignUpModal({ isOpen, onClose, parentClose }) {
   const [activeTab, setActiveTab] = useState('student');
+  const [showSignIn, setShowSignIn] = useState(false);
 
   if (!isOpen) return null;
 
@@ -21,12 +26,34 @@ export default function SignUpModal({ isOpen, onClose, parentClose }) {
 
   return (
     <div className="modalOverlay">
-      <div className="modalContainer">
-        <button className="backButton" onClick={handleBack}>
-          TILLBAKA
-        </button>
+      <div className={style.modalContainer}>
+        <div className={style.modalNavbar}>
+            <button 
+              onClick={handleBack}
+              className={style.logInNav}
+            >
+              LOGGA IN
+            </button>
+            <button 
+              /* onClick={openSignUp} */
+              className={style.signInNav}
+            >
+              SKAPA KONTO
+            </button>
+        </div>
+        <Button className={buttonStyles.underlinedWhite} /* onClick={onClose} */ style={{alignSelf: "flex-end", marginRight: "1.5rem"}}>
+          STÄNG
+          <Image
+            src="/icons/exit-white.svg"
+            alt="icon for exiting"
+            width={10}
+            height={10}
+            style={{ marginLeft: '0.5rem' }}
+          />
+        </Button>
         
-        <h2 className="modalTitle">SKAPA KONTO</h2>
+        <h3 className={style.formTitle}>SKAPA KONTO</h3>
+        <p className={style.formText}>Välj om du är studerande eller från ett företag för att skapa ett konto</p>
         
         {/* Folder tabs for switching between student and company */}
         <div className="tabsContainer">

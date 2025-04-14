@@ -316,10 +316,10 @@ export default function EditStudentForm({ user, profile }) {
       )}
         <fieldset className={style.profilePicture}>
         {formData.profile_picture && (
-                <button 
+                <Button 
                     type="button" 
                     className={style.deletePictureButton}
-                    onClick={handleRemoveImage}
+                    onClick={handleRemoveImage} 
                 >
                     <Image
                     src="/icons/delete_white.svg"
@@ -327,7 +327,7 @@ export default function EditStudentForm({ user, profile }) {
                     width={15}
                     height={15}
                     />
-                </button>
+                </Button>
             )}
             <Button 
             type="button" 
