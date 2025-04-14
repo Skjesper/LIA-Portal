@@ -89,7 +89,8 @@ export default function MobileDropdown({ isOpen, onClose }) {
             </Link>
           </li>
           <li>
-            <Link href="/event" onClick={onClose} className={styles.menuLink}>
+          
+            <Link href="#event" scroll ={true} onClick={onClose} className={styles.menuLink}>
               EVENT
             </Link>
           </li>

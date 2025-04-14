@@ -8,7 +8,7 @@
     align-self: stretch;
     border-radius: 1rem;
     margin-bottom: 1.5rem;
-    max-width: 31rem;
+    max-width: 33rem;
     box-sizing: border-box;
     /* Standardfärger (designer-varianten) */
     background-color: var(--Primary-Red, #e63946);
