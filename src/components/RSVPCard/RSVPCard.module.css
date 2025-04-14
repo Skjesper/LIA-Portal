@@ -15,6 +15,7 @@
   align-self: stretch;
   border-radius: var(--border-radius);
   width: 100%;
+ 
 }
 
 .titleWrapper {
@@ -28,10 +29,13 @@
   
   color: var(--Typography-Primary, #121212);
   text-transform: uppercase;
+  margin-bottom: 1rem;
 }
 
 .sectionText {
   color: var(--Typography-Primary);
+  width: 70%;
+  margin-bottom: 1rem;
 }
 
 .title {
