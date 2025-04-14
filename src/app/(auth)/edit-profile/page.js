@@ -178,7 +178,7 @@ const handleDeleteAccount = async () => {
         disabled={loading}
         className={buttonStyles.underlinedBlack}
         style={{
-          margin: '1.5rem 0 2rem 0',
+          margin: '0 0 2rem 0',
           alignSelf:"center" 
         }}
       >
