@@ -18,6 +18,7 @@ export default function EditCompanyForm({ user, profile }) {
   const [uploading, setUploading] = useState(false);
   const [message, setMessage] = useState('');
   const [newCity, setNewCity] = useState('');
+  const [newFunBenefit, setNewFunBenefit] = useState('');
   const [formData, setFormData] = useState({
     name: profile?.name || '',
     city: profile?.city || [],
@@ -207,7 +208,6 @@ export default function EditCompanyForm({ user, profile }) {
         </fieldset>
         
         <div className="">
-        <div>
     <label htmlFor="newCity" className="">
       *ORT
     </label>
@@ -247,7 +247,6 @@ export default function EditCompanyForm({ user, profile }) {
           </Button>
         ))
       )}
-  </div>
           
   <fieldset required className={style.checkboxField}>
             <legend className={style.label}>
@@ -358,8 +357,6 @@ export default function EditCompanyForm({ user, profile }) {
             className={inputStyles.inputBlack}
           />
         </fieldset>
-        
-        <div>
           <label htmlFor="bio" className="">
             *OM FÖRETAGET
           </label>
@@ -372,8 +369,46 @@ export default function EditCompanyForm({ user, profile }) {
             className={textareaStyles.textareaBlack}
             placeholder="Skriv en kort bio om ert företag, max 200 tecken"
           />
-        </div>
       </div>
+    {/*   <label htmlFor="fun_benefits" className="">
+      *FÖRDELAR PÅ VÅRT KONTOR
+      </label>
+        <Input
+          type="text"
+          id="fun_benefits"
+          name="fun_benefits"
+          value={newFunBenefit}
+          onChange={(e) => setNewFunBenefit(e.target.value)}
+          className={inputStyles.inputBlack}
+        />
+        <Button 
+          type="button"
+          onClick={handleAddFunBenefit}
+          className={buttonStyles.labelButton}
+        >
+          Lägg till
+        </Button>
+      
+        {formData.fun_benefits && formData.fun_benefits.length > 0 && (
+          formData.fun_benefits.map((fun_benefits, index) => (
+            <Button
+              key={index}
+              type="button"
+              className={buttonStyles.labelButton}
+              onClick={() => handleRemoveFunBenefit(fun_benefits, index)}
+              style={{ margin: '0.5rem 0.5rem 0.5rem 0rem' }}
+            >
+              {city}
+              <Image
+                src="/icons/exit-white.svg"
+                alt="icon for removing"
+                width={10}
+                height={10}
+                style={{ marginLeft: '0.5rem' }}
+              />
+            </Button>
+          ))
+        )} */}
       
         <Button
           type="submit"
