@@ -5,13 +5,7 @@ import FilterComponent from '@/components/filter/FilterComponent';
 import styles from '@/components/filter/FilterPopup.module.css';
 
 /**
- * A popup component that displays the filtering interface when a button is clicked
- * @param {Object} props 
- * @param {string} props.targetTable - The name of the main table to filter results from
- * @param {Function} props.onFiltersApplied - Callback with filtered data and filter state
- * @param {string} props.buttonText - Text to display on the toggle button
- * @param {React.ReactNode} props.buttonIcon - Optional icon to show on the button
- * @param {string} props.buttonClassName - Optional custom class for the button
+ * A simplified popup component that displays the filtering interface
  */
 const FilterPopup = ({
   targetTable = 'student_profiles',
@@ -21,6 +15,10 @@ const FilterPopup = ({
   buttonClassName = ''
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [hasFilters, setHasFilters] = useState(false);
+  const [savedData, setSavedData] = useState([]);
+  const [savedFilters, setSavedFilters] = useState({});
+  const [initialLoadDone, setInitialLoadDone] = useState(false);
   const popupRef = useRef(null);
   const buttonRef = useRef(null);
   
@@ -72,30 +70,44 @@ const FilterPopup = ({
     };
   }, [isOpen]);
   
-  // Handle filters applied and close popup
+  // Handle filters applied and save data/filters
   const handleFiltersApplied = (data, filters) => {
+    const hasActiveFilters = filters && Object.keys(filters).length > 0;
+    setHasFilters(hasActiveFilters);
+    
+    // Save data and filters
+    setSavedData(data || []);
+    setSavedFilters(filters || {});
+    
+    // Mark initial load as done
+    if (!initialLoadDone) {
+      setInitialLoadDone(true);
+    }
+    
+    // Pass data up to parent
     if (onFiltersApplied) {
       onFiltersApplied(data, filters);
     }
-    
-    // Option: Auto-close after applying filters
-    // setIsOpen(false);
   };
 
   return (
     <div className={styles.filterPopupContainer}>
       <button 
         ref={buttonRef}
-        className={`${styles.filterButton} ${buttonClassName}`}
+        className={`${styles.filterButton} ${buttonClassName} ${hasFilters ? styles.hasFilters : ''}`}
         onClick={togglePopup}
         aria-expanded={isOpen}
         aria-haspopup="dialog"
+        type="button"
       >
         {buttonIcon && <span className={styles.buttonIcon}>{buttonIcon}</span>}
         {buttonText}
+        {hasFilters && (
+          <span className={styles.filterBadge} />
+        )}
       </button>
       
-      {isOpen && (
+      {isOpen ? (
         <>
           <div className={styles.overlay} aria-hidden="true" />
           <div 
@@ -111,6 +123,7 @@ const FilterPopup = ({
                 className={styles.closeButton}
                 onClick={() => setIsOpen(false)}
                 aria-label="Stäng filtreringsfönster"
+                type="button"
               >
                 ×
               </button>
@@ -119,11 +132,23 @@ const FilterPopup = ({
             <div className={styles.popupBody}>
               <FilterComponent 
                 targetTable={targetTable} 
-                onFiltersApplied={handleFiltersApplied} 
+                onFiltersApplied={handleFiltersApplied}
+                initialData={initialLoadDone ? savedData : undefined}
+                initialFilters={initialLoadDone ? savedFilters : undefined}
               />
             </div>
           </div>
         </>
+      ) : (
+        // När popupen är stängd, hämta endast initial data om det inte redan gjorts
+        !initialLoadDone && (
+          <div style={{ display: 'none', position: 'absolute', visibility: 'hidden' }}>
+            <FilterComponent 
+              targetTable={targetTable}
+              onFiltersApplied={handleFiltersApplied}
+            />
+          </div>
+        )
       )}
     </div>
   );

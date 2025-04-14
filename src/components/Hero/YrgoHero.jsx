@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import styles from '@/components/Hero/YrgoHero.module.css';
 import '@/components/styles/colors.css';
 import Button, { buttonStyles } from '@/components/ui/Button/Button';
@@ -25,7 +26,10 @@ const YrgoHero = () => {
             Webbutvecklare och Digital Designers på Yrgo
             </p>
         </section>
-        <Button className={buttonStyles.underlinedBlack}>Anmäl dig</Button>
+        
+
+        <Link href="#event" scroll={true}><Button className={buttonStyles.underlinedBlack}>Anmäl dig</Button>
+        </Link>
     </section>
         <section className={styles.heroImage}>
 

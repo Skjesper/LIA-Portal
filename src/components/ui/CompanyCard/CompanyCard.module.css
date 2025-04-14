@@ -5,14 +5,20 @@
     padding: 1.875rem 1.5rem;
     flex-direction: column;
     align-items: flex-start;
-    gap: 2.5rem;
+    gap: 1.5rem;
     align-self: stretch;
     background-color: var(--Background-Dark);
     border-radius: 1rem;
     color: var(--background-MediumLight);
     /* margin-bottom: 1.5rem; */
-    max-width: 100%;
-    box-sizing: border-box; /* Viktigt: inkludera padding i bredden */
+    max-width: 30rem;
+    width: 100%;
+    min-height: 15rem;
+    
+  }
+
+  .buttonWrapper {
+    margin-top: auto;
   }
 
   .companiesList {
@@ -63,7 +69,17 @@
     gap: 1rem;
     width: 100%; /* Begränsa till föräldrabredden */
     box-sizing: border-box;
+    
   }
+
+  .companyCardFlex {
+
+    display: flex;
+    width: 100%;
+
+  }
+
+
   
   /* Mobil/H3/Regular */
   .title {
@@ -131,8 +147,12 @@
     }
   
     .companyCard {
-      width: 25.5rem;
-      height: 30rem;
+      width: 22rem;
+      height: 25rem;
+    }
+
+    .cardText {
+      margin-top: 3rem;
     }
   
     .flexCompaniesContainer {
@@ -140,14 +160,19 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 2rem;
-      width: 100%; /* Ta bort 100vw här som orsakar sidoscroll */
+      width: 100%; 
     }
   
     .companyCardFlex {
       max-width: 29.5rem;
     }
-  
-    .companyCard {
-      justify-content: space-between;
+
+    .jobTypes {
+
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap
     }
+
+    
   }

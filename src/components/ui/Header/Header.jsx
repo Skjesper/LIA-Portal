@@ -10,7 +10,7 @@ import MobileDropdown from '@/components/ui/MobileDropdown/MobileDropdown';
 import styles from './Header.module.css';
 
 export default function Header() {
-  const isMobile = useBreakpoint(768); // Use 768px as breakpoint
+  const isMobile = useBreakpoint(1279); // Use 768px as breakpoint
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isLoggedIn, userType } = useAuth();
 
@@ -21,7 +21,7 @@ export default function Header() {
   // Get the appropriate profile link based on user type
   const getProfileLink = () => {
     if (userType === 'student') {
-      return '/student/profile';
+      return '/edit-profile';
     } else if (userType === 'company') {
       return '/company/profile';
     }
@@ -66,14 +66,15 @@ export default function Header() {
               <nav className={styles.desktopNavbar} aria-label="Main Navigation">
                 <ul>
                   <li>
-                    <Link href="/event">
-                      <Button 
-                        className={buttonStyles.underlinedBlack}
-                        style={{ width: '100%', textAlign: 'center', textDecoration: 'none' }}
-                      >
-                        event
-                      </Button>
+                    <Link href="#event" scroll={true}>
+                        <Button 
+                          className={buttonStyles.underlinedBlack}
+                          style={{ width: '100%', textAlign: 'center', textDecoration: 'none' }}
+                        >
+                          event
+                        </Button>
                     </Link>
+                   
                   </li>
                   <li>
                     <Link href="/companies">

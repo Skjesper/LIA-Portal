@@ -24,15 +24,13 @@ const StudentCardSection = () => {
         <section className={styles.studentCardContainer}>
         <StudentCard 
         title="DIGITAL DESIGNERS"
-        count="25 ST."
         variant="student"
         
       />
 
       <StudentCard 
-        title="WEBBUTVECKLARE"
-        count="25 ST."
-        variant="webDev"
+       title="WEBBUTVECKLARE"
+      variant="webDev"
         
       />
       </section>

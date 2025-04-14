@@ -1,5 +1,5 @@
 'use client';
-
+import Label, {labelStyles} from '@/components/ui/Label/Label';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from '@/components/StudentProfileCard/StudentProfileCard.module.css';
@@ -37,24 +37,29 @@ const StudentProfileCard = ({ student }) => {
 
   return (
     <article className={styles.studentCard}>
-      <h2 className={styles.studentName}>{studentName}</h2>
-      
-      <div className={styles.cardContent}>
-        {/* <div className={styles.imageContainer}>
-          <Image 
+      <h2 className={styles.studentName}>
+        <span>{student.first_name}</span>
+        <span><br />{student.last_name}</span>
+      </h2>
+
+
+          <div className={styles.cardContent}>
+        <div className={styles.imageContainer}>
+          {/* <Image 
             src={profileImage}
             alt={`Profilbild av ${studentName}`}
             width={224}
             height={224}
             className={styles.profileImage}
             priority
-          />
-        </div> */}
+          /> */}
+        </div>
         
         <div className={styles.studentInfo}>
-          <div className={styles.programBadge}>
-            {getProgramDisplay(student.education_program)}
-          </div>
+  <Label className={labelStyles.unfilled}>
+    {getProgramDisplay(student.education_program)}
+  </Label>
+
           
           <ul className={styles.skillsList}>
             {student.knowledge && student.knowledge.map((skill) => (
@@ -63,10 +68,11 @@ const StudentProfileCard = ({ student }) => {
               </li>
             ))}
           </ul>
-          
+          <div className={styles.buttonWrapper}>
           <Link href={`/students/${student.id}`} className={styles.profileLink}>
             SE PROFIL
           </Link>
+          </div>
         </div>
       </div>
     </article>

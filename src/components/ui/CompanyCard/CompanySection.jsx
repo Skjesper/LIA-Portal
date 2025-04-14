@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import Button, { buttonStyles } from '@/components/ui/Button/Button';
 import RandomCompanies from '@/components/ui/CompanyCard/RandomCompanies';
 import styles from '@/components/ui/CompanyCard/CompanyCard.module.css';
@@ -19,7 +20,9 @@ const CompanySection = () => {
             Lorem ipsum dolor sit amet si consectetur. Sagittis faucibus vita in faucibus nunc. 
             Semper nun sodales malesuada. Non habitant.
         </p>
+        <Link href="/companies">
         <Button className={buttonStyles.underlinedBlack}>Se alla företag</Button>
+        </Link>
         </div>
         </div>
         <div className={styles.flexCompaniesContainer}>

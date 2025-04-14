@@ -16,10 +16,8 @@ export default function Home() {
   return (
     <main>
       <YrgoHero/>
-      <Section>
-       
-          <RSVPCard />
-        
+      <Section id="event">
+        <RSVPCard />
       </Section>
       <Section>
     
