@@ -37,7 +37,11 @@ const StudentProfileCard = ({ student }) => {
 
   return (
     <article className={styles.studentCard}>
-      <h2 className={styles.studentName}>{studentName}</h2>
+      <h2 className={styles.studentName}>
+        <span>{student.first_name}</span>
+        <span><br />{student.last_name}</span>
+      </h2>
+
 
           <div className={styles.cardContent}>
         <div className={styles.imageContainer}>

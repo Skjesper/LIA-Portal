@@ -112,18 +112,17 @@
 
 /* Responsive adjustments */
 @media (min-width: 768px) {
-  .cardContent {
+  /* .cardContent {
     flex-direction: row;
     align-items: flex-start;
-  }
+  } */
   
   .imageContainer {
-    width: 10.125rem;
-    height: 12.625rem;
+    /* width: 10.125rem;
+    height: 12.625rem; */
+    max-width: 50%;
     flex-shrink: 0;
   }
   
-  .studentInfo {
-    flex-grow: 1;
-  }
+ 
 }
