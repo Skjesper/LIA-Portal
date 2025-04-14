@@ -352,7 +352,12 @@ export default function EditStudentForm({ user, profile }) {
                     className=""
                     onClick={handleRemoveImage}
                 >
-                    {formData.profile_picture.split('/').pop()}
+                    <Image
+                    src="/icons/delete.svg"
+                    alt="Delete icon"
+                    width={15}
+                    height={15}
+                    />
                 </button>
             )}
         <fieldset className={style.nameField}>
@@ -387,7 +392,7 @@ export default function EditStudentForm({ user, profile }) {
             </legend>
                 <label htmlFor="webbutveckling" className={style.educationChoice}>
                 WEBBUTVECKLARE
-                <input
+                <Input
                 id="webbutveckling"
                 name="education_program"
                 type="radio"
@@ -400,7 +405,7 @@ export default function EditStudentForm({ user, profile }) {
                 </label>
                 <label htmlFor="digital-design" className={style.educationChoice}>
                     DIGITAL DESIGNER
-                    <input
+                    <Input
                     id="digital-design"
                     name="education_program"
                     type="radio"

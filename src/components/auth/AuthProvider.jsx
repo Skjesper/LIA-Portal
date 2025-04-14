@@ -44,7 +44,7 @@ export function AuthProvider({ children }) {
               
               // Fetch profile data based on user type
               const profileTable = userData.user_type === 'student' ? 'student_profiles' : 'company_profiles';
-              const idField = userData.user_type === 'student' ? 'id' : 'user_id';
+              const idField = userData.user_type === 'student' ? 'id' : 'id';
               
               const { data: profileData, error: profileError } = await supabase
                 .from(profileTable)
