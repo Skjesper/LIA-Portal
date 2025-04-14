@@ -1,15 +1,26 @@
+'use server';
+
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 import CompanyProfileView from '@/components/Profile/Company/Company';
 
 export default async function CompanyProfilePage({ params }) {
-  const supabase = createServerComponentClient({ cookies });
-  const { id } = params;
+  // The params object is already available, no need to await it
+  const id = params.id;
 
+  // Create a properly initialized cookie store
+  const cookieStore = cookies();
+  
+  // Create Supabase client with the cookie store
+  const supabase = createServerComponentClient({ 
+    cookies: () => cookieStore 
+  });
+
+  // Fetch the company data
   const { data: company, error } = await supabase
     .from('company_profiles')
     .select('*')
-    .eq('id', 'c55325da-c481-4552-a073-99fc3b44bebc')
+    .eq('id', id)
     .single();
 
   if (error || !company) {

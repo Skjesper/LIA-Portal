@@ -24,7 +24,7 @@ const StudentCardSection = () => {
         <section className={styles.studentCardContainer}>
         <StudentCard 
         title="DIGITAL DESIGNERS"
-        variant="student"
+        variant="designer"
         
       />
 
