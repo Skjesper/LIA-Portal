@@ -1,19 +1,19 @@
 "use client";
 
-import { useState, useEffect } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-import Link from 'next/link';
+import { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import Link from "next/link";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   
   const router = useRouter();
   const searchParams = useSearchParams();
-  const redirectedFrom = searchParams.get('redirectedFrom');
+  const redirectedFrom = searchParams.get("redirectedFrom");
   
   const supabase = createClientComponentClient();
   
@@ -24,10 +24,10 @@ export default function LoginPage() {
       if (data.session) {
         // Redirect based on user type
         const userType = data.session.user.user_metadata.user_type;
-        if (userType === 'student') {
-          router.push('/student/dashboard');
-        } else if (userType === 'company') {
-          router.push('/company/dashboard');
+        if (userType === "student") {
+          router.push("/student/dashboard");
+        } else if (userType === "company") {
+          router.push("/company/dashboard");
         }
       }
     };
@@ -52,20 +52,20 @@ export default function LoginPage() {
       
       if (data?.user) {
         // Determine where to redirect after login
-        const userType = data.user.user_metadata?.user_type || 'student';
+        const userType = data.user.user_metadata?.user_type || "student";
         
         if (redirectedFrom) {
           router.push(redirectedFrom);
         } else {
-          if (userType === 'student') {
-            router.push('/student/dashboard');
+          if (userType === "student") {
+            router.push("/student/dashboard");
           } else {
-            router.push('/company/dashboard');
+            router.push("/company/dashboard");
           }
         }
       }
     } catch (error) {
-      setError(error.message || 'An error occurred during login');
+      setError(error.message || "An error occurred during login");
     } finally {
       setLoading(false);
     }
@@ -78,7 +78,7 @@ export default function LoginPage() {
           Sign in to your account
         </h1>
         <p className="mt-2 text-center text-sm text-gray-600">
-          Don't have an account?{' '}
+          Don&apos;t have an account?{" "}
           <Link href="/signup" className="font-medium text-blue-600 hover:text-blue-500">
             Sign up
           </Link>
@@ -144,7 +144,7 @@ export default function LoginPage() {
                 disabled={loading}
                 className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
               >
-                {loading ? 'Signing in...' : 'Sign in'}
+                {loading ? "Signing in..." : "Sign in"}
               </button>
             </div>
           </form>
