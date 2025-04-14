@@ -37,7 +37,7 @@
   min-height: 120px;  /* Minsta bredd för att garantera att bilden visas ordentligt */
   max-width: 50%;
   height: 100%;
-  max-height: 200px;
+  max-height: 180px;
   overflow: hidden;
   
   border-radius: 0.875rem;
@@ -112,6 +112,7 @@
   opacity: 0.8;
 }
 
+
 /* Responsive adjustments */
 @media (min-width: 768px) {
   /* .cardContent {
@@ -124,6 +125,19 @@
     height: 12.625rem; */
     max-width: 50%;
     flex-shrink: 0;
+  }
+
+  .imageContainer {
+    flex: 1;  /* Tar upp halva utrymmet */
+    min-width: 120px;
+    min-height: 120px;  /* Minsta bredd för att garantera att bilden visas ordentligt */
+    max-width: 50%;
+    height: 100%;
+    
+    overflow: hidden;
+    
+    border-radius: 0.875rem;
+    background-color: antiquewhite;   /* Maximal bredd 50% */
   }
   
  
