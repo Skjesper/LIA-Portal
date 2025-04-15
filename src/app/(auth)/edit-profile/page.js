@@ -153,7 +153,7 @@ const handleDeleteAccount = async () => {
       
       <h1 
       style={{ 
-        color: 'var(--Primary-Red)', 
+        color: 'var(--Primary-Dark)', 
         alignSelf:"center", 
         fontSize: "2rem",
         fontStyle: "italic",
