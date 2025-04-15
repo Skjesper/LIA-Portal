@@ -161,14 +161,14 @@ const handleDeleteAccount = async () => {
         lineHeight: "2rem",
         letterSpacing: "-0.06rem",
       }} 
-      > REDIGERA PROFIL</h1>
+      >REDIGERA PROFIL</h1>
       <Section className={sectionStyles.sectionInvertedColors}>
       {profile?.type === 'student' ? (
         <EditStudentForm user={user} profile={profile.data} />
       ) : profile?.type === 'company' ? (
         <EditCompanyForm user={user} profile={profile.data} />
       ) : (
-        <div>Unknown profile type. Please contact support.</div>
+        <div>Okänd typ av profil, kontakta support.</div>
       )}
       </Section>
       <Button

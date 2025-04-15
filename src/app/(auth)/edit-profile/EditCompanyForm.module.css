@@ -16,6 +16,36 @@
     border: none;
 }
 
+.cityField {
+    width: 100%;
+    border: none;
+    display: flex;
+}
+
+.inputButtonBlack {
+    background-color: var(--Typography-Primary);
+    border-radius: 0 0.25rem 0.25rem 0;
+    display: flex;
+    height: 3.125rem;
+    padding: 0.875rem 0.75rem;
+    width: 9rem;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: Inter;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 450;
+    line-height: 1.375rem;
+}
+
+.cityContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-top: -1rem;
+}
+
 .checkboxField {
     width: 100%;
     display: flex;

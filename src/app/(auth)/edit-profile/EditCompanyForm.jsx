@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { createBrowserClient } from '@supabase/ssr';
 import { useRouter } from 'next/navigation';
 import Button, { buttonStyles } from '@/components/ui/Button/Button';
 import Label, { labelStyles } from '@/components/ui/Label/Label';
@@ -12,7 +13,7 @@ import style from './EditCompanyForm.module.css';
 
 export default function EditCompanyForm({ user, profile }) {
   const router = useRouter();
-  const supabase = createClientComponentClient();
+  const supabase = createBrowserClient();
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [message, setMessage] = useState('');
@@ -177,6 +178,7 @@ const handleAddFunBenefit = async () => {
       ...prev,
       fun_benefits: updatedFunBenefits
     }));
+
     
     // Clear the input field
     setNewFunBenefit('');
@@ -317,25 +319,28 @@ const handleSubmit = async (e) => {
             required
           />
         </fieldset>
-    <label htmlFor="newCity" className={style.label}>
-      *ORT
-    </label>
-      <Input
-        type="text"
-        id="newCity"
-        name="newCity"
-        value={newCity}
-        onChange={(e) => setNewCity(e.target.value)}
-        className={inputStyles.inputBlack}
-      />
-      <Button 
-        type="button"
-        onClick={handleAddCity}
-        className={buttonStyles.labelButton}
-      >
-        Lägg till
-      </Button>
-      
+      <label htmlFor="newCity" className={style.label}>
+        *ORT
+      </label>
+      <fieldset className={style.cityField}>
+          <Input
+            type="text"
+            id="newCity"
+            name="newCity"
+            value={newCity}
+            onChange={(e) => setNewCity(e.target.value)}
+            className={inputStyles.inputBlack}
+            style={{borderRadius: "0.25rem 0 0 0.25rem"}}
+          />
+          <Button 
+            type="button"
+            onClick={handleAddCity}
+            className={style.inputButtonBlack}
+          >
+            Lägg till
+          </Button>
+      </fieldset>
+      <div className={style.cityContainer}>
       {formData.city && formData.city.length > 0 && (
         formData.city.map((city, index) => (
           <Button
@@ -356,7 +361,7 @@ const handleSubmit = async (e) => {
           </Button>
         ))
       )}
-          
+      </div>  
   <fieldset required className={style.checkboxField}>
             <legend className={style.label}>
                 *DISTANS
@@ -480,6 +485,7 @@ const handleSubmit = async (e) => {
       <label htmlFor="fun_benefits" className={style.label}>
       FÖRDELAR PÅ VÅRT KONTOR
       </label>
+      <fieldset className={style.cityField}>
         <Input
           type="text"
           id="fun_benefits"
@@ -487,15 +493,17 @@ const handleSubmit = async (e) => {
           value={newFunBenefit}
           onChange={(e) => setNewFunBenefit(e.target.value)}
           className={inputStyles.inputBlack}
+          style={{borderRadius: "0.25rem 0 0 0.25rem"}}
         />
         <Button 
           type="button"
           onClick={handleAddFunBenefit}
-          className={buttonStyles.labelButton}
+          className={style.inputButtonBlack}
         >
           Lägg till
         </Button>
-      
+      </fieldset>
+      <div className={style.cityContainer}>
         {formData.fun_benefits && formData.fun_benefits.length > 0 && (
           formData.fun_benefits.map((fun_benefits, index) => (
             <Button
@@ -516,11 +524,12 @@ const handleSubmit = async (e) => {
             </Button>
           ))
         )}
-      
+        </div>
         <Button
           type="submit"
           disabled={loading}
           className={buttonStyles.filledBlack}
+          style={{margin:"1.5rem 0"}}
         >
           {loading ? 'SPARAR...' : 'SPARA ÄNDRINGAR'}
         </Button>
