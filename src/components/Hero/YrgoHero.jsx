@@ -52,7 +52,7 @@ const YrgoHero = () => {
     </section>
     <section className={styles.heroImage}>
         <Image 
-            src="/heroimage.png"
+            src="/heroImage.png"
             alt="Yrgo logotyp"
             fill={true}
             sizes="100%"

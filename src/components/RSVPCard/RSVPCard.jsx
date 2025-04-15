@@ -145,7 +145,7 @@ const RSVPCard = ({ title, onSubmit }) => {
           {!isMobile && (
   <section className={styles.rsvpImage}>
       <Image 
-      src="/heroimage.png"
+      src="/heroImage.png"
       alt="Yrgo logotyp"
       fill  // fyller hela förälderns yta
       style={{ objectFit: 'cover' }}
