@@ -1,13 +1,19 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import styles from '@/components/Hero/YrgoHero.module.css';
 import '@/components/styles/colors.css';
 import Button, { buttonStyles } from '@/components/ui/Button/Button';
 import Image from 'next/image';
+import useBreakpoint from '@/app/hooks/useBreakpoint';
 
 const companies = ["spöket", "aino", "sould", "grebban", "volvo", "knowit", "simma lugnt"];
 
+
 const YrgoHero = () => {
+
+    const isMobile = useBreakpoint(768);
   return (
 <section className={styles.heroSection}>
       <h1 className={styles.heroTitle}>
@@ -29,11 +35,20 @@ const YrgoHero = () => {
         </section>
         
         <div className={styles.rsvpButton}>
-        <Link href="#event" scroll={true}><Button className={buttonStyles.filledBlack}
-        style={{ padding: '0.875rem 2rem' }}
-        >Anmäl dig</Button>
-        </Link>
-        </div>
+  {!isMobile ? (
+    <Link href="#event" scroll={true}>
+      <Button className={buttonStyles.filledBlack} style={{ padding: '0.875rem 2rem' }}>
+        Anmäl dig
+      </Button>
+    </Link>
+  ) : (
+    <Link href="#event" scroll={true}>
+      <Button className={buttonStyles.filledBlack}>
+        Anmäl dig
+      </Button>
+    </Link>
+  )}
+</div>
     </section>
     <section className={styles.heroImage}>
         <Image 
