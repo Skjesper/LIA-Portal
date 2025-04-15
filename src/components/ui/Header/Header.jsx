@@ -119,8 +119,8 @@ export default function Header() {
             <section className={styles.headerRight}>
               {isLoggedIn ? (
 
-                <ul>
-                  <li>
+                <ul style={{display:"flex", flexDirection:"row", alignItems:"center", gap:"1.5rem"}}>
+                  <li style={{listStyle:"none"}}>
                   <Link href={getProfileLink()}>
                     <Button className={buttonStyles.underlinedBlack}
                     style={{ width: '100%', textAlign: 'center', textDecoration: 'none' }}
@@ -129,7 +129,7 @@ export default function Header() {
                     </Button>
                   </Link>
                 </li>
-                <li>
+                <li style={{listStyle:"none"}}>
                   <Button 
                     className={buttonStyles.filledRed} 
                     onClick={handleSignOut}
