@@ -26,7 +26,7 @@
 .buttonContent {
 
     display: flex;
-
+    align-items: center;
 }
 
 .buttonContent{
