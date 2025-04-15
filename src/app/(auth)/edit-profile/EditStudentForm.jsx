@@ -341,7 +341,14 @@ export default function EditStudentForm({ user, profile }) {
             width={40}
             height={40}
             className=""
+            />{formData.profile_picture && (
+              <Image 
+              src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/profile-picture/${profile.profile_picture}`} 
+              alt={`${profile.first_name} ${profile.last_name}`} 
+              width={200}
+              height={200}
             />
+          )}
             {uploading ? 'LADDAR UPP...' : 'VÄLJ PROFILBILD'}
             <input
                 type="file"
