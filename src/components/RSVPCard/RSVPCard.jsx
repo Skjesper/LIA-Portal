@@ -6,14 +6,17 @@ import styles from './RSVPCard.module.css';
 import Button, { buttonStyles } from '@/components/ui/Button/Button';
 import supabase from '@/utils/supabase';
 import useBreakpoint from '@/app/hooks/useBreakpoint';
+import RSVPConfirmation from './RSVPConfirmation'; // Importera bekräftelsekomponenten
 
 const RSVPCard = ({ title, onSubmit }) => {
-  const isMobile = useBreakpoint(1080);
+  const isMobile = useBreakpoint(800);
   const [formData, setFormData] = useState({
     companyName: '',
     email: '',
     participants: ''
   });
+  // State för att kontrollera om bekräftelsen ska visas
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,17 +30,28 @@ const RSVPCard = ({ title, onSubmit }) => {
     e.preventDefault();
     
     try {
-      // Ta bort id-fältet helt från insert-anropet
-      // Låt databasen hantera id:t (efter att du ändrat begränsningen)
+      // Validera data före insättning
+      if (!formData.companyName || !formData.email || !formData.participants) {
+        alert('Vänligen fyll i alla obligatoriska fält');
+        return;
+      }
+      
+      // Konvertera deltagare till nummer och validera
+      const attendeesCount = parseInt(formData.participants);
+      if (isNaN(attendeesCount) || attendeesCount <= 0) {
+        alert('Vänligen ange ett giltigt antal deltagare');
+        return;
+      }
+      
       const { data, error } = await supabase
-      .from('event_registrations')
-      .insert([
-        { 
-          company_name: formData.companyName.trim(),
-          email: formData.email.trim(),
-          number_of_attendees: parseInt(formData.participants)
-        }
-      ]);
+        .from('event_registrations')
+        .insert([
+          { 
+            company_name: formData.companyName.trim(),
+            email: formData.email.trim(),
+            number_of_attendees: attendeesCount
+          }
+        ]);
       
       if (error) throw error;
       
@@ -54,16 +68,38 @@ const RSVPCard = ({ title, onSubmit }) => {
         participants: ''
       });
       
-      alert('Tack för din anmälan!');
+      // Visa bekräftelseöverlag istället för alert
+      setShowConfirmation(true);
       
     } catch (error) {
       console.error('Fel vid skickande till databasen:', error);
-      alert('Ett fel uppstod när din anmälan skulle skickas. Vänligen försök igen.');
+      alert(`Ett fel uppstod när din anmälan skulle skickas: ${error.message}. Vänligen försök igen.`);
     }
+  };
+
+  // Funktion för att stänga bekräftelsen
+  const closeConfirmation = () => {
+    setShowConfirmation(false);
   };
 
   return (
     <section className={styles.rsvpCardContainer}>
+      {/* Bekräftelseöverlag */}
+      {showConfirmation && (
+        <div className={styles.overlay}>
+          <div className={styles.overlayContent}>
+            <RSVPConfirmation />
+            <Button 
+              className={buttonStyles.filledBlack}
+              onClick={closeConfirmation}
+              style={{ marginTop: '20px', width: '8rem', padding: '0.7rem' }}
+            >
+              STÄNG
+            </Button>
+          </div>
+        </div>
+      )}
+
       <h2 className={styles.sectionTitle}><span>01/</span>Anmälan</h2>
       <p className={styles.sectionText}>
         Detta är ett unikt tillfälle att bygga relationer med studerande från Yrgo och för att hitta nya kompetenser till ert team. Anmäl ert företag idag för att hitta potentiella praktikanter och för att få delta på ett underbart event! 
@@ -142,15 +178,15 @@ const RSVPCard = ({ title, onSubmit }) => {
           </div>
 
           {!isMobile && (
-  <section className={styles.rsvpImage}>
-      <Image 
-      src="/heroImage.png"
-      alt="Yrgo logotyp"
-      fill  // fyller hela förälderns yta
-      style={{ objectFit: 'cover' }}
-      priority
-    />
-  </section>
+            <section className={styles.rsvpImage}>
+              <Image 
+                src="/heroImage.png"
+                alt="Yrgo logotyp"
+                fill
+                style={{ objectFit: 'cover' }}
+                priority
+              />
+            </section>
           )}
         </div>
       </section>
