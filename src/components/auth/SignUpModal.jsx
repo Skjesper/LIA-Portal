@@ -34,13 +34,7 @@ export default function SignUpModal({ isOpen, onClose, parentClose }) {
     try {
       const savedEmail = localStorage.getItem('pendingEmail');
       const savedPassword = localStorage.getItem('pendingPassword');
-      
-      // Close the modal
-      /* onClose();
-      if (parentClose) parentClose(); */
       handleBack();
-      // Redirect to login page
-      /* router.push('/edit-profile'); */
       
     } catch (error) {
       console.error("Error during redirection:", error);
