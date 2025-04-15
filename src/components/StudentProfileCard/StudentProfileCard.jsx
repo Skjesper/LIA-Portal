@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react'; // Lägg till denna rad
+import { useState, useEffect } from 'react'; 
 import Label, { labelStyles } from '@/components/ui/Label/Label';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -21,18 +21,27 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 const StudentProfileCard = ({ student }) => {
   // State for profile image
   const [profileImageUrl, setProfileImageUrl] = useState(null);
+  const [imageError, setImageError] = useState(false);
   const supabase = createClientComponentClient();
+  
+  // Konstant för placeholder-bild
+  const PLACEHOLDER_IMAGE = '/placeholder/placeholder.png';
 
   // UseEffect to get the public URL for profile picture from Supabase storage
   useEffect(() => {
     if (student.profile_picture) {
-      const { data } = supabase
-        .storage
-        .from('profile-picture')
-        .getPublicUrl(student.profile_picture);
-      
-      if (data?.publicUrl) {
-        setProfileImageUrl(data.publicUrl);
+      try {
+        const { data } = supabase
+          .storage
+          .from('profile-picture')
+          .getPublicUrl(student.profile_picture);
+        
+        if (data?.publicUrl) {
+          setProfileImageUrl(data.publicUrl);
+        }
+      } catch (error) {
+        console.error('Error getting profile image URL:', error);
+        setImageError(true);
       }
     }
   }, [student.profile_picture, supabase]);
@@ -49,8 +58,16 @@ const StudentProfileCard = ({ student }) => {
     }
   };
 
-  // Default profile image if none provided
-  const profileImage = profileImageUrl || '/placeholder-profile.jpg';
+  // Hantera bildfel
+  const handleImageError = () => {
+    console.log('Image failed to load, using placeholder');
+    setImageError(true);
+  };
+
+  // Avgör vilken bild som ska visas
+  const displayImageSrc = profileImageUrl && !imageError 
+    ? profileImageUrl 
+    : PLACEHOLDER_IMAGE;
 
   return (
     <article className={styles.studentCard}>
@@ -61,23 +78,15 @@ const StudentProfileCard = ({ student }) => {
 
       <div className={styles.cardContent}>
         <div className={styles.imageContainer}>
-          {profileImage ? (
-            <Image 
-              src={profileImage}
-              alt={`Profilbild för ${student.first_name} ${student.last_name}`}
-              width={100}
-              height={100}
-              className={styles.profileImage}
-            />
-          ) : (
-            <Image
-              src="/placeholder/placeholder.jpg"
-              alt="Placeholder Profile Image"
-              width={100}
-              height={100}
-              className={styles.profileImage}
-            />
-          )}
+          <Image 
+            src={displayImageSrc}
+            alt={`Profilbild för ${student.first_name} ${student.last_name}`}
+            width={100}
+            height={100}
+            className={styles.profileImage}
+            onError={handleImageError}
+            priority
+          />
         </div>
         
         <div className={styles.studentInfo}>
@@ -85,7 +94,7 @@ const StudentProfileCard = ({ student }) => {
             {getProgramDisplay(student.education_program)}
           </Label>
           
-          {/* Skills list with a limit of 4 random skills */}
+          {/* Skills list with a limit of 3 skills */}
           <ul className={styles.skillsList}>
             {student.knowledge && student.knowledge.slice(0, 3).map((skill, index) => (
               <li key={index} className={styles.skillItem}>
