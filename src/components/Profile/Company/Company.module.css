@@ -1,6 +1,7 @@
 .componentContainer {
     padding: 2rem 1rem;
     background: var(--Primary-Grey, #E4E9EB);
+    
 }
 
 .companyContainer {
@@ -9,6 +10,12 @@
     flex-direction: column;
     align-items: center;
     margin-top: 1.5rem;
+    
+}
+
+.returnButton {
+
+    margin-left: auto;
 }
 
 .profileHeader {
@@ -19,7 +26,19 @@
     padding: 1.5rem;
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.5rem;
+    gap: 1rem;
+}
+
+.headerInfo {
+
+    display: flex;
+    gap: 0.3rem;
+
+}
+
+.jobTypes {
+    display: flex;
+    gap: 0.3rem;
 }
 
 .profileBio {
@@ -31,6 +50,7 @@
     padding: 1.5rem 1rem;
     align-items: flex-start;
     border-radius: 0.75rem;
+    gap: 1rem;
     
     
 }
@@ -71,6 +91,7 @@ line-height: 1.5rem; /* 120% */
 .profilePerks {
     border-radius: 0.75rem;
     background: var(--Background-Light, #FFF);
+    color: var(--Typography-Primary);
     display: flex;
     padding: 1.5rem;
     flex-direction: column;
@@ -78,7 +99,141 @@ line-height: 1.5rem; /* 120% */
     gap: 0.5rem;
 }
 
-.profilePerks, .profileBio, .profileCity  {
+.profileBio {
+    max-width: 28rem;
+    /* min-height: 11rem; */
+}
+
+.cardContainer {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    margin-top: 1rem;
+}
+
+.linksContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+}
+
+.links {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+}
+
+.buttonContent{
+
+    display: flex;
+    gap: 0.3rem;
+}
+
+.benefitsList {
+
+margin-top: 0.5rem;
+display: flex;
+gap: 0.3rem;
+color: var(--Typography-Secondary);
+
+}
+
+.componentContainer {
+    padding: 2rem 1rem;
+    background: var(--Primary-Grey, #E4E9EB);
+}
+
+.companyContainer {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1.5rem;
+}
+
+.profileHeader {
+
+    background-color: var(--Primary-Red);
+    border-radius: 0.75rem;
+    display: flex;
+    padding: 1.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.headerInfo {
+
+    display: flex;
+    gap: 0.3rem;
+
+}
+
+.jobTypes {
+    display: flex;
+    gap: 0.3rem;
+}
+
+.profileBio {
+   
+    display:flex;
+    flex-direction: column;
+    background-color: var(--Background-Dark);
+    width: 100%;
+    padding: 1.5rem 1rem;
+    align-items: flex-start;
+    border-radius: 0.75rem;
+    gap: 1rem;
+    
+    
+}
+
+.profileCity {
+    background-color: var(--Primary-Red);
+    border-radius: 0.75rem;
+    display: flex;
+    padding: 1.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.profileCity h2 {
+color: var(--Typography-Secondary, #FFF);
+/* Mobil/H2/Bold */
+font-family: Inter;
+font-size: 2rem;
+font-style: normal;
+font-weight: 530;
+line-height: 2rem; /* 100% */
+letter-spacing: -0.06rem;
+text-transform: uppercase;
+}
+
+.profileCity h3 {
+
+color: var(--Typography-Secondary, #FFF);
+/* Mobil/H3/Slanted */
+font-family: Inter;
+font-size: 1.25rem;
+font-style: normal;
+font-weight: 530;
+line-height: 1.5rem; /* 120% */
+}
+
+.profilePerks {
+    border-radius: 0.75rem;
+    background: var(--Background-Light, #FFF);
+    color: var(--Typography-Primary);
+    display: flex;
+    padding: 1.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.profileBio {
     max-width: 28rem;
     min-height: 11rem;
 }
@@ -106,6 +261,18 @@ line-height: 1.5rem; /* 120% */
 .benefitsList {
 
 margin-top: 0.5rem;
+display: flex;
+gap: 0.3rem;
+color: var(--Typography-Secondary);
 
 }
 
+@media screen and (min-width: 768px) {
+    .cardContainer {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        align-items: start;
+        grid-auto-flow: dense;
+    }
+}

@@ -46,10 +46,10 @@ export default function Header() {
           <div className={styles.logo}>
             <Link href="/">
               <Image
-                src="/logos/yrgo-logo-black.svg"
+                src="/logos/yrgo_red.svg"
                 alt="Company Logo"
-                width={50}
-                height={30}
+                width={80}
+                height={50}
                 className={styles.image}
               />
             </Link>
@@ -111,6 +111,7 @@ export default function Header() {
             </section>
             <section className={styles.headerRight}>
               {isLoggedIn ? (
+
                 <ul>
                   <li>
                   <Link href={getProfileLink()}>
@@ -127,6 +128,7 @@ export default function Header() {
                     onClick={handleSignOut}
                   >
                     LOGGA UT
+
                   </Button>
                 </li>
                 </ul>
