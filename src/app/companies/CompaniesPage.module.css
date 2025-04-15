@@ -6,6 +6,13 @@
   gap: 0.5rem;
 }
 
+.companiesGrid {
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .searchForm {
   display: flex;
   flex: 1;
@@ -92,14 +99,18 @@
   width: 100%;
 }
 
-.companiesGrid {
-  display: grid
-  ;
-    grid-template-columns: repeat(auto-fill, minmax(22.375rem, 1fr));
-    max-width: 120rem;
-    align-items: stretch;
-    gap: 1.5rem;
-    width: 100%;
+
+@media (min-width: 680px) {
+  
+  .companiesGrid {
+    display: grid
+    ;
+      grid-template-columns: repeat(auto-fill, minmax(22.375rem, 1fr));
+      max-width: 120rem;
+      align-items: stretch;
+      gap: 1.5rem;
+      width: 100%;
+  }
 }
 
 
