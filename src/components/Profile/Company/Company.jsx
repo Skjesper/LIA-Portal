@@ -46,7 +46,7 @@ const CompanyProfileView = ({ company }) => {
         {/* Only show edit button if the user is the company owner */}
         {isCompanyOwner && (
           <div className={styles.editProfile}>
-            <Link href={'/edit-page'}>
+            <Link href={'/edit-profile'}>
               <Button className={buttonStyles.filledBlack}>Redigera Profil</Button>
             </Link>
           </div>
