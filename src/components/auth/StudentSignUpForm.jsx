@@ -43,10 +43,6 @@ export default function StudentSignUpForm({ onSuccess }) {
       }
 
       if (data?.user) {
-        setMessage({
-          type: 'success',
-          text: 'Registration successful! Redirecting to profile setup...'
-        });
         
         // Clear form
         setFirstName('');
@@ -60,7 +56,7 @@ export default function StudentSignUpForm({ onSuccess }) {
             onSuccess(); // Close the modal
           }
           router.push('/edit-profile');
-        }, 1500); // 1.5 seconds
+        }, 2000);
       }
     } catch (error) {
       setMessage({

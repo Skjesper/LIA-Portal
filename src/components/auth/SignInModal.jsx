@@ -40,10 +40,6 @@ export default function SignInModal({ isOpen, onClose }) {
       
       if (data?.user) {
         setSignedIn(true);
-        setMessage({
-          type: 'success',
-          text: 'Sign in successful! Redirecting...'
-        });
         
         // Clear form
         setEmail('');
@@ -173,15 +169,7 @@ export default function SignInModal({ isOpen, onClose }) {
           SKAPA KONTO
         </button>
       </div>
-      <Button className={buttonStyles.underlinedBlack} onClick={onClose} style={{alignSelf: "flex-end", marginRight: "1.5rem"}}>
-        STÄNG
-        <Image
-          src="/icons/exit-black.svg"
-          alt="icon for exiting"
-          width={14}
-          height={14}
-        />
-      </Button>
+      <div className={style.welcomeMessage}>
         <h3 className={style.formTitle}>VÄLKOMMEN TILLBAKA!</h3>
         <Image
           src="/icons/check_circle_black.svg"
@@ -190,7 +178,8 @@ export default function SignInModal({ isOpen, onClose }) {
           height={73}
           style={{margin:"1rem  0 1.5rem 0"}}
         />
-        <p className={style.formText} style={{marginBottom:"3rem"}}>Du är nu inloggad</p>
+        <p className={style.formText}>Du är nu inloggad</p>
+      </div>
     </div>
   </div>
   );

@@ -1,23 +1,19 @@
 "use client";
 import React, { useState } from 'react';
-import { createBrowserClient } from '@supabase/ssr';
 import { useRouter } from 'next/navigation';
 import Input, { inputStyles } from '@/components/ui/Input/Input';
 import Button, { buttonStyles } from '@/components/ui/Button/Button';
+import { useAuth } from '@/components/auth/AuthProvider';
 
-export default function CompanySignUpForm({ onSuccess }) {
+export default function CompanySignUpForm({ onSuccess, onClose }) {
   const router = useRouter();
+  const { supabase } = useAuth();
   const [companyName, setCompanyName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState(null);
   const [loading, setLoading] = useState(false);
   
-  const supabase = createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-  );
-
   const handleSignUp = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -33,44 +29,41 @@ export default function CompanySignUpForm({ onSuccess }) {
             user_type: 'company',
             name: companyName
           },
+          // The EmailRedirectTo will send the user back to your site with a verification code
+          emailRedirectTo: `${window.location.origin}`,
         },
       });
-
+      
       if (error) {
         throw error;
       }
-
+      
       if (data?.user) {
-        setMessage({
-          type: 'success',
-          text: 'Registration successful! Redirecting to profile setup...'
-        });
+        // Store company name in local storage to potentially use later
+        localStorage.setItem('pendingCompanyName', companyName);
+        
+        // Call onSuccess with the email address
+        if (onSuccess) {
+          onSuccess(email);
+        }
         
         // Clear form
         setCompanyName('');
         setEmail('');
         setPassword('');
-        
-        // Add a short delay before redirecting
-        setTimeout(() => {
-          if (onSuccess) {
-            onSuccess(); // Close the modal
-          }
-          router.push('/edit-profile');
-        }, 1500); // 1.5 seconds
       }
     } catch (error) {
       setMessage({
         type: 'error',
-        text: error.message || 'An error occurred during sign-up'
+        text: error.message || 'Ett fel uppstod vid registrering'
       });
     } finally {
       setLoading(false);
     }
   };
-
+  
   return (
-    <form 
+    <form
       onSubmit={handleSignUp}
       style={{display:"flex", flexDirection:"column", gap:"0.5rem"}}
     >
@@ -79,7 +72,6 @@ export default function CompanySignUpForm({ onSuccess }) {
           {message.text}
         </div>
       )}
-      
       <div className="formGroup">
         <label htmlFor="companyName">*FÖRETAGSNAMN</label>
         <Input
@@ -92,7 +84,6 @@ export default function CompanySignUpForm({ onSuccess }) {
           placeholder="ex. Företag AB"
         />
       </div>
-      
       <div className="formGroup">
         <label htmlFor="email">*EMAIL</label>
         <Input
@@ -105,7 +96,6 @@ export default function CompanySignUpForm({ onSuccess }) {
           placeholder="exempel@mail.com"
         />
       </div>
-      
       <div className="formGroup">
         <label htmlFor="password">*LÖSENORD</label>
         <Input
@@ -119,14 +109,13 @@ export default function CompanySignUpForm({ onSuccess }) {
           placeholder="Välj ett lösenord"
         />
       </div>
-      
       <Button
         type="submit"
         disabled={loading}
         className={buttonStyles.filledWhite}
         style={{width:"12rem", padding:"0.875rem 2rem", alignSelf:"center", marginTop:"1rem"}}
       >
-        {loading ? 'Creating account...' : 'SKAPA KONTO'}
+        {loading ? 'SKAPAR KONTO...' : 'SKAPA KONTO'}
       </Button>
     </form>
   );
