@@ -11,6 +11,19 @@
   
 }
 
+.sectionInvertedColors {
+  display: flex;
+  padding: 1.5rem;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-self: stretch;
+  align-items: center;
+  background-color: var(--Background-Light);
+  margin: 0 0 1rem 0;
+  
+  
+}
+
 
 @media (min-width: 768px) {
 

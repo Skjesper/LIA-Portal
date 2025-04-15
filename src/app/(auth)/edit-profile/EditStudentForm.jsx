@@ -248,7 +248,7 @@ export default function EditStudentForm({ user, profile }) {
         profile_picture: ''
       }));
       
-      setMessage('CV borttagen');
+      setMessage('Profilbild borttagen');
     } catch (error) {
       console.error('Error removing profile picture:', error);
       setMessage(`Error removing profile picture: ${error.message}`);
@@ -315,6 +315,20 @@ export default function EditStudentForm({ user, profile }) {
         </div>
       )}
         <fieldset className={style.profilePicture}>
+        {formData.profile_picture && (
+                <Button 
+                    type="button" 
+                    className={style.deletePictureButton}
+                    onClick={handleRemoveImage} 
+                >
+                    <Image
+                    src="/icons/delete_white.svg"
+                    alt="Delete icon"
+                    width={15}
+                    height={15}
+                    />
+                </Button>
+            )}
             <Button 
             type="button" 
             className={style.uploadProfilePicture}
@@ -339,22 +353,6 @@ export default function EditStudentForm({ user, profile }) {
             />
             </Button>
         </fieldset>
-            {uploading && <p>Laddar upp...</p>}
-            {formData.profile_picture && !uploading && (
-                <div className="">
-                    Profilbild uppladdad!
-                </div>
-            )}
-            {message && message !== 'Profile picture uploaded successfully!' && <p className="">{message}</p>}
-            {formData.profile_picture && (
-                <button 
-                    type="button" 
-                    className=""
-                    onClick={handleRemoveImage}
-                >
-                    {formData.profile_picture.split('/').pop()}
-                </button>
-            )}
         <fieldset className={style.nameField}>
             <label htmlFor="first_name" className={style.label}>
               * FÖRNAMN
@@ -387,7 +385,7 @@ export default function EditStudentForm({ user, profile }) {
             </legend>
                 <label htmlFor="webbutveckling" className={style.educationChoice}>
                 WEBBUTVECKLARE
-                <input
+                <Input
                 id="webbutveckling"
                 name="education_program"
                 type="radio"
@@ -400,7 +398,7 @@ export default function EditStudentForm({ user, profile }) {
                 </label>
                 <label htmlFor="digital-design" className={style.educationChoice}>
                     DIGITAL DESIGNER
-                    <input
+                    <Input
                     id="digital-design"
                     name="education_program"
                     type="radio"

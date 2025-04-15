@@ -30,9 +30,11 @@
   width: 100%;
 }
 .imageContainer {
+
   width: 50%; /* Lite mindre än 50% för att ge marginal */
   aspect-ratio: 1 / 1; /* Behåller samma proportion (kvadratisk) */
   flex-shrink: 0;
+
   overflow: hidden;
   border-radius: 0.875rem;
   background-color: antiquewhite;
@@ -105,4 +107,14 @@
   opacity: 0.8;
 }
 
+
+
+/* Responsive adjustments */
+@media (max-width: 1080px) {
+ 
+  .imageContainer {
+
+    max-height: 180px;
+  }
+}
 
