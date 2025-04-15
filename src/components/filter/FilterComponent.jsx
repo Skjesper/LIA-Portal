@@ -393,7 +393,7 @@ const FilterComponentWithoutSSR = ({
           />
         </section>
         
-        <section aria-labelledby="lia-period-heading">
+        {/* <section aria-labelledby="lia-period-heading">
           <h2 id="lia-period-heading" className={styles.title}>LIA PERIOD</h2>
           <FilterSection
             title=""
@@ -407,41 +407,11 @@ const FilterComponentWithoutSSR = ({
             multiSelect={true}
             initialFilterValues={getInitialFilterValues('lia_period')}
           />
-        </section>
+        </section> */}
         
-        <section aria-labelledby="ort-heading">
-          <h2 id="ort-heading" className={styles.title}>ORT</h2>
-          <FilterSection
-            title=""
-            tableName={targetTable}
-            column="location"
-            options={[
-              { value: "GÖTEBORG", label: "GÖTEBORG" },
-              { value: "STOCKHOLM", label: "STOCKHOLM" },
-              { value: "ANNAT", label: "ANNAT" }
-            ]}
-            onFilterChange={handleFilterChange}
-            multiSelect={true}
-            initialFilterValues={getInitialFilterValues('location')}
-          />
-        </section>
         
-        <section aria-labelledby="distans-heading">
-          <h2 id="distans-heading" className={styles.title}>DISTANS</h2>
-          <FilterSection
-            title=""
-            tableName={targetTable}
-            column="remote_options"
-            options={[
-              { value: "ON SITE", label: "ON SITE" },
-              { value: "HYBRID", label: "HYBRID" },
-              { value: "REMOTE", label: "REMOTE" }
-            ]}
-            onFilterChange={handleFilterChange}
-            multiSelect={true}
-            initialFilterValues={getInitialFilterValues('remote_options')}
-          />
-        </section>
+        
+       
       </form>
     </aside>
   );

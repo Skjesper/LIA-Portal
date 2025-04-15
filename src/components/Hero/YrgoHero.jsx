@@ -28,9 +28,12 @@ const YrgoHero = () => {
             </p>
         </section>
         
-
-        <Link href="#event" scroll={true}><Button className={buttonStyles.underlinedBlack}>Anmäl dig</Button>
+        <div className={styles.rsvpButton}>
+        <Link href="#event" scroll={true}><Button className={buttonStyles.filledBlack}
+        style={{ padding: '0.875rem 2rem' }}
+        >Anmäl dig</Button>
         </Link>
+        </div>
     </section>
     <section className={styles.heroImage}>
         <Image 

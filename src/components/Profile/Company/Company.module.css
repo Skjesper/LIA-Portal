@@ -1,6 +1,7 @@
 .componentContainer {
     padding: 2rem 1rem;
     background: var(--Primary-Grey, #E4E9EB);
+    
 }
 
 .companyContainer {
@@ -9,6 +10,7 @@
     flex-direction: column;
     align-items: center;
     margin-top: 1.5rem;
+    
 }
 
 .returnButton {
@@ -99,7 +101,7 @@ line-height: 1.5rem; /* 120% */
 
 .profileBio {
     max-width: 28rem;
-    min-height: 11rem;
+    /* min-height: 11rem; */
 }
 
 .cardContainer {
