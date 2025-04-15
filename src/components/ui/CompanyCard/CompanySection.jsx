@@ -21,7 +21,9 @@ const CompanySection = () => {
             Semper nun sodales malesuada. Non habitant.
         </p>
         <Link href="/companies">
-        <Button className={buttonStyles.underlinedBlack}>Se alla företag</Button>
+        <Button style={{ whiteSpace: 'nowrap' }} className={buttonStyles.underlinedBlack}>
+  Se alla företag
+</Button>
         </Link>
         </div>
         </div>

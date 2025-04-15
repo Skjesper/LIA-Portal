@@ -83,7 +83,7 @@ export default function Header() {
               <nav className={styles.desktopNavbar} aria-label="Main Navigation">
                 <ul>
                   <li>
-                    <Link href="#event" scroll={true}>
+                    <Link href="/event">
                         <Button 
                           className={buttonStyles.underlinedBlack}
                           style={{ width: '100%', textAlign: 'center', textDecoration: 'none' }}
