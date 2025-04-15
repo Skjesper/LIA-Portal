@@ -18,10 +18,7 @@ export default function SignInModal({ isOpen, onClose }) {
   const [signedIn, setSignedIn] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
 
-  const supabase = createClientComponentClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-  );
+  const supabase = createClientComponentClient();
 
   const handleSignIn = async (e) => {
     e.preventDefault();
