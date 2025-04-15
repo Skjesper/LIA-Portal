@@ -17,11 +17,14 @@
   width: 100%;
   padding: 0.5rem 1rem;
   padding-right: 4rem;
-  border: 1px solid var(--Background-Dark, #121212);
-  border-radius: 1.5rem;
+  border: 2px solid var(--Greyscale-90);
+  background-color: var(--Background-Light);
+  border-radius: 3rem;
   font-size: 0.875rem;
   outline: none;
 }
+
+
 
 .searchButton {
   position: absolute;
