@@ -3,6 +3,10 @@ import React, { useState } from 'react';
 import { createBrowserClient } from '@supabase/ssr';
 import { useRouter } from 'next/navigation';
 import SignUpModal from './SignUpModal';
+import Button, { buttonStyles } from '@/components/ui/Button/Button';
+import Input, { inputStyles } from '@/components/ui/Input/Input';
+import Image from 'next/image';
+import style from './SignInModal.module.css';
 
 export default function SignInModal({ isOpen, onClose }) {
   const router = useRouter();
@@ -78,14 +82,35 @@ export default function SignInModal({ isOpen, onClose }) {
 
   return (
     <div className="modalOverlay">
-      <div className="modalContainer">
-        <button className="close-button" onClick={onClose}>
-          TILLBAKA
-        </button>
+      <div className={style.modalContainer}>
+        <div className={style.modalNavbar}>
+          <button 
+            onClick={openSignUp}
+            className={style.logInNav}
+          >
+            LOGGA IN
+          </button>
+          <button 
+            onClick={openSignUp}
+            className={style.signInNav}
+          >
+            SKAPA KONTO
+          </button>
+        </div>
+        <Button className={buttonStyles.underlinedBlack} onClick={onClose} style={{alignSelf: "flex-end", marginRight: "1.5rem"}}>
+          STÄNG
+          <Image
+            src="/icons/exit-black.svg"
+            alt="icon for exiting"
+            width={10}
+            height={10}
+            style={{ marginLeft: '0.5rem' }}
+          />
+        </Button>
         
-        <h2 className="modalTitle">LOGGA IN</h2>
-        
-        <form onSubmit={handleSignIn}>
+        <form onSubmit={handleSignIn} className={style.logInForm}>
+        <h3 className={style.formTitle}>HEJ!</h3>
+        <p className={style.formText}>Skriv in e-post och lösenord för att logga in</p>
           {message && (
             <div className={message.type === 'success' ? 'success' : 'error'}>
               {message.text}
@@ -93,48 +118,40 @@ export default function SignInModal({ isOpen, onClose }) {
           )}
           
           <div className="formGroup">
-            <label htmlFor="email">*EMAIL</label>
-            <input
+            <label htmlFor="email" className={style.label}>*EMAIL</label>
+            <Input
               type="email"
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              className={inputStyles.inputBlack}
               required
               placeholder="exempel@mail.com"
             />
           </div>
           
           <div className="formGroup">
-            <label htmlFor="password">*LÖSENORD</label>
-            <input
+            <label htmlFor="password" className={style.label}>*LÖSENORD</label>
+            <Input
               type="password"
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              className={inputStyles.inputBlack}
               required
               placeholder="Skriv in ditt lösenord"
             />
           </div>
           
-          <button
+          <Button
             type="submit"
             disabled={loading}
-            className="primaryButton"
+            className={buttonStyles.filledBlack}
+            style={{ width: "9rem", padding: "0.875rem 2rem", alignSelf:"center", marginTop:"0.5rem"}}
           >
-            {loading ? 'Loggar in...' : 'LOGGA IN'}
-          </button>
+            {loading ? 'LOGGAR IN...' : 'LOGGA IN'}
+          </Button>
         </form>
-        
-        <div className="separator">
-          <span>eller</span>
-        </div>
-        
-        <button 
-          onClick={openSignUp}
-          className="secondaryButton"
-        >
-          SKAPA KONTO
-        </button>
       </div>
     </div>
   );

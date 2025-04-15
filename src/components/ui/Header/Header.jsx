@@ -8,15 +8,20 @@ import useBreakpoint from '@/app/hooks/useBreakpoint';
 import Button, { buttonStyles } from '@/components/ui/Button/Button';
 import MobileDropdown from '@/components/ui/MobileDropdown/MobileDropdown';
 import styles from './Header.module.css';
+import SignInModal from '@/components/auth/SignInModal';
 
 export default function Header() {
   const isMobile = useBreakpoint(1279); // Use 768px as breakpoint
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { isLoggedIn, userType } = useAuth();
+  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
+  const { isLoggedIn, userType, userProfile, signOut } = useAuth();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  const openSignInModal = () => setIsSignInModalOpen(true);
+  const closeSignInModal = () => setIsSignInModalOpen(false);
 
   // Get the appropriate profile link based on user type
   const getProfileLink = () => {
@@ -27,6 +32,11 @@ export default function Header() {
     }
     
     return '/profile';
+  };
+
+  const handleSignOut = async () => {
+    await signOut();
+    onClose();
   };
 
   return (
@@ -101,17 +111,33 @@ export default function Header() {
             </section>
             <section className={styles.headerRight}>
               {isLoggedIn ? (
-                <Link href={getProfileLink()}>
-                  <Button className={buttonStyles.primaryBlack}>
-                    Min Profil
+                <ul>
+                  <li>
+                  <Link href={getProfileLink()}>
+                    <Button className={buttonStyles.underlinedBlack}
+                    style={{ width: '100%', textAlign: 'center', textDecoration: 'none' }}
+                    >
+                      Min Profil
+                    </Button>
+                  </Link>
+                </li>
+                <li>
+                  <Button 
+                    className={buttonStyles.filledRed} 
+                    onClick={handleSignOut}
+                  >
+                    LOGGA UT
                   </Button>
-                </Link>
+                </li>
+                </ul>
               ) : (
-                <Link href="/login">
-                  <Button className={buttonStyles.primaryBlack}>
+                  <Button 
+                  type="button" 
+                  className={buttonStyles.filledRed}
+                    onClick={openSignInModal}
+                  >
                     Logga in
                   </Button>
-                </Link>
               )}
             </section>
           </>
@@ -120,6 +146,8 @@ export default function Header() {
 
       {/* Mobile dropdown */}
       <MobileDropdown isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+      {/* Sign-in and sign-up pop-up */}
+      <SignInModal isOpen={isSignInModalOpen} onClose={() => setIsSignInModalOpen(false)} />
     </>
   );
 }

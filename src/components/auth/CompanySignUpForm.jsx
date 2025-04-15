@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { createBrowserClient } from '@supabase/ssr';
 import { useRouter } from 'next/navigation';
+import Input, { inputStyles } from '@/components/ui/Input/Input';
 
 export default function CompanySignUpForm({ onSuccess }) {
   const router = useRouter();
