@@ -19,10 +19,11 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
  * @param {Array<string>} props.student.knowledge - Array of student's skills/knowledge
  */
 const StudentProfileCard = ({ student }) => {
-  // Format the student name
+  // State for profile image
   const [profileImageUrl, setProfileImageUrl] = useState(null);
   const supabase = createClientComponentClient();
 
+  // UseEffect to get the public URL for profile picture from Supabase storage
   useEffect(() => {
     if (student.profile_picture) {
       const { data } = supabase
@@ -35,7 +36,7 @@ const StudentProfileCard = ({ student }) => {
       }
     }
   }, [student.profile_picture, supabase]);
-  
+
   // Format the education program display text
   const getProgramDisplay = (program) => {
     switch(program) {
@@ -47,9 +48,9 @@ const StudentProfileCard = ({ student }) => {
         return program?.toUpperCase() || '';
     }
   };
-  
+
   // Default profile image if none provided
-  const profileImage = student.profile_picture || '/placeholder-profile.jpg';
+  const profileImage = profileImageUrl || '/placeholder-profile.jpg';
 
   return (
     <article className={styles.studentCard}>
@@ -60,9 +61,9 @@ const StudentProfileCard = ({ student }) => {
 
       <div className={styles.cardContent}>
         <div className={styles.imageContainer}>
-          {profileImageUrl ? (
+          {profileImage ? (
             <Image 
-              src={profileImageUrl}
+              src={profileImage}
               alt={`Profilbild för ${student.first_name} ${student.last_name}`}
               width={100}
               height={100}
@@ -84,9 +85,10 @@ const StudentProfileCard = ({ student }) => {
             {getProgramDisplay(student.education_program)}
           </Label>
           
+          {/* Skills list with a limit of 4 random skills */}
           <ul className={styles.skillsList}>
-            {student.knowledge && student.knowledge.map((skill) => (
-              <li key={skill} className={styles.skillItem}>
+            {student.knowledge && student.knowledge.slice(0, 3).map((skill, index) => (
+              <li key={index} className={styles.skillItem}>
                 <span className={styles.bulletPoint}>•</span> {skill}
               </li>
             ))}

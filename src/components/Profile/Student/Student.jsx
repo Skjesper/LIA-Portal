@@ -25,7 +25,8 @@ const StudentProfileView = ({ student }) => {
     portfolio_url,
     bio,
     cv,
-    knowledge
+    knowledge,
+    previous_experience
   } = student;
 
   // Check if the current user is the owner of this student profile
@@ -182,6 +183,16 @@ const StudentProfileView = ({ student }) => {
                 height={58} 
               />
             </a>
+          </section>
+        )}
+
+          { previous_experience &&  (
+          <section className={styles.profileExperience}>
+           
+              <h2>Tidigare erfarenhet</h2>
+              <p>{previous_experience}</p>
+            
+            
           </section>
         )}
       </section>

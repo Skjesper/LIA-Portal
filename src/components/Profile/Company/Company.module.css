@@ -33,6 +33,7 @@
 
     display: flex;
     gap: 0.3rem;
+    flex-wrap: wrap;
 
 }
 
@@ -270,9 +271,16 @@ color: var(--Typography-Secondary);
 @media screen and (min-width: 768px) {
     .cardContainer {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
-        align-items: start;
         grid-auto-flow: dense;
+        align-items: end;
+      }
+
+    .profilePerks {
+
+        margin-top: auto;
     }
+
+
 }

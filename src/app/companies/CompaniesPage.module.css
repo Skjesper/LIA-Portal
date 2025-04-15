@@ -90,28 +90,20 @@
 }
 
 .companiesGrid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
-
-  width: 100%;
+  display: grid
+  ;
+    grid-template-columns: repeat(auto-fill, minmax(22.375rem, 1fr));
+    max-width: 120rem;
+    align-items: stretch;
+    gap: 1.5rem;
+    width: 100%;
 }
 
-/* Bas styling för kort som fungerar på de flesta skärmar */
-.companiesGrid > * {
-  flex: 0 1 calc(30% - 1rem); /* Anpassad för tre kort per rad */
-  min-width: 280px; /* Minsta bredd för ett kort innan det flyttas ner */
-  max-width: 380px; /* Maxbredd så att korten inte blir för stora */
-  margin: 0.25rem;
-}
 
-/* Mellan-stora skärmar: 2 kort per rad */
-@media (max-width: 1100px) and (min-width: 769px) {
-  .companiesGrid > * {
-    flex: 0 1 calc(45% - 1rem); /* Anpassad för två kort per rad */
-  }
-}
+
+
+
+
 
 /* Mobile styles */
 @media (max-width: 768px) {
@@ -133,8 +125,5 @@
     padding: 0;
   }
   
-  .companiesGrid > * {
-    flex: 1 1 100%; /* Fullt utrymme på mobil */
-    margin: 0.5rem 0;
-  }
+  
 }
