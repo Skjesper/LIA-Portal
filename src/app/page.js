@@ -10,7 +10,7 @@ import styles from '@/components/RSVPCard/RSVPCard.module.css';
 import YrgoHero from '@/components/Hero/YrgoHero';
 import StudentCard from '@/components/ui/StudentCard/StudentCard';
 import StudentCardSection from '@/components/ui/StudentCard/StudentCardSection';
-import TestCompanyById from './instruments/page';
+
 
 
 
