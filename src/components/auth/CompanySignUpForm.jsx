@@ -41,7 +41,10 @@ export default function CompanySignUpForm({ onSuccess, onClose }) {
       if (data?.user) {
         // Store company name in local storage to potentially use later
         localStorage.setItem('pendingCompanyName', companyName);
-        
+        localStorage.setItem('pendingEmail', email);
+        localStorage.setItem('pendingPassword', password);
+
+
         // Call onSuccess with the email address
         if (onSuccess) {
           onSuccess(email);

@@ -8,15 +8,18 @@ import EditStudentForm from './EditStudentForm';
 import EditCompanyForm from './EditCompanyForm';
 import Image from 'next/image';
 import Section, { sectionStyles } from '@/components/Sections/Sections';
+import SignInModal from '@/components/auth/SignInModal';
 
 export default function EditProfilePage() {
   const [user, setUser] = useState(null);
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
   const [error, setError] = useState(null);
   
   const router = useRouter();
   const supabase = createClientComponentClient();
+
   
   useEffect(() => {
     async function getProfile() {
@@ -26,10 +29,9 @@ export default function EditProfilePage() {
       const { data: { session }, error: authError } = await supabase.auth.getSession();
       
       if (authError || !session) {
-        setError('You must be logged in to edit your profile');
+        setError('Du behöver vara inloggad för att redigera din profil');
         setLoading(false);
-        // Redirect to login page after a short delay
-        setTimeout(() => router.push('/login'), 2000);
+        setIsSignInModalOpen(true);
         return;
       }
       
@@ -72,7 +74,6 @@ export default function EditProfilePage() {
   }, [supabase, router]);
   
   if (loading) return <div className="">Loading profile information...</div>;
-  if (error) return <div className="">{error}</div>;
 
 
 
@@ -128,13 +129,15 @@ const handleDeleteAccount = async () => {
 };
 
   return (
-    <div className="" 
+    <main className="" 
     style={{
       backgroundColor:"var(--background-MediumLight)", 
       display:"flex", 
       flexDirection:"column", 
       alignItems:"flex-start"
       }}>
+      <SignInModal isOpen={isSignInModalOpen} onClose={() => setIsSignInModalOpen(false)} />
+      {error && <div style={{ color: 'red', alignSelf: 'center' }}>{error}</div>}
       <Button
         type="button"
         onClick={() => router.back()}
@@ -190,6 +193,6 @@ const handleDeleteAccount = async () => {
         />
         RADERA KONTO
       </Button>
-    </div>
+    </main>
   );
 }
