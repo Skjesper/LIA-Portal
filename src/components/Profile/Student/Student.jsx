@@ -147,6 +147,7 @@ const StudentProfileView = ({ student }) => {
           </div>
         </section>
 
+      <section className={styles.infoCards}>
         <section className={styles.profileBio}>
           <h2>BIO</h2>
           <p>{bio}</p>
@@ -196,6 +197,7 @@ const StudentProfileView = ({ student }) => {
           </section>
         )}
       </section>
+    </section>
     </div>
   );
 };

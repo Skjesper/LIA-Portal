@@ -139,3 +139,27 @@
     top: 2rem;/* För att överlappa profilbilden */
     margin-top: auto;
   }
+
+
+  @media screen and (min-width: 768px) {
+
+    .infoCards {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Skapar två kolumner med lika bredd */
+        gap: 20px; /* Lägger till mellanrum mellan grid-elementen */
+        margin-top: 3rem;
+        
+    }
+   
+    .profileKnowledge, .profileBio, .profileCv, .profileExperience {
+        margin:0;
+        
+    }
+
+    .profilePerks {
+
+        margin-top: auto;
+    }
+
+
+}
