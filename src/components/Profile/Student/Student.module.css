@@ -23,6 +23,12 @@
     margin-bottom: 3rem;
 }
 
+.buttonContent {
+
+    display: flex;
+
+}
+
 .buttonContent{
 
     display: flex;
