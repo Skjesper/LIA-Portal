@@ -1,8 +1,19 @@
 'use client';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-import { createBrowserClient } from '@supabase/ssr';
-import { useRouter, usePathname, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+
+// Create a consistent way to access search params that works with Vercel
+function useCustomSearchParams() {
+  // Only execute this in the browser
+  if (typeof window !== 'undefined') {
+    const params = new URLSearchParams(window.location.search);
+    return {
+      get: (key) => params.get(key)
+    };
+  }
+  return { get: () => null };
+}
 
 const AuthContext = createContext();
 
@@ -12,18 +23,19 @@ export function AuthProvider({ children }) {
   const [userType, setUserType] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isVerifying, setIsVerifying] = useState(false);
-  /* const supabase = createBrowserClient(); */
   const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-
-  const supabase = createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-  );
+  
+  // Use a consistent Supabase client
+  const supabase = createClientComponentClient();
+  
+  // Custom search params implementation
+  const searchParams = useCustomSearchParams();
 
   // Handle email verification callback
   useEffect(() => {
+    // Only run this effect in the browser
+    if (typeof window === 'undefined') return;
+    
     // Check if we're on a page with a verification code
     const code = searchParams.get('code');
     const type = searchParams.get('type');
@@ -122,7 +134,7 @@ export function AuthProvider({ children }) {
     return () => {
       subscription?.unsubscribe();
     };
-  }, [supabase, router]);
+  }, [supabase]);
 
   const signOut = async () => {
     try {

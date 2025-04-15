@@ -1,9 +1,30 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import Link from 'next/link';
+
+// Custom hook for searchParams that works with SSR/Vercel
+function useCustomSearchParams() {
+  const [params, setParams] = useState({});
+  
+  useEffect(() => {
+    // Only run in browser
+    if (typeof window !== 'undefined') {
+      const searchParams = new URLSearchParams(window.location.search);
+      const paramsObj = {};
+      for (const [key, value] of searchParams.entries()) {
+        paramsObj[key] = value;
+      }
+      setParams(paramsObj);
+    }
+  }, []);
+  
+  return {
+    get: (key) => params[key] || null
+  };
+}
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -12,8 +33,7 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const redirectedFrom = searchParams.get('redirectedFrom');
+  const searchParams = useCustomSearchParams();
   
   const supabase = createClientComponentClient();
   
@@ -53,6 +73,7 @@ export default function LoginPage() {
       if (data?.user) {
         // Determine where to redirect after login
         const userType = data.user.user_metadata?.user_type || 'student';
+        const redirectedFrom = searchParams.get('redirectedFrom');
         
         if (redirectedFrom) {
           router.push(redirectedFrom);
