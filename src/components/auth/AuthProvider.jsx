@@ -1,6 +1,7 @@
 'use client';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { createBrowserClient } from '@supabase/ssr';
 import { useRouter } from 'next/navigation';
 
 // Create a consistent way to access search params that works with Vercel
@@ -26,7 +27,10 @@ export function AuthProvider({ children }) {
   const router = useRouter();
   
   // Use a consistent Supabase client
-  const supabase = createClientComponentClient();
+  const supabase = createBrowserClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  );
   
   // Custom search params implementation
   const searchParams = useCustomSearchParams();
