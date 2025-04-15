@@ -5,10 +5,26 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Button, { buttonStyles } from '@/components/ui/Button/Button';
 import useBreakpoint from '@/app/hooks/useBreakpoint';
+import { useAuth } from '@/components/auth/AuthProvider';
 
 export default function Footer() {
-
   const isMobile = useBreakpoint(768);
+  const { isLoggedIn, userType, userProfile } = useAuth();
+
+  // Get the appropriate profile link based on user type (copied from Header)
+  const getProfileLink = () => {
+    if (!isLoggedIn || !userProfile) return '/profile';
+    
+    const userId = userProfile.id;
+    
+    if (userType === 'student') {
+      return `/student/${userId}`;
+    } else if (userType === 'company') {
+      return `/company/${userId}`;
+    }
+  
+    return '/profile';
+  }
 
   if(!isMobile) return (
     <footer className={styles.footer}>
@@ -25,9 +41,15 @@ export default function Footer() {
               <Link href="/event" className={styles.link}>
                 Event
               </Link>
-              <Link href="/login" className={styles.link}>
-                <span className={buttonStyles.underlinedWhite}>Logga in</span>
-              </Link>
+              {isLoggedIn ? (
+                <Link href={getProfileLink()} className={styles.link}>
+                  <span className={buttonStyles.underlinedWhite}>Min Profil</span>
+                </Link>
+              ) : (
+                <Link href="/login" className={styles.link}>
+                  <span className={buttonStyles.underlinedWhite}>Logga in</span>
+                </Link>
+              )}
             </div>
     
             <div className={styles.linkGroupTwo}>
@@ -77,9 +99,15 @@ export default function Footer() {
             <Link href="/event" className={styles.link}>
               Event
             </Link>
-            <Link href="/login" className={styles.link}>
-              <span className={buttonStyles.underlinedWhite}>Logga in</span>
-            </Link>
+            {isLoggedIn ? (
+              <Link href={getProfileLink()} className={styles.link}>
+                <span className={buttonStyles.underlinedWhite}>Min Profil</span>
+              </Link>
+            ) : (
+              <Link href="/login" className={styles.link}>
+                <span className={buttonStyles.underlinedWhite}>Logga in</span>
+              </Link>
+            )}
           </div>
   
           <div className={styles.linkGroup}>
