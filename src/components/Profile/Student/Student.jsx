@@ -13,6 +13,7 @@ const StudentProfileView = ({ student }) => {
   const { isLoggedIn, userType, user } = useAuth();
   const [profileImageUrl, setProfileImageUrl] = useState(null);
   const [cvUrl, setCvUrl] = useState(null);
+  const [imageError, setImageError] = useState(false);
   const supabase = createClientComponentClient();
   
   const {
@@ -31,31 +32,52 @@ const StudentProfileView = ({ student }) => {
 
   // Check if the current user is the owner of this student profile
   const isStudentOwner = isLoggedIn && userType === 'student' && user?.id === id;
+  const PLACEHOLDER_IMAGE = '/placeholder/placeholder.png';
 
   // Get public URLs for stored files
   useEffect(() => {
     if (profile_picture) {
-      const { data } = supabase
-        .storage
-        .from('profile-picture')
-        .getPublicUrl(profile_picture);
-      
-      if (data?.publicUrl) {
-        setProfileImageUrl(data.publicUrl);
+      try {
+        const { data } = supabase
+          .storage
+          .from('profile-picture')
+          .getPublicUrl(profile_picture);
+        
+        if (data?.publicUrl) {
+          setProfileImageUrl(data.publicUrl);
+        }
+      } catch (error) {
+        console.error('Error getting profile image URL:', error);
+        setImageError(true);
       }
     }
     
     if (cv) {
-      const { data } = supabase
-        .storage
-        .from('cv')
-        .getPublicUrl(cv);
-      
-      if (data?.publicUrl) {
-        setCvUrl(data.publicUrl);
+      try {
+        const { data } = supabase
+          .storage
+          .from('cv')
+          .getPublicUrl(cv);
+        
+        if (data?.publicUrl) {
+          setCvUrl(data.publicUrl);
+        }
+      } catch (error) {
+        console.error('Error getting CV URL:', error);
       }
     }
   }, [profile_picture, cv, supabase]);
+
+  // Hantera bildfel
+  const handleImageError = () => {
+    console.log('Image failed to load, using placeholder');
+    setImageError(true);
+  };
+
+  // Avgör vilken bild som ska visas
+  const displayImageSrc = profileImageUrl && !imageError 
+    ? profileImageUrl 
+    : PLACEHOLDER_IMAGE;
 
   // Format program display
   const getProgramDisplay = (program) => {
@@ -108,14 +130,14 @@ const StudentProfileView = ({ student }) => {
         <section className={styles.studentHeader}>
           {/* Profile picture */}
           <div className={styles.profileImg}>
-            {profileImageUrl && (
-              <Image 
-              src={profileImageUrl}
+            <Image 
+              src={displayImageSrc}
               alt={`Profilbild för ${first_name} ${last_name}`}
               fill
               style={{ objectFit: 'cover' }}
+              onError={handleImageError}
+              priority
             />
-            )}
           </div>
 
           {/* Profile information */}
@@ -196,13 +218,10 @@ const StudentProfileView = ({ student }) => {
           </section>
         )}
 
-          { previous_experience &&  (
+          {previous_experience && (
           <section className={styles.profileExperience}>
-           
               <h2>Tidigare erfarenhet</h2>
               <p>{previous_experience}</p>
-            
-            
           </section>
         )}
       </section>
