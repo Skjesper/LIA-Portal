@@ -30,10 +30,10 @@
     padding: 0.75rem;
     box-sizing: border-box;
     background-color: transparent;
-    color: var(--Background-Dark);
+    color: var(--Typography-Primary);
     font-size: 1.125rem;
     border-radius: 0.25rem;
-    border: 2px solid var(--Background-Dark);
+    border: 2px solid var(--Typography-Primary);
   }
   
 .inputBlack::placeholder {
@@ -45,9 +45,9 @@ color: var(--Greyscale-40);
     border: 2px solid var(--Button-State-Disabled);
 }
 
-.inputBlack:required:invalid {
+/* .inputBlack:required:invalid {
     border: 2px solid var(--Primary-Red);
-}
+} */
 
 /* Required */
 
