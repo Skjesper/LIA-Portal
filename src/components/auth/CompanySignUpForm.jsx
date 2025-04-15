@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { createBrowserClient } from '@supabase/ssr';
 import { useRouter } from 'next/navigation';
 import Input, { inputStyles } from '@/components/ui/Input/Input';
+import Button, { buttonStyles } from '@/components/ui/Button/Button';
 
 export default function CompanySignUpForm({ onSuccess }) {
   const router = useRouter();
@@ -69,7 +70,10 @@ export default function CompanySignUpForm({ onSuccess }) {
   };
 
   return (
-    <form onSubmit={handleSignUp}>
+    <form 
+      onSubmit={handleSignUp}
+      style={{display:"flex", flexDirection:"column", gap:"0.5rem"}}
+    >
       {message && (
         <div className={message.type === 'success' ? 'success' : 'error'}>
           {message.text}
@@ -77,8 +81,8 @@ export default function CompanySignUpForm({ onSuccess }) {
       )}
       
       <div className="formGroup">
-        <label htmlFor="companyName">*FÖRETAGSNAMS</label>
-        <input
+        <label htmlFor="companyName">*FÖRETAGSNAMN</label>
+        <Input
           type="text"
           id="companyName"
           value={companyName}
@@ -90,7 +94,7 @@ export default function CompanySignUpForm({ onSuccess }) {
       
       <div className="formGroup">
         <label htmlFor="email">*EMAIL</label>
-        <input
+        <Input
           type="email"
           id="email"
           value={email}
@@ -102,7 +106,7 @@ export default function CompanySignUpForm({ onSuccess }) {
       
       <div className="formGroup">
         <label htmlFor="password">*LÖSENORD</label>
-        <input
+        <Input
           type="password"
           id="password"
           value={password}
@@ -113,12 +117,12 @@ export default function CompanySignUpForm({ onSuccess }) {
         />
       </div>
       
-      <button
+      <Button
         type="submit"
         disabled={loading}
       >
         {loading ? 'Creating account...' : 'SKAPA KONTO'}
-      </button>
+      </Button>
     </form>
   );
 }

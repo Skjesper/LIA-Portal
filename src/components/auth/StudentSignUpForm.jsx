@@ -73,7 +73,10 @@ export default function StudentSignUpForm({ onSuccess }) {
   };
 
   return (
-    <form onSubmit={handleSignUp}>
+    <form 
+      onSubmit={handleSignUp}
+      style={{display:"flex", flexDirection:"column", gap:"0.5rem"}}
+    >
       {message && (
         <div className={message.type === 'success' ? 'success' : 'error'}>
           {message.text}
@@ -137,6 +140,7 @@ export default function StudentSignUpForm({ onSuccess }) {
         type="submit"
         disabled={loading}
         className={buttonStyles.filledWhite}
+        style={{width:"12rem", padding:"0.875rem 2rem", alignSelf:"center"}}
       >
         {loading ? 'SKAPAR KONTO...' : 'SKAPA KONTO'}
       </Button>
