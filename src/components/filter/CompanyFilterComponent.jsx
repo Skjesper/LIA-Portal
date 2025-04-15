@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import styles from '@/components/filter/FilterComponent.module.css';
 
@@ -28,7 +28,6 @@ const FilterSection = ({
 }) => {
   const [options, setOptions] = useState(predefinedOptions || []);
   const [selectedOptions, setSelectedOptions] = useState(initialFilterValues || []);
-  const [pendingChange, setPendingChange] = useState(null);
   const supabase = createClientComponentClient();
 
   // Update selectedOptions when initialFilterValues changes
@@ -37,14 +36,6 @@ const FilterSection = ({
       setSelectedOptions(initialFilterValues);
     }
   }, [initialFilterValues]);
-
-  // Handle pending filter changes in an effect
-  useEffect(() => {
-    if (pendingChange !== null && onFilterChange) {
-      onFilterChange(column, pendingChange);
-      setPendingChange(null);
-    }
-  }, [pendingChange, onFilterChange, column]);
 
   // Fetch available options from the database if not provided
   useEffect(() => {
@@ -73,7 +64,7 @@ const FilterSection = ({
           if (typeof data[0]?.[column] === 'string') {
             uniqueValues = [...new Set(data.map(item => item[column]))];
           } 
-          // For array columns
+          // For array columns (like skills/knowledge)
           else if (Array.isArray(data[0]?.[column])) {
             const allValues = data.flatMap(item => item[column] || []);
             uniqueValues = [...new Set(allValues)];
@@ -109,18 +100,27 @@ const FilterSection = ({
         updated = prev.includes(optionValue) ? [] : [optionValue];
       }
       
-      // Schedule the notification for the next render cycle
-      setPendingChange(updated);
+      // Notify parent component about changes after state updates
+      setTimeout(() => {
+        if (onFilterChange) {
+          onFilterChange(column, updated);
+        }
+      }, 0);
       
       return updated;
     });
-  }, [multiSelect]);
+  }, [column, multiSelect, onFilterChange]);
 
   // Clear all selections
   const clearSelections = useCallback(() => {
     setSelectedOptions([]);
-    setPendingChange([]);
-  }, []);
+    // Notify parent after state is cleared
+    setTimeout(() => {
+      if (onFilterChange) {
+        onFilterChange(column, []);
+      }
+    }, 0);
+  }, [column, onFilterChange]);
 
   return (
     <section className={styles.filterSection} aria-labelledby={`filter-${column}`}>
@@ -178,21 +178,47 @@ const CompanyFilterComponent = ({
   const targetTable = 'company_profiles';
   const [activeFilters, setActiveFilters] = useState(initialFilters || {});
   const [isInitialLoad, setIsInitialLoad] = useState(!initialData);
+  const [isClient, setIsClient] = useState(false);
+  const [allData, setAllData] = useState([]);
+  const filteringRef = useRef(false);
+  const initialPropsAppliedRef = useRef(false);
   const supabase = createClientComponentClient();
 
-  // Use initialData and initialFilters if provided
+  // Markera att vi är på klientsidan efter första renderingen
   useEffect(() => {
-    if (initialData && initialFilters) {
-      setActiveFilters(initialFilters);
-      if (onFiltersApplied) {
-        onFiltersApplied(initialData, initialFilters);
+    setIsClient(true);
+  }, []);
+
+  // Handle initial data and filters without causing infinite loops
+  useEffect(() => {
+    // Only run this once
+    if (initialPropsAppliedRef.current) return;
+    
+    if (initialData) {
+      setAllData(initialData);
+      
+      if (initialFilters) {
+        setActiveFilters(initialFilters);
       }
+      
+      if (onFiltersApplied) {
+        // Apply initial filters
+        if (initialFilters && Object.keys(initialFilters).length > 0) {
+          const filteredData = filterData(initialData, initialFilters);
+          onFiltersApplied(filteredData, initialFilters);
+        } else {
+          onFiltersApplied(initialData, {});
+        }
+      }
+      
       setIsInitialLoad(false);
+      initialPropsAppliedRef.current = true;
     }
   }, [initialData, initialFilters, onFiltersApplied]);
 
   // Fetch initial data on component mount if no initialData provided
   useEffect(() => {
+    if (initialPropsAppliedRef.current) return;
     if (!initialData && isInitialLoad) {
       const fetchInitialData = async () => {
         try {
@@ -203,10 +229,14 @@ const CompanyFilterComponent = ({
             return;
           }
           
-          if (onFiltersApplied && data) {
-            onFiltersApplied(data, {});
+          setAllData(data || []);
+          
+          if (onFiltersApplied) {
+            onFiltersApplied(data || [], {});
             setIsInitialLoad(false);
           }
+          
+          initialPropsAppliedRef.current = true;
         } catch (error) {
           console.error('Error loading initial data:', error);
         }
@@ -216,10 +246,73 @@ const CompanyFilterComponent = ({
     }
   }, [supabase, targetTable, onFiltersApplied, isInitialLoad, initialData]);
 
+  // Helper function to filter data - no state updates here
+  const filterData = (data, filters) => {
+    // If no filters or data, return data as is
+    if (!filters || Object.keys(filters).length === 0 || !data || data.length === 0) {
+      return data || [];
+    }
+    
+    let filteredData = [...data];
+    
+    // Apply each filter
+    Object.entries(filters).forEach(([column, values]) => {
+      if (values && values.length > 0) {
+        if (column === 'accepts_digital_designer' || column === 'accepts_webb_developer') {
+          // Endast filtrera om "true" är vald
+          if (values.includes('true')) {
+            filteredData = filteredData.filter(company => company[column] === true);
+          }
+        } 
+        else if (column === 'city') {
+          filteredData = filteredData.filter(company => {
+            if (!company[column]) return false;
+            
+            // Hantera både string och potentiellt JSON-string format
+            let cityValue = company[column];
+            try {
+              // Om det är en JSON-string, gör om den till string
+              if (typeof cityValue === 'string' && (cityValue.startsWith('{') || cityValue.startsWith('['))) {
+                cityValue = JSON.parse(cityValue);
+                // Om det blev en array/objekt, extrahera värden
+                if (Array.isArray(cityValue)) {
+                  cityValue = cityValue.join(' ');
+                } else if (typeof cityValue === 'object') {
+                  cityValue = Object.values(cityValue).join(' ');
+                }
+              }
+            } catch (e) {
+              // Ignorera parsningsfel och använd värdet som det är
+            }
+            
+            // Konvertera till string och gör case-insensitive jämförelse
+            const cityStr = String(cityValue).toLowerCase();
+            return values.some(city => cityStr.includes(city.toLowerCase()));
+          });
+        }
+        else if (column === 'location_status') {
+          filteredData = filteredData.filter(company => {
+            if (!company[column]) return false;
+            return values.includes(company[column]);
+          });
+        }
+        else {
+          filteredData = filteredData.filter(company => 
+            values.includes(company[column])
+          );
+        }
+      }
+    });
+    
+    return filteredData;
+  };
+
   // Safely update filters without causing state update errors
   const handleFilterChange = useCallback((column, selectedValues) => {
+    if (filteringRef.current) return; // Prevent overlapping updates
+    filteringRef.current = true;
+    
     setActiveFilters(prev => {
-      // Create a new object to avoid reference issues
       const updatedFilters = { ...prev };
       
       if (selectedValues && selectedValues.length > 0) {
@@ -228,115 +321,18 @@ const CompanyFilterComponent = ({
         delete updatedFilters[column];
       }
       
+      // Apply filters separately to avoid dependency cycles
+      setTimeout(() => {
+        const filteredData = filterData(allData, updatedFilters);
+        if (onFiltersApplied) {
+          onFiltersApplied(filteredData, updatedFilters);
+        }
+        filteringRef.current = false;
+      }, 10);
+      
       return updatedFilters;
     });
-  }, []);
-
-  // Apply filters when they change, with debounce to avoid too many calls
-  useEffect(() => {
-    // Skip if it's the initial load or we don't have any active filters yet
-    if (isInitialLoad) {
-      return;
-    }
-    
-    const applyFilters = async () => {
-      try {
-        let query = supabase.from(targetTable).select('*');
-        
-        // Apply each active filter
-        Object.entries(activeFilters).forEach(([column, values]) => {
-          if (values && values.length > 0) {
-            // Special handling for boolean columns
-            if (column === 'accepts_digital_designer' || column === 'accepts_webb_developer') {
-              // Assuming the values are strings like 'true', 'false'
-              const booleanValues = values.map(v => v === 'true');
-              query = query.in(column, booleanValues);
-            } 
-            // Special handling for city which may have strange formatting 
-            else if (column === 'city') {
-              // Create an OR condition for each city value
-              values.forEach((city, index) => {
-                // For the first city, use .ilike, for subsequent cities use .or
-                if (index === 0) {
-                  query = query.ilike(column, `%${city}%`);
-                } else {
-                  query = query.or(`${column}.ilike.%${city}%`);
-                }
-              });
-            }
-            // For regular columns
-            else {
-              query = query.in(column, values);
-            }
-          }
-        });
-        
-        const { data, error } = await query;
-        
-        if (error) {
-          console.error('Error applying filters:', error);
-          // Försök med en enklare fråga om det var ett fel med filtreringen
-          const { data: fallbackData, error: fallbackError } = await supabase
-            .from(targetTable)
-            .select('*');
-            
-          if (fallbackError) {
-            console.error('Failed to fetch fallback data:', fallbackError);
-            return;
-          }
-          
-          // Manuell filtrering på klientsidan som backup
-          let filteredData = fallbackData;
-          
-          Object.entries(activeFilters).forEach(([column, values]) => {
-            if (values && values.length > 0) {
-              if (column === 'accepts_digital_designer' || column === 'accepts_webb_developer') {
-                // För boolean-värden
-                const wantTrue = values.includes('true');
-                filteredData = filteredData.filter(item => 
-                  wantTrue ? item[column] === true : true
-                );
-              } else if (column === 'city') {
-                // För städer, gör enkel delsträngsmatchning
-                filteredData = filteredData.filter(item => {
-                  const cityValue = String(item[column] || '');
-                  return values.some(city => 
-                    cityValue.toLowerCase().includes(city.toLowerCase())
-                  );
-                });
-              } else if (column === 'location_status') {
-                // För location_status
-                filteredData = filteredData.filter(item => 
-                  values.includes(item[column])
-                );
-              }
-            }
-          });
-          
-          // Använd den manuellt filtrerade datan
-          if (onFiltersApplied) {
-            onFiltersApplied(filteredData, activeFilters);
-          }
-          
-          return;
-        }
-        
-        if (onFiltersApplied && data) {
-          onFiltersApplied(data, activeFilters);
-        }
-      } catch (error) {
-        console.error('Error in applyFilters:', error);
-      }
-    };
-    
-    // Create a debounced function to avoid applying filters too frequently
-    const timeoutId = setTimeout(() => {
-      applyFilters();
-    }, 100);
-    
-    // Cleanup
-    return () => clearTimeout(timeoutId);
-  }, [activeFilters, supabase, targetTable, onFiltersApplied, isInitialLoad]);
+  }, [allData, onFiltersApplied]);
 
   // Get initialFilterValues for each filter section
   const getInitialFilterValues = useCallback((column) => {
@@ -345,6 +341,11 @@ const CompanyFilterComponent = ({
     }
     return [];
   }, [activeFilters]);
+
+  // If not on client yet, show empty container
+  if (!isClient) {
+    return <aside className={styles.filterContainer} aria-label="Filtreringsverktyg för företag"></aside>;
+  }
 
   return (
     <aside className={styles.filterContainer} aria-label="Filtreringsverktyg för företag">
@@ -385,7 +386,6 @@ const CompanyFilterComponent = ({
         <section aria-labelledby="accepts-heading">
           <h2 id="accepts-heading" className={styles.title}>ACCEPTERAR</h2>
           <FilterSection
-            
             tableName={targetTable}
             column="accepts_digital_designer"
             options={[
@@ -397,7 +397,6 @@ const CompanyFilterComponent = ({
           />
           
           <FilterSection
-           
             tableName={targetTable}
             column="accepts_webb_developer"
             options={[

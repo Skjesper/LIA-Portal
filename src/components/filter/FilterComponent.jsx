@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import styles from '@/components/filter/FilterComponent.module.css';
+import dynamic from 'next/dynamic';
 
 /**
  * A reusable filter component for filtering data
@@ -100,10 +101,12 @@ const FilterSection = ({
         updated = prev.includes(optionValue) ? [] : [optionValue];
       }
       
-      // Notify parent component about changes
-      if (onFilterChange) {
-        onFilterChange(column, updated);
-      }
+      // Notify parent component after state updates
+      setTimeout(() => {
+        if (onFilterChange) {
+          onFilterChange(column, updated);
+        }
+      }, 0);
       
       return updated;
     });
@@ -112,9 +115,12 @@ const FilterSection = ({
   // Clear all selections
   const clearSelections = useCallback(() => {
     setSelectedOptions([]);
-    if (onFilterChange) {
-      onFilterChange(column, []);
-    }
+    // Notify parent after state is cleared
+    setTimeout(() => {
+      if (onFilterChange) {
+        onFilterChange(column, []);
+      }
+    }, 0);
   }, [column, onFilterChange]);
 
   return (
@@ -158,15 +164,8 @@ const FilterSection = ({
   );
 };
 
-/**
- * Main filter component that combines multiple filter sections
- * @param {Object} props
- * @param {string} props.targetTable - The name of the main table to filter results from
- * @param {Function} props.onFiltersApplied - Callback with filtered data and filter state
- * @param {Array} props.initialData - Initial data to use instead of fetching
- * @param {Object} props.initialFilters - Initial filters to apply
- */
-const FilterComponent = ({
+// Komponenten utan SSR för att undvika hydration-problem
+const FilterComponentWithoutSSR = ({
   targetTable = 'student_profiles',
   onFiltersApplied,
   initialData,
@@ -174,21 +173,47 @@ const FilterComponent = ({
 }) => {
   const [activeFilters, setActiveFilters] = useState(initialFilters || {});
   const [isInitialLoad, setIsInitialLoad] = useState(!initialData);
+  const [isClient, setIsClient] = useState(false);
+  const [allData, setAllData] = useState([]);
+  const filteringRef = useRef(false);
+  const initialPropsAppliedRef = useRef(false);
   const supabase = createClientComponentClient();
 
-  // Use initialData and initialFilters if provided
+  // Markera att vi är på klientsidan efter första renderingen
   useEffect(() => {
-    if (initialData && initialFilters) {
-      setActiveFilters(initialFilters);
-      if (onFiltersApplied) {
-        onFiltersApplied(initialData, initialFilters);
+    setIsClient(true);
+  }, []);
+
+  // Handle initial data and filters without causing infinite loops
+  useEffect(() => {
+    // Only run this once
+    if (initialPropsAppliedRef.current) return;
+    
+    if (initialData) {
+      setAllData(initialData);
+      
+      if (initialFilters) {
+        setActiveFilters(initialFilters);
       }
+      
+      if (onFiltersApplied) {
+        // Apply initial filters
+        if (initialFilters && Object.keys(initialFilters).length > 0) {
+          const filteredData = filterData(initialData, initialFilters);
+          onFiltersApplied(filteredData, initialFilters);
+        } else {
+          onFiltersApplied(initialData, {});
+        }
+      }
+      
       setIsInitialLoad(false);
+      initialPropsAppliedRef.current = true;
     }
   }, [initialData, initialFilters, onFiltersApplied]);
 
   // Fetch initial data on component mount if no initialData provided
   useEffect(() => {
+    if (initialPropsAppliedRef.current) return;
     if (!initialData && isInitialLoad) {
       const fetchInitialData = async () => {
         try {
@@ -199,10 +224,14 @@ const FilterComponent = ({
             return;
           }
           
+          setAllData(data || []);
+          
           if (onFiltersApplied && data) {
             onFiltersApplied(data, {});
             setIsInitialLoad(false);
           }
+          
+          initialPropsAppliedRef.current = true;
         } catch (error) {
           console.error('Error loading initial data:', error);
         }
@@ -212,10 +241,79 @@ const FilterComponent = ({
     }
   }, [supabase, targetTable, onFiltersApplied, isInitialLoad, initialData]);
 
+  // Helper function to filter data - no state updates here
+  const filterData = (data, filters) => {
+    // If no filters or data, return data as is
+    if (!filters || Object.keys(filters).length === 0 || !data || data.length === 0) {
+      return data || [];
+    }
+    
+    let filteredData = [...data];
+    
+    // Apply each filter
+    Object.entries(filters).forEach(([column, values]) => {
+      if (values && values.length > 0) {
+        // Specialhantering för knowledge (array-kolumn)
+        if (column === 'knowledge') {
+          // Mappa UI-värden till databasvärden
+          const correctCaseValues = values.map(v => {
+            if (typeof v === 'string') {
+              switch(v.toUpperCase()) {
+                case 'FIGMA': return 'Figma';
+                case 'ILLUSTRATOR': return 'Illustrator';
+                case 'PHOTOSHOP': return 'Photoshop';
+                case 'UNREAL ENGINE': return 'Unreal engine';
+                case 'WEBFLOW': return 'Webflow';
+                case 'FRAMER': return 'Framer';
+                case 'AFTER EFFECTS': return 'After Effects';
+                case 'BLENDER': return 'Blender';
+                case 'HTML': return 'HTML';
+                case 'CSS': return 'CSS';
+                case 'JAVASCRIPT': return 'JavaScript';
+                case 'SQL': return 'SQL';
+                default: return v;
+              }
+            }
+            return String(v);
+          });
+          
+          // Kontrollera knowledge array-innehåll
+          filteredData = filteredData.filter(student => {
+            // Om studenten inte har knowledge-property eller det inte är en array
+            if (!student.knowledge || !Array.isArray(student.knowledge)) {
+              return false;
+            }
+            
+            // Kontrollera om studenten har någon av de valda kompetenserna
+            return correctCaseValues.some(value => 
+              student.knowledge.includes(value)
+            );
+          });
+        } 
+        // Specialhantering för education_program (single-select)
+        else if (column === 'education_program') {
+          filteredData = filteredData.filter(student => 
+            values.includes(student[column])
+          );
+        }
+        // Hantering för övriga filter (multi-select)
+        else {
+          filteredData = filteredData.filter(student => 
+            values.includes(student[column])
+          );
+        }
+      }
+    });
+    
+    return filteredData;
+  };
+
   // Safely update filters without causing state update errors
   const handleFilterChange = useCallback((column, selectedValues) => {
+    if (filteringRef.current) return; // Prevent overlapping updates
+    filteringRef.current = true;
+    
     setActiveFilters(prev => {
-      // Create a new object to avoid reference issues
       const updatedFilters = { ...prev };
       
       if (selectedValues && selectedValues.length > 0) {
@@ -224,85 +322,18 @@ const FilterComponent = ({
         delete updatedFilters[column];
       }
       
+      // Apply filters separately to avoid dependency cycles
+      setTimeout(() => {
+        const filteredData = filterData(allData, updatedFilters);
+        if (onFiltersApplied) {
+          onFiltersApplied(filteredData, updatedFilters);
+        }
+        filteringRef.current = false;
+      }, 10);
+      
       return updatedFilters;
     });
-  }, []);
-
-  // Apply filters when they change, with debounce to avoid too many calls
-  useEffect(() => {
-    // Skip if it's the initial load or we don't have any active filters yet
-    if (isInitialLoad) {
-      return;
-    }
-    
-    const applyFilters = async () => {
-      try {
-        let query = supabase.from(targetTable).select('*');
-        
-        // Apply each active filter
-        Object.entries(activeFilters).forEach(([column, values]) => {
-          if (values && values.length > 0) {
-            // För array-kolumnen knowledge
-            if (column === 'knowledge') {
-              // För knowledge, använd case insensitive jämförelse eftersom databasen har "Figma" men i UI visar vi "FIGMA"
-              // Vi använder den exakta textfallet som finns i databasen
-              // Anpassa värdena baserat på databasens format
-              const correctCaseValues = values.map(v => {
-                // Konvertera UI-värde till databas-format
-                if (typeof v === 'string') {
-                  // Konvertera till korrekt format baserat på vad som finns i databasen
-                  switch(v.toUpperCase()) {
-                    case 'FIGMA': return 'Figma';
-                    case 'ILLUSTRATOR': return 'Illustrator';
-                    case 'PHOTOSHOP': return 'Photoshop';
-                    case 'UNREAL ENGINE': return 'Unreal engine';
-                    case 'WEBFLOW': return 'Webflow';
-                    case 'FRAMER': return 'Framer';
-                    case 'AFTER EFFECTS': return 'After Effects';
-                    case 'BLENDER': return 'Blender';
-                    case 'HTML': return 'HTML';
-                    case 'CSS': return 'CSS';
-                    case 'JAVASCRIPT': return 'JavaScript';
-                    case 'SQL': return 'SQL';
-                    default: return v; // Använd originalvärdet om ingen mapping finns
-                  }
-                }
-                return String(v);
-              });
-              
-              query = query.overlaps(column, correctCaseValues);
-            } else {
-              // För vanliga kolumner som education_program
-              query = query.in(column, values);
-            }
-          }
-        });
-        
-        const { data, error } = await query;
-        
-        if (error) {
-          console.error('Error applying filters:', error, JSON.stringify(error));
-          // Alternativt logga hela query-objektet för att se vad som skickas till Supabase
-          console.error('Query state:', activeFilters);
-          return;
-        }
-        
-        if (onFiltersApplied && data) {
-          onFiltersApplied(data, activeFilters);
-        }
-      } catch (error) {
-        console.error('Error in applyFilters:', error);
-      }
-    };
-    
-    // Create a debounced function to avoid applying filters too frequently
-    const timeoutId = setTimeout(() => {
-      applyFilters();
-    }, 100);
-    
-    // Cleanup
-    return () => clearTimeout(timeoutId);
-  }, [activeFilters, supabase, targetTable, onFiltersApplied, isInitialLoad]);
+  }, [allData, onFiltersApplied]);
 
   // Get initialFilterValues for each filter section
   const getInitialFilterValues = useCallback((column) => {
@@ -311,6 +342,11 @@ const FilterComponent = ({
     }
     return [];
   }, [activeFilters]);
+
+  // If not on client yet, show empty container
+  if (!isClient) {
+    return <aside className={styles.filterContainer} aria-label="Filtreringsverktyg"></aside>;
+  }
 
   return (
     <aside className={styles.filterContainer} aria-label="Filtreringsverktyg">
@@ -410,5 +446,10 @@ const FilterComponent = ({
     </aside>
   );
 };
+
+// Exportera en dynamisk version utan SSR
+const FilterComponent = dynamic(() => Promise.resolve(FilterComponentWithoutSSR), {
+  ssr: false
+});
 
 export default FilterComponent;
