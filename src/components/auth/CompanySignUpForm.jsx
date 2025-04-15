@@ -87,6 +87,7 @@ export default function CompanySignUpForm({ onSuccess }) {
           id="companyName"
           value={companyName}
           onChange={(e) => setCompanyName(e.target.value)}
+          className={inputStyles.inputWhite}
           required
           placeholder="ex. Företag AB"
         />
@@ -99,6 +100,7 @@ export default function CompanySignUpForm({ onSuccess }) {
           id="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          className={inputStyles.inputWhite}
           required
           placeholder="exempel@mail.com"
         />
@@ -111,6 +113,7 @@ export default function CompanySignUpForm({ onSuccess }) {
           id="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          className={inputStyles.inputWhite}
           required
           minLength={6}
           placeholder="Välj ett lösenord"
@@ -120,6 +123,8 @@ export default function CompanySignUpForm({ onSuccess }) {
       <Button
         type="submit"
         disabled={loading}
+        className={buttonStyles.filledWhite}
+        style={{width:"12rem", padding:"0.875rem 2rem", alignSelf:"center"}}
       >
         {loading ? 'Creating account...' : 'SKAPA KONTO'}
       </Button>

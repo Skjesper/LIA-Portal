@@ -51,11 +51,11 @@ export default function SignUpModal({ isOpen, onClose, parentClose }) {
           />
         </Button>
 
-        <article className={style.logInContent}>
+        <article className={style.signUpContent}>
           <h3 className={style.formTitle}>SKAPA KONTO</h3>
           <p className={style.formText}>Välj om du är studerande eller från ett företag för att skapa ett konto</p>
           
-          <fieldset className={style.logInContentControler}>
+          <fieldset className={style.signUpContentControler}>
             <button 
               className={activeTab === 'student' ? style.active : style.inactive}
               onClick={() => setActiveTab('student')}
@@ -73,13 +73,11 @@ export default function SignUpModal({ isOpen, onClose, parentClose }) {
           </fieldset>
           
           {/* Form container */}
-          <div className="formContainer">
             {activeTab === 'student' ? (
               <StudentSignUpForm onSuccess={parentClose || onClose} />
             ) : (
               <CompanySignUpForm onSuccess={parentClose || onClose} />
             )}
-          </div>
         </article>
       </div>
     </div>

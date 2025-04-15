@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { createBrowserClient } from '@supabase/ssr';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useRouter } from 'next/navigation';
 import SignUpModal from './SignUpModal';
 import Button, { buttonStyles } from '@/components/ui/Button/Button';
@@ -14,9 +15,10 @@ export default function SignInModal({ isOpen, onClose }) {
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [signedIn, setSignedIn] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
-  
-  const supabase = createBrowserClient(
+
+  const supabase = createClientComponentClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
   );
@@ -31,12 +33,13 @@ export default function SignInModal({ isOpen, onClose }) {
         email,
         password,
       });
-
+      
       if (error) {
         throw error;
       }
-
+      
       if (data?.user) {
+        setSignedIn(true);
         setMessage({
           type: 'success',
           text: 'Sign in successful! Redirecting...'
@@ -49,8 +52,7 @@ export default function SignInModal({ isOpen, onClose }) {
         // Redirect after short delay
         setTimeout(() => {
           onClose(); // Close the modal
-          router.push('/dashboard'); // Redirect to dashboard or appropriate page
-        }, 1000);
+        }, 2000);
       }
     } catch (error) {
       setMessage({
@@ -80,12 +82,11 @@ export default function SignInModal({ isOpen, onClose }) {
   // Don't render anything if modal is closed
   if (!isOpen) return null;
 
-  return (
+  if (!signedIn) return (
     <div className="modalOverlay">
       <div className={style.modalContainer}>
         <div className={style.modalNavbar}>
           <button 
-            onClick={openSignUp}
             className={style.logInNav}
           >
             LOGGA IN
@@ -153,5 +154,44 @@ export default function SignInModal({ isOpen, onClose }) {
         </form>
       </div>
     </div>
+  );
+
+  return (
+    <div className="modalOverlay">
+    <div className={style.modalContainer}>
+      <div className={style.modalNavbar}>
+        <button 
+          onClick={openSignUp}
+          className={style.logInNav}
+        >
+          LOGGA IN
+        </button>
+        <button 
+          onClick={openSignUp}
+          className={style.signUpNav}
+        >
+          SKAPA KONTO
+        </button>
+      </div>
+      <Button className={buttonStyles.underlinedBlack} onClick={onClose} style={{alignSelf: "flex-end", marginRight: "1.5rem"}}>
+        STÄNG
+        <Image
+          src="/icons/exit-black.svg"
+          alt="icon for exiting"
+          width={14}
+          height={14}
+        />
+      </Button>
+        <h3 className={style.formTitle}>VÄLKOMMEN TILLBAKA!</h3>
+        <Image
+          src="/icons/check_circle_black.svg"
+          alt="icon signaling success"
+          width={73}
+          height={73}
+          style={{margin:"1rem  0 1.5rem 0"}}
+        />
+        <p className={style.formText} style={{marginBottom:"3rem"}}>Du är nu inloggad</p>
+    </div>
+  </div>
   );
 }
