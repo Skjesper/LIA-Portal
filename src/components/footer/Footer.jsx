@@ -9,12 +9,63 @@ import useBreakpoint from '@/app/hooks/useBreakpoint';
 export default function Footer() {
 
   const isMobile = useBreakpoint(768);
+
+  if(!isMobile) return (
+    <footer className={styles.footer}>
+      <div className={styles.logoContainer}>
+        <Image
+          src="/logos/white-main.svg"
+          alt="Huvudlogotyp"
+          className={styles.logoContainerImg}
+          width={243}
+          height={221}
+        />
+        <nav className={styles.Nav}>
+            <div className={styles.linkGroupOne}>
+              <Link href="/event" className={styles.link}>
+                Event
+              </Link>
+              <Link href="/login" className={styles.link}>
+                <span className={buttonStyles.underlinedWhite}>Logga in</span>
+              </Link>
+            </div>
+    
+            <div className={styles.linkGroupTwo}>
+              <Link href="/companies" className={styles.link}>
+                Företag
+              </Link>
+              <Link href="/students" className={styles.link}>
+                Studerande
+              </Link>
+            </div>
+    
+            <div className={styles.linkGroupThree}>
+              <Link href="https://linkedin.com" className={styles.link}>
+                Linkedin
+              </Link>
+              <Link href="/event" className={styles.link}>
+                Event
+              </Link>
+            </div>
+        </nav>
+      </div>
+        <Image 
+          src="/logos/yrgo-logo-white-flipped.svg"
+          alt="Yrgo logotyp"
+          width={120}
+          height={40}
+          className={styles.logo}
+        />
+    </footer>
+  );
+
   return (
     <footer className={styles.footer}>
       <div className={styles.logoContainer}>
         <Image
           src="/logos/white-main.svg"
           alt="Huvudlogotyp"
+          className={styles.logoContainerImg}
           width={130}
           height={45}
         />
