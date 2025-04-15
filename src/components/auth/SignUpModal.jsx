@@ -27,7 +27,7 @@ export default function SignUpModal({ isOpen, onClose, parentClose }) {
   return (
     <div className="modalOverlay">
       <div className={style.modalContainer}>
-        <div className={style.modalNavbar}>
+        <nav className={style.modalNavbar}>
             <button 
               onClick={handleBack}
               className={style.logInNav}
@@ -36,49 +36,51 @@ export default function SignUpModal({ isOpen, onClose, parentClose }) {
             </button>
             <button 
               /* onClick={openSignUp} */
-              className={style.signInNav}
+              className={style.signUpNav}
             >
               SKAPA KONTO
             </button>
-        </div>
+        </nav>
         <Button className={buttonStyles.underlinedWhite} /* onClick={onClose} */ style={{alignSelf: "flex-end", marginRight: "1.5rem"}}>
           STÄNG
           <Image
             src="/icons/exit-white.svg"
             alt="icon for exiting"
-            width={10}
-            height={10}
-            style={{ marginLeft: '0.5rem' }}
+            width={14}
+            height={14}
           />
         </Button>
-        
-        <h3 className={style.formTitle}>SKAPA KONTO</h3>
-        <p className={style.formText}>Välj om du är studerande eller från ett företag för att skapa ett konto</p>
-        
-        {/* Folder tabs for switching between student and company */}
-        <div className="tabsContainer">
-          <button 
-            className={`tab ${activeTab === 'student' ? 'active' : ''}`}
-            onClick={() => setActiveTab('student')}
-          >
-            STUDERANDE
-          </button>
-          <button 
-            className={`tab ${activeTab === 'company' ? 'active' : ''}`}
-            onClick={() => setActiveTab('company')}
-          >
-            FÖRETAG
-          </button>
-        </div>
-        
-        {/* Form container */}
-        <div className="formContainer">
-          {activeTab === 'student' ? (
-            <StudentSignUpForm onSuccess={parentClose || onClose} />
-          ) : (
-            <CompanySignUpForm onSuccess={parentClose || onClose} />
-          )}
-        </div>
+
+        <article className={style.logInContent}>
+          <h3 className={style.formTitle}>SKAPA KONTO</h3>
+          <p className={style.formText}>Välj om du är studerande eller från ett företag för att skapa ett konto</p>
+          
+          <fieldset className={style.logInContentControler}>
+            <button 
+              className={activeTab === 'student' ? style.active : style.inactive}
+              onClick={() => setActiveTab('student')}
+              style={{width:"50%"}}
+            >
+              STUDERANDE
+            </button>
+            <button 
+              className={activeTab === 'company' ? style.active : style.inactive}
+              onClick={() => setActiveTab('company')}
+              style={{width:"50%"}}
+            >
+              FÖRETAG
+            </button>
+          </fieldset>
+          
+          {/* Form container */}
+          <div className="formContainer">
+            {activeTab === 'student' ? (
+              <StudentSignUpForm onSuccess={parentClose || onClose} />
+            ) : (
+              <CompanySignUpForm onSuccess={parentClose || onClose} />
+            )}
+          </div>
+        </article>
       </div>
     </div>
   );

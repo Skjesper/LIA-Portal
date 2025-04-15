@@ -92,7 +92,7 @@ export default function SignInModal({ isOpen, onClose }) {
           </button>
           <button 
             onClick={openSignUp}
-            className={style.signInNav}
+            className={style.signUpNav}
           >
             SKAPA KONTO
           </button>
@@ -102,9 +102,8 @@ export default function SignInModal({ isOpen, onClose }) {
           <Image
             src="/icons/exit-black.svg"
             alt="icon for exiting"
-            width={10}
-            height={10}
-            style={{ marginLeft: '0.5rem' }}
+            width={14}
+            height={14}
           />
         </Button>
         

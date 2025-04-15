@@ -30,13 +30,19 @@
     margin: 0;
 }
 
-.signInNav {
+.signUpNav {
     background-color: var(--Background-Dark);
     width: 50%;
     height: 2rem;
     border: none;
     border-radius: 0.75rem 0.75rem 0rem 0rem;
     margin: 0;
+}
+
+.logInContent {
+    width: 26.5rem;
+    display: flex;
+    flex-direction: column;
 }
 
 .formTitle {
@@ -61,6 +67,28 @@
     flex-direction: column;
     gap: 1rem;
     margin-bottom: 3rem;
+}
+
+.logInContentControler {
+    width: 100%;
+    border: 1px solid var(--Background-Light);
+    border-radius: 0.25rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.active {
+    background-color: var(--Background-Light);
+    color: var(--Background-Dark);
+    border: none;
+    padding: 0.75rem 0.5rem;
+}
+
+.inactive {
+    background-color: var(--Background-Dark);
+    border: none;
+    padding: 0.75rem 0.5rem;
 }
 
 .label {
