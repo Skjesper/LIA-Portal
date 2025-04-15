@@ -43,6 +43,9 @@ export default function CompanySignUpForm({ onSuccess, onClose }) {
         localStorage.setItem('pendingCompanyName', companyName);
         localStorage.setItem('pendingEmail', email);
         localStorage.setItem('pendingPassword', password);
+        localStorage.setItem('needsProfileCompletion', true)
+
+        localStorage.removeItem('pendingEmail');
 
 
         // Call onSuccess with the email address

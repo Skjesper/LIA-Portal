@@ -56,9 +56,6 @@ export default function SignInModal({ isOpen, onClose }) {
           // New user, redirect to edit-profile
           localStorage.removeItem('needsProfileCompletion');
           router.push('/edit-profile');
-        } else {
-          // Regular login, redirect to dashboard or home
-          router.push('/dashboard');
         }
         
         // Redirect after short delay

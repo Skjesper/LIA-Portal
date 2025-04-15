@@ -35,17 +35,12 @@ export default function SignUpModal({ isOpen, onClose, parentClose }) {
       const savedEmail = localStorage.getItem('pendingEmail');
       const savedPassword = localStorage.getItem('pendingPassword');
       
-      if (!savedEmail || !savedPassword) {
-        alert("Vi kan inte hitta dina inloggningsuppgifter. Försök logga in manuellt.");
-        return;
-      }
-      
       // Close the modal
       /* onClose();
       if (parentClose) parentClose(); */
       handleBack();
       // Redirect to login page
-      /* router.push('/login'); */
+      /* router.push('/edit-profile'); */
       
     } catch (error) {
       console.error("Error during redirection:", error);
