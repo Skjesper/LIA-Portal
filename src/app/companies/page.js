@@ -90,7 +90,7 @@ export default function CompaniesPage() {
 
   return (
     <main>
-      <Section style={{ background: 'var(--Background-Light)' }}>
+      <Section style={{ background: 'var(--Background-Light)', marginTop: '5rem' }}>
         <h2 className="companiesTitle">Företag</h2>
         
         {/* Search and filter controls */}

@@ -68,7 +68,7 @@ export default function StudentsPage() {
 
   return (
     <main>
-      <Section style={{ background: 'var(--Background-Light)' }}>
+      <Section style={{ background: 'var(--Background-Light)', marginTop: '5rem' }}>
         <h2 className="companiesTitle">Studenter</h2>
         
         {/* Search and filter controls */}
