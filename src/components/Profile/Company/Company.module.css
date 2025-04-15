@@ -278,14 +278,30 @@ color: var(--Typography-Secondary);
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
-        grid-auto-flow: dense;
+        grid-template-areas: 
+          "header city"
+          "bio perks";
         align-items: end;
+        align-content: space-between;
+        
+      }
+      
+      .profileHeader {
+        grid-area: header;
+      }
+      
+      .profileBio {
+        grid-area: bio;
+      }
+      
+      .profileCity {
+        grid-area: city;
+      }
+      
+      .profilePerks {
+        grid-area: perks;
       }
 
-    .profilePerks {
-
-        margin-top: auto;
-    }
-
+   
 
 }
