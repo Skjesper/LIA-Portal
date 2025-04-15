@@ -37,6 +37,8 @@ aspect-ratio: 358/149;
 border-radius: var(--16, 1rem);
 background: var(--background-MediumLight);
 margin-top: 0.5rem;
+position: relative; /* Viktigt för att fill-attributet ska fungera */
+overflow: hidden;
 }
 
 .infoTextContainer {

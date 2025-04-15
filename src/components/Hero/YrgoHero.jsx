@@ -3,6 +3,7 @@ import Link from 'next/link';
 import styles from '@/components/Hero/YrgoHero.module.css';
 import '@/components/styles/colors.css';
 import Button, { buttonStyles } from '@/components/ui/Button/Button';
+import Image from 'next/image';
 
 const companies = ["spöket", "aino", "sould", "grebban", "volvo", "knowit", "simma lugnt"];
 
@@ -31,8 +32,15 @@ const YrgoHero = () => {
         <Link href="#event" scroll={true}><Button className={buttonStyles.underlinedBlack}>Anmäl dig</Button>
         </Link>
     </section>
-        <section className={styles.heroImage}>
-
+    <section className={styles.heroImage}>
+        <Image 
+            src="/heroimage.png"
+            alt="Yrgo logotyp"
+            fill={true}
+            sizes="100%"
+            style={{ objectFit: 'cover' }}
+            className={styles.heroImageContent}
+        />
         </section>
         <section className={styles.attendingCompanies}>
         <p className={styles.companiesText}>
