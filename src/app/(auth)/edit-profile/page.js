@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { createBrowserClient } from '@supabase/ssr';
 import { useRouter } from 'next/navigation';
 import Button, { buttonStyles } from '@/components/ui/Button/Button';
 import EditStudentForm from './EditStudentForm';
@@ -16,7 +17,7 @@ export default function EditProfilePage() {
   const [error, setError] = useState(null);
   
   const router = useRouter();
-  const supabase = createClientComponentClient();
+  const supabase = createBrowserClient();
   
   useEffect(() => {
     async function getProfile() {
