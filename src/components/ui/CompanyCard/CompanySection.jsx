@@ -22,8 +22,8 @@ const CompanySection = () => {
         </p>
         <Link href="/companies">
         <Button style={{ whiteSpace: 'nowrap' }} className={buttonStyles.underlinedBlack}>
-  Se alla företag
-</Button>
+          Se alla företag
+        </Button>
         </Link>
         </div>
         </div>
