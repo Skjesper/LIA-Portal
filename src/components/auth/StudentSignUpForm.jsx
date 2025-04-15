@@ -43,6 +43,8 @@ export default function StudentSignUpForm({ onSuccess }) {
       }
 
       if (data?.user) {
+
+        localStorage.setItem('needsProfileCompletion', true);
         
         // Clear form
         setFirstName('');
@@ -50,13 +52,13 @@ export default function StudentSignUpForm({ onSuccess }) {
         setEmail('');
         setPassword('');
         
-        // Add a short delay before redirecting
+/*         // Add a short delay before redirecting
         setTimeout(() => {
           if (onSuccess) {
             onSuccess(); // Close the modal
           }
           router.push('/edit-profile');
-        }, 2000);
+        }, 2000); */
       }
     } catch (error) {
       setMessage({

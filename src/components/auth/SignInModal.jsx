@@ -48,10 +48,6 @@ export default function SignInModal({ isOpen, onClose }) {
         // Check if user needs to complete their profile
         const needsProfileCompletion = localStorage.getItem('needsProfileCompletion');
         
-        // Clean up localStorage items
-        localStorage.removeItem('pendingEmail');
-        localStorage.removeItem('pendingPassword');
-        
         if (needsProfileCompletion === 'true') {
           // New user, redirect to edit-profile
           localStorage.removeItem('needsProfileCompletion');

@@ -70,7 +70,7 @@ export default function EditProfilePage() {
   }, [supabase, router]);
   
   if (loading) return <div className="">Loading profile information...</div>;
-  if (error) return <div className="">{error}</div>;
+  if (error) return <div style={{color: 'var(--Primary-Red)', alignSelf:"center"}}> {error} </div>;
 
 
 
