@@ -118,6 +118,11 @@
     flex-wrap: nowrap;
   }
 
+  .studentsGrid > * {
+    width: 100%;
+    max-width: 22.375rem; /* Begränsa max bredd */
+  }
+
   .searchForm {
     max-width: 400px;
     width: auto;
