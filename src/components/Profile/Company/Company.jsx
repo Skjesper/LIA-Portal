@@ -12,12 +12,15 @@ const CompanyProfileView = ({ company }) => {
   
   const {
     name,
-    email,
+    contact,
     city,
     bio,
     fun_benefits,
-    linkedin,
-    website,
+    linkedin_url,
+    website_url,
+    location_status,
+    accepts_digital_designer,
+    accepts_webb_developer
   } = company;
 
   // Check if the current user is the owner of this company profile
@@ -44,24 +47,42 @@ const CompanyProfileView = ({ company }) => {
         <section className={styles.cardContainer}>
           <section className={styles.profileHeader}>
             <h2>{name}</h2>
+            <section className={styles.headerInfo}>
+
+            <div className={styles.locationStatus}>
+              {location_status && location_status !== 'NULL' && (
+                <Label className={labelStyles.unfilled}>{location_status}</Label>
+              )}
+            </div>
+              
+            <div className={styles.jobTypes}>
+              {(accepts_digital_designer === true || accepts_digital_designer === 'TRUE') && (
+                <Label className={labelStyles.unfilled}>Digital Designer</Label>
+              )}
+              {(accepts_webb_developer === true || accepts_webb_developer === 'TRUE') && (
+                <Label className={labelStyles.unfilled}>Webbutvecklare</Label>
+              )}
+            </div>
+
+            </section>
 
             <section className={styles.linksContainer}>
-              {linkedin && (
+              {linkedin_url && (
                 <div className={styles.links}>
                   <Image src="/logos/LinkedinLogo.svg" alt="LinkedIn ikon" width={24} height={24} />
-                  <a href={linkedin} target="_blank" rel="noopener noreferrer">LINKEDIN</a>
+                  <a href={linkedin_url} target="_blank" rel="noopener noreferrer">LINKEDIN</a>
                 </div>
               )}
-              {website && (
+              {website_url && (
                 <div className={styles.links}>
                   <Image src="/logos/Desktop.svg" alt="Webbplats ikon" width={24} height={24} />
-                  <a href={website} target="_blank" rel="noopener noreferrer">HEMSIDA</a>
+                  <a href={website_url} target="_blank" rel="noopener noreferrer">HEMSIDA</a>
                 </div>
               )}
-              {email && (
+              {contact && (
                 <div className={styles.links}>
                   <Image src="/logos/mail.svg" alt="Mail ikon" width={24} height={24} />
-                  <a href={`mailto:${email}`}>MAIL</a>
+                  <a href={`mailto:${contact}`}>MAIL</a>
                 </div>
               )}
             </section>
