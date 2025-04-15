@@ -36,10 +36,10 @@ export default function Header() {
           <div className={styles.logo}>
             <Link href="/">
               <Image
-                src="/logos/yrgo-logo-black.svg"
+                src="/logos/yrgo_red.svg"
                 alt="Company Logo"
-                width={50}
-                height={30}
+                width={80}
+                height={50}
                 className={styles.image}
               />
             </Link>
@@ -102,7 +102,8 @@ export default function Header() {
             <section className={styles.headerRight}>
               {isLoggedIn ? (
                 <Link href={getProfileLink()}>
-                  <Button className={buttonStyles.primaryBlack}>
+                  <Button className={buttonStyles.primaryBlack}
+                   style={{ background: 'var(--Primary-Red)' }}>
                     Min Profil
                   </Button>
                 </Link>
