@@ -41,6 +41,11 @@ position: relative; /* Viktigt för att fill-attributet ska fungera */
 overflow: hidden;
 }
 
+.location {
+    display: flex;
+    flex-direction: column;
+}
+
 .infoTextContainer {
 
 display: flex;

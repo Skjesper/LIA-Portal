@@ -30,15 +30,14 @@ const RSVPCard = ({ title, onSubmit }) => {
       // Ta bort id-fältet helt från insert-anropet
       // Låt databasen hantera id:t (efter att du ändrat begränsningen)
       const { data, error } = await supabase
-        .from('event_registrations')
-        .insert([
-          { 
-            company_name: formData.companyName,
-            email: formData.email,
-            number_of_attendees: parseInt(formData.participants), 
-            created_at: new Date()
-          }
-        ]);
+      .from('event_registrations')
+      .insert([
+        { 
+          company_name: formData.companyName.trim(),
+          email: formData.email.trim(),
+          number_of_attendees: parseInt(formData.participants)
+        }
+      ]);
       
       if (error) throw error;
       
@@ -145,7 +144,7 @@ const RSVPCard = ({ title, onSubmit }) => {
           {!isMobile && (
   <section className={styles.rsvpImage}>
       <Image 
-      src="/heroimage.png"
+      src="/heroImage.png"
       alt="Yrgo logotyp"
       fill  // fyller hela förälderns yta
       style={{ objectFit: 'cover' }}

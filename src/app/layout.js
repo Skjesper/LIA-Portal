@@ -6,6 +6,7 @@ import Footer from '@/components/footer/Footer';
 import "@/components/styles/globals.css";
 import "@/components/styles/colors.css";
 import "@/app/page.module.css";
+import { Suspense } from 'react';
 
 const inter = Inter({
   variable: "--font-inter",
@@ -23,11 +24,13 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <AuthProvider>
-          <ClientOnly>
-            <Header />
-            {children}
-            <Footer />
-          </ClientOnly>
+          <Suspense fallback={null}>
+            <ClientOnly>
+              <Header />
+              {children}
+              <Footer />
+            </ClientOnly>
+          </Suspense>
         </AuthProvider>
       </body>
     </html>
