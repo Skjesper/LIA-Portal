@@ -23,11 +23,13 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <AuthProvider>
-          <ClientOnly>
-            <Header />
-            {children}
-            <Footer />
-          </ClientOnly>
+          <Suspense fallback={null}>
+            <ClientOnly>
+              <Header />
+              {children}
+              <Footer />
+            </ClientOnly>
+          </Suspense>
         </AuthProvider>
       </body>
     </html>
