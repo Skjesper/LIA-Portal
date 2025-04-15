@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import { createBrowserClient } from '@supabase/ssr';
 import { useRouter } from 'next/navigation';
+import Input, { inputStyles } from '@/components/ui/Input/Input';
+import Button, { buttonStyles } from '@/components/ui/Button/Button';
 
 export default function StudentSignUpForm({ onSuccess }) {
   const router = useRouter();
@@ -41,29 +43,23 @@ export default function StudentSignUpForm({ onSuccess }) {
       }
 
       if (data?.user) {
-        setMessage({
-          type: 'success',
-          text: 'Registration successful! Redirecting to profile setup...'
-        });
-        
+        localStorage.setItem('needsProfileCompletion', true);
+
+        // Call onSuccess with the email address
+        if (onSuccess) {
+          onSuccess(email);
+        }
+
         // Clear form
         setFirstName('');
         setLastName('');
         setEmail('');
         setPassword('');
-        
-        // Add a short delay before redirecting
-        setTimeout(() => {
-          if (onSuccess) {
-            onSuccess(); // Close the modal
-          }
-          router.push('/edit-profile');
-        }, 1500); // 1.5 seconds
       }
     } catch (error) {
       setMessage({
         type: 'error',
-        text: error.message || 'An error occurred during sign-up'
+        text: error.message || 'Ett fel uppstod vid registrering'
       });
     } finally {
       setLoading(false);
@@ -71,7 +67,10 @@ export default function StudentSignUpForm({ onSuccess }) {
   };
 
   return (
-    <form onSubmit={handleSignUp}>
+    <form 
+      onSubmit={handleSignUp}
+      style={{display:"flex", flexDirection:"column", gap:"0.5rem"}}
+    >
       {message && (
         <div className={message.type === 'success' ? 'success' : 'error'}>
           {message.text}
@@ -80,10 +79,11 @@ export default function StudentSignUpForm({ onSuccess }) {
       
       <div className="formGroup">
         <label htmlFor="firstName">*FÖRNAMN</label>
-        <input
+        <Input
           type="text"
           id="firstName"
           value={firstName}
+          className={inputStyles.inputWhite}
           onChange={(e) => setFirstName(e.target.value)}
           placeholder="Ex. Anna"
           required
@@ -92,10 +92,11 @@ export default function StudentSignUpForm({ onSuccess }) {
       
       <div className="formGroup">
         <label htmlFor="lastName">*EFTERNAMN</label>
-        <input
+        <Input
           type="text"
           id="lastName"
           value={lastName}
+          className={inputStyles.inputWhite}
           onChange={(e) => setLastName(e.target.value)}
           placeholder="Ex. Nilsson"
           required
@@ -104,10 +105,11 @@ export default function StudentSignUpForm({ onSuccess }) {
       
       <div className="formGroup">
         <label htmlFor="email">*EMAIL</label>
-        <input
+        <Input
           type="email"
           id="email"
           value={email}
+          className={inputStyles.inputWhite}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="exempel@mail.com"
           required
@@ -116,10 +118,11 @@ export default function StudentSignUpForm({ onSuccess }) {
       
       <div className="formGroup">
         <label htmlFor="password">*LÖSENORD</label>
-        <input
+        <Input
           type="password"
           id="password"
           value={password}
+          className={inputStyles.inputWhite}
           onChange={(e) => setPassword(e.target.value)}
           required
           placeholder="Välj ett lösenord"
@@ -127,12 +130,14 @@ export default function StudentSignUpForm({ onSuccess }) {
         />
       </div>
       
-      <button
+      <Button
         type="submit"
         disabled={loading}
+        className={buttonStyles.filledWhite}
+        style={{width:"12rem", padding:"0.875rem 2rem", alignSelf:"center", marginTop:"1rem"}}
       >
-        {loading ? 'Creating account...' : 'SKAPA KONTO'}
-      </button>
+        {loading ? 'SKAPAR KONTO...' : 'SKAPA KONTO'}
+      </Button>
     </form>
   );
 }

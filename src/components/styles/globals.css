@@ -1,8 +1,11 @@
 :root {
+  font-size: clamp(0.8rem, 1vw + 0.2rem, 1rem);
   --font-inter: 'Inter', system-ui, sans-serif;
   --border-radius: 1.5rem;
   
   --Title-height: 1.5rem;
+
+
 
   
 
@@ -37,6 +40,7 @@
   
   --Button-Primary: #001A52;
   --Greyscale-70: #2D2D2D;
+  --Greyscale-90: #121212;
 
 
    /* 

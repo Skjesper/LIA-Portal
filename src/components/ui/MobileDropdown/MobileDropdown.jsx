@@ -45,16 +45,19 @@ export default function MobileDropdown({ isOpen, onClose }) {
     return '';
   };
 
-  // Get profile link based on user type
   const getProfileLink = () => {
-    if (userType === 'student') {
-      return '/student/profile';
-    } else if (userType === 'company') {
-      return '/company/profile';
-    }
+    if (!isLoggedIn || !userProfile) return '/profile';
     
+    const userId = userProfile.id;
+    
+    if (userType === 'student') {
+      return `/student/${userId}`;
+    } else if (userType === 'company') {
+      return `/company/${userId}`;
+    }
+  
     return '/profile';
-  };
+  }
 
   return (
     <div className={styles.menuOverlay}>
@@ -89,7 +92,8 @@ export default function MobileDropdown({ isOpen, onClose }) {
             </Link>
           </li>
           <li>
-            <Link href="/event" onClick={onClose} className={styles.menuLink}>
+          
+            <Link href="/event" scroll ={true} onClick={onClose} className={styles.menuLink}>
               EVENT
             </Link>
           </li>

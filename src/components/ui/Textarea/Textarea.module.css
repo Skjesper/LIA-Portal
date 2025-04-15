@@ -9,6 +9,7 @@
     background-color: transparent;
     color: var(--Background-Light);
     font-size: 1.125rem;
+    font-family: var(--font-inter);
     border-radius: 0.25rem;
     border: 2px solid var(--Background-Light);
   }
@@ -30,6 +31,7 @@
     box-sizing: border-box;
     background-color: transparent;
     color: var(--Background-Dark);
+    font-family: var(--font-inter);
     font-size: 1.125rem;
     border-radius: 0.25rem;
     border: 2px solid var(--Background-Dark);

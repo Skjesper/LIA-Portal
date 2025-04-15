@@ -8,25 +8,42 @@ import useBreakpoint from '@/app/hooks/useBreakpoint';
 import Button, { buttonStyles } from '@/components/ui/Button/Button';
 import MobileDropdown from '@/components/ui/MobileDropdown/MobileDropdown';
 import styles from './Header.module.css';
+import SignInModal from '@/components/auth/SignInModal';
 
 export default function Header() {
-  const isMobile = useBreakpoint(768); // Use 768px as breakpoint
+  const isMobile = useBreakpoint(1279); // Use 768px as breakpoint
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { isLoggedIn, userType } = useAuth();
+  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
+  const { isLoggedIn, userType, userProfile, signOut } = useAuth();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const openSignInModal = () => setIsSignInModalOpen(true);
+  const closeSignInModal = () => setIsSignInModalOpen(false);
+
   // Get the appropriate profile link based on user type
   const getProfileLink = () => {
-    if (userType === 'student') {
-      return '/student/profile';
-    } else if (userType === 'company') {
-      return '/company/profile';
-    }
+    if (!isLoggedIn || !userProfile) return '/profile';
     
+    const userId = userProfile.id;
+    
+    if (userType === 'student') {
+      return `/student/${userId}`;
+    } else if (userType === 'company') {
+      return `/company/${userId}`;
+    }
+  
     return '/profile';
+  }
+
+  const handleSignOut = async () => {
+    await signOut();
+ 
+    if (isMenuOpen) {
+      setIsMenuOpen(false);
+    }
   };
 
   return (
@@ -36,10 +53,10 @@ export default function Header() {
           <div className={styles.logo}>
             <Link href="/">
               <Image
-                src="/logos/yrgo-logo-black.svg"
+                src="/logos/yrgo_red.svg"
                 alt="Company Logo"
-                width={50}
-                height={30}
+                width={80}
+                height={50}
                 className={styles.image}
               />
             </Link>
@@ -67,13 +84,14 @@ export default function Header() {
                 <ul>
                   <li>
                     <Link href="/event">
-                      <Button 
-                        className={buttonStyles.underlinedBlack}
-                        style={{ width: '100%', textAlign: 'center', textDecoration: 'none' }}
-                      >
-                        event
-                      </Button>
+                        <Button 
+                          className={buttonStyles.underlinedBlack}
+                          style={{ width: '100%', textAlign: 'center', textDecoration: 'none' }}
+                        >
+                          event
+                        </Button>
                     </Link>
+                   
                   </li>
                   <li>
                     <Link href="/companies">
@@ -100,17 +118,35 @@ export default function Header() {
             </section>
             <section className={styles.headerRight}>
               {isLoggedIn ? (
-                <Link href={getProfileLink()}>
-                  <Button className={buttonStyles.primaryBlack}>
-                    Min Profil
+
+                <ul style={{display:"flex", flexDirection:"row", alignItems:"center", gap:"1.5rem"}}>
+                  <li style={{listStyle:"none"}}>
+                  <Link href={getProfileLink()}>
+                    <Button className={buttonStyles.underlinedBlack}
+                    style={{ width: '100%', textAlign: 'center', textDecoration: 'none' }}
+                    >
+                      Min Profil
+                    </Button>
+                  </Link>
+                </li>
+                <li style={{listStyle:"none"}}>
+                  <Button 
+                    className={buttonStyles.filledRed} 
+                    onClick={handleSignOut}
+                  >
+                    LOGGA UT
+
                   </Button>
-                </Link>
+                </li>
+                </ul>
               ) : (
-                <Link href="/login">
-                  <Button className={buttonStyles.primaryBlack}>
+                  <Button 
+                  type="button" 
+                  className={buttonStyles.filledRed}
+                    onClick={openSignInModal}
+                  >
                     Logga in
                   </Button>
-                </Link>
               )}
             </section>
           </>
@@ -119,6 +155,8 @@ export default function Header() {
 
       {/* Mobile dropdown */}
       <MobileDropdown isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+      {/* Sign-in and sign-up pop-up */}
+      <SignInModal isOpen={isSignInModalOpen} onClose={() => setIsSignInModalOpen(false)} />
     </>
   );
 }

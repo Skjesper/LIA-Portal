@@ -2,11 +2,13 @@
 
 import { useEffect, useState } from 'react';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { createBrowserClient } from '@supabase/ssr';
 import { useRouter } from 'next/navigation';
 import Button, { buttonStyles } from '@/components/ui/Button/Button';
 import EditStudentForm from './EditStudentForm';
 import EditCompanyForm from './EditCompanyForm';
 import Image from 'next/image';
+import Section, { sectionStyles } from '@/components/Sections/Sections';
 
 export default function EditProfilePage() {
   const [user, setUser] = useState(null);
@@ -15,7 +17,7 @@ export default function EditProfilePage() {
   const [error, setError] = useState(null);
   
   const router = useRouter();
-  const supabase = createClientComponentClient();
+  const supabase = createBrowserClient();
   
   useEffect(() => {
     async function getProfile() {
@@ -25,11 +27,9 @@ export default function EditProfilePage() {
       const { data: { session }, error: authError } = await supabase.auth.getSession();
       
       if (authError || !session) {
-        setError('You must be logged in to edit your profile');
+        setError('Du behöver vara inloggad för att redigera din profil!');
         setLoading(false);
-        // Redirect to login page after a short delay
-        setTimeout(() => router.push('/login'), 2000);
-        return;
+        return ;
       }
       
       setUser(session.user);
@@ -71,7 +71,7 @@ export default function EditProfilePage() {
   }, [supabase, router]);
   
   if (loading) return <div className="">Loading profile information...</div>;
-  if (error) return <div className="">{error}</div>;
+  if (error) return <div style={{color: 'var(--Primary-Red)', alignSelf:"center"}}> {error} </div>;
 
 
 
@@ -127,12 +127,20 @@ const handleDeleteAccount = async () => {
 };
 
   return (
-    <div className="">
+    <main className="" 
+    style={{
+      backgroundColor:"var(--background-MediumLight)", 
+      display:"flex", 
+      flexDirection:"column", 
+      alignItems:"flex-start"
+      }}>
       <Button
         type="button"
         onClick={() => router.back()}
         className={buttonStyles.underlinedBlack}
-        style={{ margin: '0 0 0 2rem' }} 
+        style={{ 
+          margin: '1.5rem 0 1.5rem 2rem'
+        }} 
       >
         <Image
           src="/icons/arrow-left-black.svg"
@@ -144,21 +152,34 @@ const handleDeleteAccount = async () => {
       </Button>
       
       <h1 
-      style={{ margin: '1.5rem 0 0.5rem 2rem', color: 'var(--Primary-Red)', fontStyle: 'italic' }} 
-      > REDIGERA PROFIL</h1>
+      style={{ 
+        color: 'var(--Primary-Dark)', 
+        alignSelf:"center", 
+        fontSize: "2rem",
+        fontStyle: "italic",
+        fontWeight: "530",
+        lineHeight: "2rem",
+        letterSpacing: "-0.06rem",
+      }} 
+      >REDIGERA PROFIL</h1>
+      <Section className={sectionStyles.sectionInvertedColors}>
       {profile?.type === 'student' ? (
         <EditStudentForm user={user} profile={profile.data} />
       ) : profile?.type === 'company' ? (
         <EditCompanyForm user={user} profile={profile.data} />
       ) : (
-        <div>Unknown profile type. Please contact support.</div>
+        <div>Okänd typ av profil, kontakta support.</div>
       )}
+      </Section>
       <Button
         type="button"
         onClick={handleDeleteAccount}
         disabled={loading}
         className={buttonStyles.underlinedBlack}
-        style={{margin: '1.5rem 0 2rem 0' }}
+        style={{
+          margin: '0 0 2rem 0',
+          alignSelf:"center" 
+        }}
       >
         <Image
           src="/icons/delete.svg"
@@ -168,6 +189,6 @@ const handleDeleteAccount = async () => {
         />
         RADERA KONTO
       </Button>
-    </div>
+    </main>
   );
 }

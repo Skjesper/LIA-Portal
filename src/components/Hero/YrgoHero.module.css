@@ -37,6 +37,13 @@ aspect-ratio: 358/149;
 border-radius: var(--16, 1rem);
 background: var(--background-MediumLight);
 margin-top: 0.5rem;
+position: relative; /* Viktigt för att fill-attributet ska fungera */
+overflow: hidden;
+}
+
+.location {
+    display: flex;
+    flex-direction: column;
 }
 
 .infoTextContainer {
@@ -45,6 +52,8 @@ display: flex;
 justify-content: space-between;
 align-items: flex-start;
 align-self: stretch;
+
+
 }
 
 .infoText {
@@ -129,13 +138,22 @@ margin-top: 0.5rem;
     }
 
     .infoTextContainer {
-        justify-content: flex-start; 
-        justify-content: flex-end;
+        
+        justify-content: space-between;
+       
+    }
+
+    .rsvpButton {
+
+        display: flex;
+        
+
     }
 
     .text {
-        font-size: 1.625rem;
-        line-height: 2.25rem;
+        font-size: 1.125rem;
+        line-height: 1.5rem;
+        width: 10.3rem;
     }
 
     .textRight {
@@ -161,8 +179,8 @@ margin-top: 0.5rem;
       .infoText {
         display: flex;
         flex-direction: row;
-        width: 30rem; 
-        gap: 2rem;
+        width: 35.375rem; 
+        gap: 8rem;
         margin-right: 2rem;
       }
 

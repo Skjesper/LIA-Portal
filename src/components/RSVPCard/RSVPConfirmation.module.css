@@ -1,0 +1,76 @@
+/* RSVPConfirmation.module.css */
+.confirmationContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 2rem;
+  }
+
+  .titleWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .title {
+
+    color: var(--Typography-Secondary, #FFF);
+/* Mobil/H2/Bold */
+font-family: Inter;
+font-size: 2rem;
+font-style: italic;
+font-weight: 530;
+line-height: 2rem; /* 100% */
+letter-spacing: -0.06rem;
+text-transform: uppercase;
+width: 60%;
+text-align: left;
+  }
+  
+  .confirmationCard {
+    display: flex;
+    width: 30rem;
+    padding: 1.5rem 1rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    background-color: var(--Background-Dark);
+    border-radius: 1rem;
+    
+  }
+  
+  .cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .cardTitle {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .text {
+    text-align: center;
+
+    font-size: 1rem;
+  }
+
+  .cardContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 18rem;
+    gap: 1rem;
+    padding: 1.5rem;
+    
+  }
+
+  

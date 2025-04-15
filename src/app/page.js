@@ -12,14 +12,14 @@ import StudentCard from '@/components/ui/StudentCard/StudentCard';
 import StudentCardSection from '@/components/ui/StudentCard/StudentCardSection';
 
 
+
+
 export default function Home() {
   return (
     <main>
       <YrgoHero/>
-      <Section>
-       
-          <RSVPCard />
-        
+      <Section id="event">
+        <RSVPCard />
       </Section>
       <Section>
     

@@ -3,18 +3,43 @@
 
   display: flex;
   flex-direction: column;
+  
 }
 
 .rsvpCard {
   background: var(--Background-Dark, #121212);
   display: flex;
-  padding: 1.5rem 1rem;
+  padding: 1.5rem 1.5rem;
   flex-direction: column;
   align-items: flex-start;
   gap: 2.5rem;
   align-self: stretch;
   border-radius: var(--border-radius);
   width: 100%;
+  
+ 
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.overlayContent {
+  max-width: 90%;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .titleWrapper {
@@ -28,10 +53,13 @@
   
   color: var(--Typography-Primary, #121212);
   text-transform: uppercase;
+  margin-bottom: 1rem;
 }
 
 .sectionText {
   color: var(--Typography-Primary);
+  width: 70%;
+  margin-bottom: 1rem;
 }
 
 .title {
@@ -43,7 +71,10 @@
   line-height: 2rem;
   letter-spacing: -0.06rem;
   text-transform: uppercase;
+  margin-bottom: 0.8rem;
 }
+
+
 
 .titleWrapper img {
   display: flex;
@@ -111,6 +142,9 @@
   background-color: #e0e0e0;
 }
 
+
+
+
 /* Tablet and Desktop Styles */
 @media (min-width: 768px) {
   .rsvpCard {
@@ -118,13 +152,41 @@
     justify-content: space-around;
   }
 
+  .sectionText {
+   
+    width: 40%;
+  
+  }
+
+  .rsvpImage {
+    
+    width: 39.375rem;
+    height: 37.5rem;
+    background-color: #F2F2F2;
+    border-radius: 1rem;
+    overflow: hidden; /* viktigt för att rundade hörn ska gälla även för bilden */
+    position: relative; /* krävs om du använder layout="fill" */
+    
+  }
+
+  .title {
+
+    font-size: 1.625rem;
+  }
+
   .form {
     margin-bottom: 5.88rem;
   }
 
   .titleWrapper img {
-    width: 5.9375rem;
-    height: 5.4375rem;
+    width: 6.5rem;
+    height: 6.5rem;
+  }
+
+  .titleWrapper {
+    display: flex;
+    gap: 8rem;
+    margin-bottom: 4rem;
   }
 
   .imgContainer {
@@ -137,8 +199,10 @@
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    gap: 8.0625rem;
-    align-self: stretch;
+    justify-content: center;
+    gap: 4.0625rem;
+    width: 100%;
+   
   }
 
   .sectionHeader {
@@ -157,12 +221,6 @@
     line-height: 7.5rem;
     letter-spacing: -0.20625rem;
     text-transform: uppercase;
-  }
-
-  .desktopImage {
-    background-color: grey;
-    width: 50%;
-    height: 300px; /* eller annat värde */
   }
 
   .sectionTitle span {

@@ -1,0 +1,171 @@
+
+.componentContainer {
+    padding: 2rem 1rem;
+    background: var(--Primary-Grey, #E4E9EB);
+}
+
+.links {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+}
+
+.profileContainer {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1.5rem;
+}
+
+.editProfile {
+
+    margin-bottom: 3rem;
+}
+
+.buttonContent {
+
+    display: flex;
+
+}
+
+.buttonContent{
+
+    display: flex;
+    gap: 0.3rem;
+}
+
+.studentHeader {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 1.8rem;
+    height: 16rem; /* Ger utrymme för båda elementen */
+    transform: translateX(5rem);
+  }
+
+.profileImg {
+    position: absolute;
+    left: 47%;
+    transform: translateX(-110%) translateY(10%) rotate(-8deg);
+     /* Centrera från vänster + rotation */
+    width: 12.5rem;
+    height: 15.625rem;
+    background-color: beige;
+    border-radius: 0.875rem;
+    overflow: hidden;
+    z-index: 1; /* Lägre z-index = bakom */
+  }
+
+.profileBio, .profileExperience {
+   
+    display:flex;
+    flex-direction: column;
+    background-color: var(--Background-Dark);
+    width: 100%;
+    padding: 1.5rem 1rem;
+    margin-top: 1.5rem;
+    align-items: flex-start;
+    border-radius: 0.75rem;
+    min-height: 11rem;
+    gap: 1rem;
+    
+}
+
+.infoCv {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 58px;
+    color: var(--Typography-Primary, #121212);
+}
+
+.profileKnowledge, .profileBio, .profileCv, .profileExperience {
+    max-width: 28rem;
+}
+
+.knowledgeList {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    gap: 0.4rem;
+    color: var(--Typography-Secondary);
+}
+
+.profileKnowledge {
+
+    display:flex;
+    flex-direction: column;
+    background: var(--Background-Light, #FFF);
+    color: var(--Typography-Primary);
+    width: 100%;
+    padding: 1.5rem 1rem;
+    margin-top: 1.5rem;
+    align-items: flex-start;
+    border-radius: 0.75rem;
+    min-height: 11rem;
+}
+
+.profileCv {
+    display: flex;
+    padding: 1.5rem 1rem;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    gap: 0.5rem;
+    background: var(--Background-Light, #FFF);
+    border-radius: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.downloadButton {
+    display: flex;
+    justify-content: flex-end;
+    width: 50%;
+}
+
+.headerInfo {
+    position: relative;
+    background-color: var(--Primary-Red);
+    display: flex;
+    flex-direction: column; /* Ändrat till column för bättre struktur */
+    width: 13.3125rem;
+    height: 14.6875rem;
+    padding: 2rem 1.5rem;
+    justify-content: space-between; /* För att sprida ut innehållet */
+    align-items: flex-start; /* Vänsterjustera innehållet */
+    gap: 0.5rem;
+    border-radius: 0.75rem;
+    z-index: 2; /* Högre z-index = framför */
+     
+    top: 2rem;/* För att överlappa profilbilden */
+    margin-top: auto;
+  }
+
+
+  @media screen and (min-width: 768px) {
+
+    .infoCards {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Skapar två kolumner med lika bredd */
+        gap: 20px; /* Lägger till mellanrum mellan grid-elementen */
+        margin-top: 3rem;
+        
+    }
+   
+    .profileKnowledge, .profileBio, .profileCv, .profileExperience {
+        margin:0;
+        
+    }
+
+    .profilePerks {
+
+        margin-top: auto;
+    }
+
+
+}
