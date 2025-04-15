@@ -110,7 +110,7 @@
   }
   
   .imageContainer img {
-    height: var(--Title-height);
+    
     width: auto;
     object-fit: contain;
   }
