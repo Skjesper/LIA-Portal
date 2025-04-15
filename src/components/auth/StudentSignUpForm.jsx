@@ -140,7 +140,7 @@ export default function StudentSignUpForm({ onSuccess }) {
         type="submit"
         disabled={loading}
         className={buttonStyles.filledWhite}
-        style={{width:"12rem", padding:"0.875rem 2rem", alignSelf:"center"}}
+        style={{width:"12rem", padding:"0.875rem 2rem", alignSelf:"center", marginTop:"1rem"}}
       >
         {loading ? 'SKAPAR KONTO...' : 'SKAPA KONTO'}
       </Button>

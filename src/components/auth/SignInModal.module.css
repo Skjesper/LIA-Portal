@@ -1,14 +1,29 @@
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* 50% opacity black */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    z-index: 1000; /* High z-index to be above everything */
+  }
+
 .modalContainer {
-    background-color:darkgreen;
+    background-color: var(--Background-Light);
     max-width: 50rem;
     display: flex;
-    /* padding: 0 1.5rem 3rem 1.5rem; */
     border-radius: 0.75rem 0.75rem 0.75rem 0.75rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
-    align-self: stretch;
+    margin-top: 2rem;
+    z-index: 1001;
 }
 
 .modalNavbar {
@@ -21,8 +36,8 @@
 }
 
 .logInNav {
-    background-color: darkgreen;
-    color: var(--Typography-Secondary);
+    background-color: var(--Background-Light);
+    color: var(--Typography-Primary);
     width: 50%;
     height: 2.75rem;
     border: none;

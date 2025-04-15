@@ -124,7 +124,7 @@ export default function CompanySignUpForm({ onSuccess }) {
         type="submit"
         disabled={loading}
         className={buttonStyles.filledWhite}
-        style={{width:"12rem", padding:"0.875rem 2rem", alignSelf:"center"}}
+        style={{width:"12rem", padding:"0.875rem 2rem", alignSelf:"center", marginTop:"1rem"}}
       >
         {loading ? 'Creating account...' : 'SKAPA KONTO'}
       </Button>

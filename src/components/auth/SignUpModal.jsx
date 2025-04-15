@@ -25,7 +25,7 @@ export default function SignUpModal({ isOpen, onClose, parentClose }) {
   };
 
   return (
-    <div className="modalOverlay">
+    <div className={style.modalOverlay}>
       <div className={style.modalContainer}>
         <nav className={style.modalNavbar}>
             <button 

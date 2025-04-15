@@ -83,7 +83,7 @@ export default function SignInModal({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   if (!signedIn) return (
-    <div className="modalOverlay">
+    <div className={style.modalOverlay}>
       <div className={style.modalContainer}>
         <div className={style.modalNavbar}>
           <button 
@@ -157,7 +157,7 @@ export default function SignInModal({ isOpen, onClose }) {
   );
 
   return (
-    <div className="modalOverlay">
+    <div className={style.modalOverlay}>
     <div className={style.modalContainer}>
       <div className={style.modalNavbar}>
         <button 
