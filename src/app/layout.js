@@ -6,6 +6,7 @@ import Footer from '@/components/footer/Footer';
 import "@/components/styles/globals.css";
 import "@/components/styles/colors.css";
 import "@/app/page.module.css";
+import { Suspense } from 'react';
 
 const inter = Inter({
   variable: "--font-inter",
