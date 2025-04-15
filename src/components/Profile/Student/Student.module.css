@@ -53,7 +53,7 @@
     z-index: 1; /* Lägre z-index = bakom */
   }
 
-.profileBio {
+.profileBio, .profileExperience {
    
     display:flex;
     flex-direction: column;
@@ -77,7 +77,7 @@
     color: var(--Typography-Primary, #121212);
 }
 
-.profileKnowledge, .profileBio, .profileCv {
+.profileKnowledge, .profileBio, .profileCv, .profileExperience {
     max-width: 28rem;
 }
 

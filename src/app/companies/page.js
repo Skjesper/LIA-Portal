@@ -162,7 +162,8 @@ export default function CompaniesPage() {
             <div className={styles.companiesGrid}>
               {filteredCompanies.map((company) => (
                 <CompanyCard 
-                  key={company.id} 
+                  key={company.id || 'default-id'} // Fallback-id om company.id är undefined
+                  id={company.id || 'default-id'}
                   title={company.name} 
                   text={company.bio}
                   acceptsDigitalDesigner={company.accepts_digital_designer}
