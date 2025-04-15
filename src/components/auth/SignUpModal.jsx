@@ -6,8 +6,12 @@ import Button, { buttonStyles } from '@/components/ui/Button/Button';
 import Input, { inputStyles } from '@/components/ui/Input/Input';
 import Image from 'next/image';
 import style from './SignUpModal.module.css';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/components/auth/AuthProvider';
 
 export default function SignUpModal({ isOpen, onClose, parentClose }) {
+  const router = useRouter();
+  const { supabase } = useAuth();
   const [activeTab, setActiveTab] = useState('student');
   const [showSignIn, setShowSignIn] = useState(false);
   const [signupState, setSignupState] = useState('form'); // 'form', 'verification', 'success'
@@ -25,6 +29,19 @@ export default function SignUpModal({ isOpen, onClose, parentClose }) {
       onClose();
     }
   };
+
+  const redirectSignedIn = async () => {
+    try {
+      const savedEmail = localStorage.getItem('pendingEmail');
+      const savedPassword = localStorage.getItem('pendingPassword');
+      handleBack();
+      
+    } catch (error) {
+      console.error("Error during redirection:", error);
+      alert("Ett oväntat fel inträffade. Försök igen.");
+    }
+  };
+
   
   const handleSignupSuccess = (email) => {
     setVerificationEmail(email);
@@ -102,18 +119,7 @@ export default function SignUpModal({ isOpen, onClose, parentClose }) {
             </p>
             <Button 
               className={buttonStyles.filledWhite}
-              onClick={async () => {
-                // Check if user is now authenticated
-                const { data } = await supabase.auth.getSession();
-                if (data.session) {
-                  // User is authenticated, redirect
-                  router.push('/edit-profile');
-                  onClose(); // Close the modal
-                } else {
-                  // Not verified yet
-                  alert("Please verify your email first by clicking the link in your email.");
-                }
-              }}
+              onClick={redirectSignedIn}
               style={{marginTop: "1rem"}}
             >
             JAG HAR VERIFIERAT MIN E-POST

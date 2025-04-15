@@ -48,49 +48,49 @@ export default function EditCompanyForm({ user, profile }) {
   };
 
   // Function to add a city to both local state and Supabase immediately
-const handleAddCity = async () => {
-  if (!newCity.trim()) return;
-  
-  setLoading(true);
-  setMessage('Lägger till ort...');
-  
-  try {
-    // First get current city array from database to ensure we have the latest
-    const { data, error: fetchError } = await supabase
-      .from('company_profiles')
-      .select('city')
-      .eq('id', user.id)
-      .single();
+  const handleAddCity = async () => {
+    if (!newCity.trim()) return;
+    
+    setLoading(true);
+    setMessage('Lägger till ort...');
+    
+    try {
+      // First get current city array from database to ensure we have the latest
+      const { data, error: fetchError } = await supabase
+        .from('company_profiles')
+        .select('city')
+        .eq('id', user.id)
+        .single();
+        
+      if (fetchError) throw fetchError;
       
-    if (fetchError) throw fetchError;
-    
-    // Prepare the updated city array
-    const currentCities = Array.isArray(data?.city) ? [...data.city] : [];
-    const updatedCities = [...currentCities, newCity.trim()];
-    
-    // Update the database immediately
-    const { error: updateError } = await supabase
-      .from('company_profiles')
-      .update({ city: updatedCities })
-      .eq('id', user.id);
+      // Prepare the updated city array
+      const currentCities = Array.isArray(data?.city) ? [...data.city] : [];
+      const updatedCities = [...currentCities, newCity.trim()];
       
-    if (updateError) throw updateError;
-    
-    // Update local state to match database
-    setFormData(prev => ({
-      ...prev,
-      city: updatedCities
-    }));
-    
-    // Clear the input field
-    setNewCity('');
-  } catch (error) {
-    console.error('Error adding city:', error);
-    setMessage(`Error adding city: ${error.message}`);
-  } finally {
-    setLoading(false);
-  }
-};
+      // Update the database immediately
+      const { error: updateError } = await supabase
+        .from('company_profiles')
+        .update({ city: updatedCities })
+        .eq('id', user.id);
+        
+      if (updateError) throw updateError;
+      
+      // Update local state to match database
+      setFormData(prev => ({
+        ...prev,
+        city: updatedCities
+      }));
+      
+      // Clear the input field
+      setNewCity('');
+    } catch (error) {
+      console.error('Error adding city:', error);
+      setMessage(`Error adding city: ${error.message}`);
+    } finally {
+      setLoading(false);
+    }
+  };
 
 // Function to remove a city from both local state and Supabase immediately
 const handleRemoveCity = async (cityToRemove, index) => {

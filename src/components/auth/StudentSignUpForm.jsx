@@ -43,25 +43,23 @@ export default function StudentSignUpForm({ onSuccess }) {
       }
 
       if (data?.user) {
-        
+        localStorage.setItem('needsProfileCompletion', true);
+
+        // Call onSuccess with the email address
+        if (onSuccess) {
+          onSuccess(email);
+        }
+
         // Clear form
         setFirstName('');
         setLastName('');
         setEmail('');
         setPassword('');
-        
-        // Add a short delay before redirecting
-        setTimeout(() => {
-          if (onSuccess) {
-            onSuccess(); // Close the modal
-          }
-          router.push('/edit-profile');
-        }, 2000);
       }
     } catch (error) {
       setMessage({
         type: 'error',
-        text: error.message || 'An error occurred during sign-up'
+        text: error.message || 'Ett fel uppstod vid registrering'
       });
     } finally {
       setLoading(false);

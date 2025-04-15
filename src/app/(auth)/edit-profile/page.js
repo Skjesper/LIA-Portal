@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { createBrowserClient } from '@supabase/ssr';
 import { useRouter } from 'next/navigation';
 import Button, { buttonStyles } from '@/components/ui/Button/Button';
 import EditStudentForm from './EditStudentForm';
@@ -16,7 +17,7 @@ export default function EditProfilePage() {
   const [error, setError] = useState(null);
   
   const router = useRouter();
-  const supabase = createClientComponentClient();
+  const supabase = createBrowserClient();
   
   useEffect(() => {
     async function getProfile() {
@@ -26,11 +27,9 @@ export default function EditProfilePage() {
       const { data: { session }, error: authError } = await supabase.auth.getSession();
       
       if (authError || !session) {
-        setError('You must be logged in to edit your profile');
+        setError('Du behöver vara inloggad för att redigera din profil!');
         setLoading(false);
-        // Redirect to login page after a short delay
-        setTimeout(() => router.push('/login'), 2000);
-        return;
+        return ;
       }
       
       setUser(session.user);
@@ -72,7 +71,7 @@ export default function EditProfilePage() {
   }, [supabase, router]);
   
   if (loading) return <div className="">Loading profile information...</div>;
-  if (error) return <div className="">{error}</div>;
+  if (error) return <div style={{color: 'var(--Primary-Red)', alignSelf:"center"}}> {error} </div>;
 
 
 
@@ -128,7 +127,7 @@ const handleDeleteAccount = async () => {
 };
 
   return (
-    <div className="" 
+    <main className="" 
     style={{
       backgroundColor:"var(--background-MediumLight)", 
       display:"flex", 
@@ -190,6 +189,6 @@ const handleDeleteAccount = async () => {
         />
         RADERA KONTO
       </Button>
-    </div>
+    </main>
   );
 }

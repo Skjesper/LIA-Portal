@@ -1,18 +1,23 @@
 "use client";
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { createBrowserClient } from '@supabase/ssr';
 import Input, { inputStyles } from '@/components/ui/Input/Input';
 import Button, { buttonStyles } from '@/components/ui/Button/Button';
 import { useAuth } from '@/components/auth/AuthProvider';
 
 export default function CompanySignUpForm({ onSuccess, onClose }) {
   const router = useRouter();
-  const { supabase } = useAuth();
   const [companyName, setCompanyName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const supabase = createBrowserClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  );
   
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -41,7 +46,10 @@ export default function CompanySignUpForm({ onSuccess, onClose }) {
       if (data?.user) {
         // Store company name in local storage to potentially use later
         localStorage.setItem('pendingCompanyName', companyName);
-        
+        localStorage.setItem('pendingEmail', email);
+        localStorage.setItem('pendingPassword', password);
+        localStorage.setItem('needsProfileCompletion', true);
+
         // Call onSuccess with the email address
         if (onSuccess) {
           onSuccess(email);

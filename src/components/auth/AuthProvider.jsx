@@ -1,6 +1,7 @@
 'use client';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { createBrowserClient } from '@supabase/ssr';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 
 const AuthContext = createContext();
@@ -11,10 +12,15 @@ export function AuthProvider({ children }) {
   const [userType, setUserType] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isVerifying, setIsVerifying] = useState(false);
-  const supabase = createClientComponentClient();
+  /* const supabase = createBrowserClient(); */
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+
+  const supabase = createBrowserClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  );
 
   // Handle email verification callback
   useEffect(() => {

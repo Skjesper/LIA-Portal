@@ -18,7 +18,7 @@ export default function SignInModal({ isOpen, onClose }) {
   const [signedIn, setSignedIn] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
 
-  const supabase = createClientComponentClient(
+  const supabase = createBrowserClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
   );
@@ -44,6 +44,15 @@ export default function SignInModal({ isOpen, onClose }) {
         // Clear form
         setEmail('');
         setPassword('');
+
+        // Check if user needs to complete their profile
+        const needsProfileCompletion = localStorage.getItem('needsProfileCompletion');
+        
+        if (needsProfileCompletion === 'true') {
+          // New user, redirect to edit-profile
+          localStorage.removeItem('needsProfileCompletion');
+          router.push('/edit-profile');
+        }
         
         // Redirect after short delay
         setTimeout(() => {
