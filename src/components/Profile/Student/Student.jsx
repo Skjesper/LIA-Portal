@@ -89,7 +89,7 @@ const StudentProfileView = ({ student }) => {
         {/* Only show edit button if the user is the student owner */}
         {isStudentOwner && (
           <div className={styles.editProfile}>
-            <Link href={`/profile/student/${id}/edit`}>
+            <Link href={'/edit-profile'}>
             
               <Button className={buttonStyles.filledBlack}>Redigera Profil</Button>
             </Link>
