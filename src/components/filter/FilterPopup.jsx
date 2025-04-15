@@ -2,10 +2,17 @@
 
 import { useState, useEffect, useRef } from 'react';
 import FilterComponent from '@/components/filter/FilterComponent';
+import CompanyFilterComponent from '@/components/filter/CompanyFilterComponent';
 import styles from '@/components/filter/FilterPopup.module.css';
 
 /**
  * A simplified popup component that displays the filtering interface
+ * @param {Object} props
+ * @param {string} props.targetTable - Table to target ('student_profiles' or 'company_profiles')
+ * @param {Function} props.onFiltersApplied - Callback when filters change
+ * @param {string} props.buttonText - Text for filter button
+ * @param {React.ReactNode} props.buttonIcon - Icon for filter button
+ * @param {string} props.buttonClassName - Additional class for button
  */
 const FilterPopup = ({
   targetTable = 'student_profiles',
@@ -90,6 +97,21 @@ const FilterPopup = ({
     }
   };
 
+  // Render appropriate filter component based on targetTable
+  const renderFilterComponent = () => {
+    const commonProps = {
+      onFiltersApplied: handleFiltersApplied,
+      initialData: initialLoadDone ? savedData : undefined,
+      initialFilters: initialLoadDone ? savedFilters : undefined
+    };
+
+    if (targetTable === 'company_profiles') {
+      return <CompanyFilterComponent {...commonProps} />;
+    } else {
+      return <FilterComponent targetTable={targetTable} {...commonProps} />;
+    }
+  };
+
   return (
     <div className={styles.filterPopupContainer}>
       <button 
@@ -130,12 +152,7 @@ const FilterPopup = ({
             </div>
             
             <div className={styles.popupBody}>
-              <FilterComponent 
-                targetTable={targetTable} 
-                onFiltersApplied={handleFiltersApplied}
-                initialData={initialLoadDone ? savedData : undefined}
-                initialFilters={initialLoadDone ? savedFilters : undefined}
-              />
+              {renderFilterComponent()}
             </div>
           </div>
         </>
@@ -143,10 +160,7 @@ const FilterPopup = ({
         // När popupen är stängd, hämta endast initial data om det inte redan gjorts
         !initialLoadDone && (
           <div style={{ display: 'none', position: 'absolute', visibility: 'hidden' }}>
-            <FilterComponent 
-              targetTable={targetTable}
-              onFiltersApplied={handleFiltersApplied}
-            />
+            {renderFilterComponent()}
           </div>
         )
       )}

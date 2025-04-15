@@ -72,7 +72,15 @@ const StudentProfileView = ({ student }) => {
     <div className={styles.componentContainer}>
       <div className={styles.returnButton}>
         <Link href="/">
+        <div className={styles.buttonContent}>
+        <Image 
+          src="/logos/Button/ICON/Mobil/returnArrow.svg" 
+          alt="Return arrow" 
+          width={16} 
+          height={16} 
+        />
           <Button className={buttonStyles.underlinedBlack}>Tillbaka</Button>
+          </div>
         </Link>
       </div>
 
@@ -81,6 +89,7 @@ const StudentProfileView = ({ student }) => {
         {isStudentOwner && (
           <div className={styles.editProfile}>
             <Link href={`/profile/student/${id}/edit`}>
+            
               <Button className={buttonStyles.filledBlack}>Redigera Profil</Button>
             </Link>
           </div>

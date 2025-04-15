@@ -122,22 +122,24 @@ export default function CompaniesPage() {
           />
         </div>
         
-        {/* Display active filters */}
-        {Object.keys(activeFilters).length > 0 && (
-          <div className={styles.activeFilters}>
-            <div className={styles.filterTags}>
-              {Object.entries(activeFilters).map(([column, values]) => (
-                values.map(value => (
-                  <span key={`${column}-${value}`} className={styles.filterTag}>
-                    {column === 'location' ? 'Ort' :
-                     column === 'industry' ? 'Bransch' :
-                     column === 'company_size' ? 'Företagsstorlek' : column} {value}
-                  </span>
-                ))
-              ))}
+                  {/* Display active filters */}
+          {Object.keys(activeFilters).length > 0 && (
+            <div className={styles.activeFilters}>
+              <div className={styles.filterTags}>
+                {Object.entries(activeFilters).map(([column, values]) => (
+                  values.map(value => (
+                    <span key={`${column}-${value}`} className={styles.filterTag}>
+                      {column === 'city' ? 'Stad' : 
+                      column === 'location_status' ? 'Distans' :
+                      column === 'accepts_digital_designer' ? 'Digital Designer' :
+                      column === 'accepts_webb_developer' ? 'Webbutvecklare' : column} {value}
+                    </span>
+                  ))
+                ))}
+              </div>
             </div>
-          </div>
-        )}
+          )}
+
         
         {/* Display results count */}
         <div className={styles.resultsContainer}>

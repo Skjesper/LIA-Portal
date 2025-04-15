@@ -122,6 +122,12 @@ line-height: 1.5rem; /* 120% */
     align-items: center;
 }
 
+.buttonContent{
+
+    display: flex;
+    gap: 0.3rem;
+}
+
 .benefitsList {
 
 margin-top: 0.5rem;

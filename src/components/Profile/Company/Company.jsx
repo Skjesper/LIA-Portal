@@ -30,7 +30,15 @@ const CompanyProfileView = ({ company }) => {
     <div className={styles.componentContainer}>
       <div className={styles.returnButton}>
         <Link href="/">
+        <div className={styles.buttonContent}>
+        <Image 
+          src="/logos/Button/ICON/Mobil/returnArrow.svg" 
+          alt="Return arrow" 
+          width={16} 
+          height={16} 
+        />
           <Button className={buttonStyles.underlinedBlack}>Tillbaka</Button>
+          </div>
         </Link>
       </div>
 
