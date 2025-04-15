@@ -384,29 +384,31 @@ const CompanyFilterComponent = ({
         </section>
         
         <section aria-labelledby="accepts-heading">
-          <h2 id="accepts-heading" className={styles.title}>ACCEPTERAR</h2>
-          <FilterSection
-            tableName={targetTable}
-            column="accepts_digital_designer"
-            options={[
-              { value: "true", label: "Digital Designer" }
-            ]}
-            onFilterChange={handleFilterChange}
-            multiSelect={false}
-            initialFilterValues={getInitialFilterValues('accepts_digital_designer')}
-          />
-          
-          <FilterSection
-            tableName={targetTable}
-            column="accepts_webb_developer"
-            options={[
-              { value: "true", label: "Webbutvecklare" }
-            ]}
-            onFilterChange={handleFilterChange}
-            multiSelect={false}
-            initialFilterValues={getInitialFilterValues('accepts_webb_developer')}
-          />
-        </section>
+  <h2 id="accepts-heading" className={styles.title}>ACCEPTERAR</h2>
+  <div style={{ display: 'flex', gap: '1rem' }}>
+    <FilterSection
+      tableName={targetTable}
+      column="accepts_digital_designer"
+      options={[
+        { value: "true", label: "Digital Designer" }
+      ]}
+      onFilterChange={handleFilterChange}
+      multiSelect={false}
+      initialFilterValues={getInitialFilterValues('accepts_digital_designer')}
+    />
+    
+    <FilterSection
+      tableName={targetTable}
+      column="accepts_webb_developer"
+      options={[
+        { value: "true", label: "Webbutvecklare" }
+      ]}
+      onFilterChange={handleFilterChange}
+      multiSelect={false}
+      initialFilterValues={getInitialFilterValues('accepts_webb_developer')}
+    />
+  </div>
+</section>
       </form>
     </aside>
   );
