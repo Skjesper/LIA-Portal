@@ -12,12 +12,10 @@ const StudentCardSection = () => {
         
         <div className={styles.infoWrapper}>
         <p className={styles.sectionText}>
-            Lorem ipsum dolor sit amet si consectetur. Sagittis faucibus vita in faucibus nunc. 
-            Semper nun sodales malesuada. Non habitant.
+        Möt framtidens kreatörer och problemlösare! Här hittar du studerande från Yrgos utbildningar inom Digital Design och Webbutveckling.
         </p>
         <p className={styles.sectionText}>
-            Lorem ipsum dolor sit amet si consectetur. Sagittis faucibus vita in faucibus nunc. 
-            Semper nun sodales malesuada. Non habitant.
+        Utforska deras profiler och upptäck deras kompetenser. Det här är er möjlighet att hitta er rätta match inför kommande LIA-perioder!
         </p>
         </div>
         </div>

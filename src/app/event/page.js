@@ -8,11 +8,10 @@ import Link from 'next/link';
 
 export default function Companies() {
   return (
-    // <Section>
-    //   <RSVPpage></RSVPpage>
-    // </Section>
 
-    <RSVPConfirmation></RSVPConfirmation>
+<Section>
+    <RSVPpage></RSVPpage>
+   </Section>
   
   );
 }

@@ -16,6 +16,7 @@
   align-self: stretch;
   border-radius: var(--border-radius);
   width: 100%;
+  
  
 }
 
@@ -70,6 +71,7 @@
   line-height: 2rem;
   letter-spacing: -0.06rem;
   text-transform: uppercase;
+  margin-bottom: 0.8rem;
 }
 
 

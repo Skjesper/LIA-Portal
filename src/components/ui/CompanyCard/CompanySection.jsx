@@ -13,12 +13,10 @@ const CompanySection = () => {
         
         <div className={styles.applyWrapper}>
         <p className={styles.sectionText}>
-            Lorem ipsum dolor sit amet si consectetur. Sagittis faucibus vita in faucibus nunc. 
-            Semper nun sodales malesuada. Non habitant.
+        Företagen på plats representerar olika delar av den digitala branschen. De är här för att nätverka och upptäcka ny kompetens.
         </p>
         <p className={styles.sectionText}>
-            Lorem ipsum dolor sit amet si consectetur. Sagittis faucibus vita in faucibus nunc. 
-            Semper nun sodales malesuada. Non habitant.
+        Ta del av deras presentationer, lär känna deras verksamheter och se vilka möjligheter som finns för LIA och framtida samarbeten.
         </p>
         <Link href="/companies">
         <Button style={{ whiteSpace: 'nowrap' }} className={buttonStyles.underlinedBlack}>
