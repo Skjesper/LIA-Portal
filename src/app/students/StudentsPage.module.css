@@ -100,7 +100,6 @@
   justify-content: center;
 }
 
-/* Mobilvy som standard */
 .studentsGrid {
   display: flex;
   flex-direction: column;
@@ -111,7 +110,7 @@
 
 .studentsGrid > * {
   width: 100%;
-  max-width: 22.375rem; /* Begränsa max bredd */
+  max-width: 100%; /* Begränsa max bredd */
 }
 
 /* Desktop styles */
