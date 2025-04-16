@@ -218,12 +218,12 @@ const StudentProfileView = ({ student }) => {
           </section>
         )}
 
-          {previous_experience && (
+          {/* {previous_experience && (
           <section className={styles.profileExperience}>
               <h2>Tidigare erfarenhet</h2>
               <p>{previous_experience}</p>
           </section>
-        )}
+        )} */}
       </section>
     </section>
     </div>
