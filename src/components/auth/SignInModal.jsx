@@ -117,7 +117,7 @@ export default function SignInModal({ isOpen, onClose }) {
         <h3 className={style.formTitle}>HEJ!</h3>
         <p className={style.formText}>Skriv in e-post och lösenord för att logga in</p>
           {message && (
-            <div className={message.type === 'success' ? 'success' : 'error'}>
+            <div className={message.type === 'success' ? 'success' : 'error'} style={{color:"var(--Primary-Red)"}}>
               {message.text}
             </div>
           )}
