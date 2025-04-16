@@ -26,6 +26,7 @@
   padding-right: 4rem;
   border: 2px solid var(--Greyscale-90);
   background-color: var(--Background-Light);
+  color: var(--Typography-Primary);
   border-radius: 3rem;
   font-size: 0.875rem;
   outline: none;
