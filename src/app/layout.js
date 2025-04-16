@@ -24,13 +24,13 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <AuthProvider>
-          <Suspense fallback={null}>
+          {/* <Suspense fallback={null}> */}
             <ClientOnly>
               <Header />
               {children}
               <Footer />
             </ClientOnly>
-          </Suspense>
+          {/* </Suspense>  */}
         </AuthProvider>
       </body>
     </html>

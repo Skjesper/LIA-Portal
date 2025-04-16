@@ -1,4 +1,10 @@
 :root {
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  
   font-size: clamp(0.8rem, 1vw + 0.2rem, 1rem);
   --font-inter: 'Inter', system-ui, sans-serif;
   --border-radius: 1.5rem;
