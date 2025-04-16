@@ -1,9 +1,6 @@
 :root {
 
-  a {
-    color: inherit;
-    
-  }
+ 
 
   font-size: clamp(0.8rem, 1vw + 0.2rem, 1rem);
   --font-inter: 'Inter', system-ui, sans-serif;
@@ -76,7 +73,15 @@
 
   
 }
-  
+
+a {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+
   @media (prefers-color-scheme: dark) {
     :root {
       --background: #0a0a0a;
