@@ -18,6 +18,7 @@
     line-height: 1rem; /* 100% */
     text-transform: uppercase;
     cursor: pointer;
+    color: var(--Typography-Secondary);
   }
   
   /* .button:hover {
@@ -72,6 +73,7 @@
 
 .filledBlack {
     background-color: var(--Button-Primary);
+
 }
 
 .filledBlack:active {
