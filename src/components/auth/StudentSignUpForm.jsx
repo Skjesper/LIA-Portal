@@ -72,7 +72,7 @@ export default function StudentSignUpForm({ onSuccess }) {
       style={{display:"flex", flexDirection:"column", gap:"0.5rem"}}
     >
       {message && (
-        <div className={message.type === 'success' ? 'success' : 'error'}>
+        <div className={message.type === 'success' ? 'success' : 'error'} style={{color:"var(--Primary-Red)"}}>
           {message.text}
         </div>
       )}
