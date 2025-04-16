@@ -26,11 +26,6 @@
     
   }
   
-  /* Varianter som överskrider bara det som behövs */
-  .designer {
-    /* Behövs inte explicit eftersom det är standard */
-  }
-  
   .webDev {
     background-color: var(--Background-Light, #ffffff);
     color: var(--Typography-Primary, #121212);
